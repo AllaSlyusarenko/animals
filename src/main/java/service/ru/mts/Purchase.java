@@ -1,4 +1,4 @@
-package service;
+package service.ru.mts;
 
 /* Класс Purchase(Покупка)
  * итоговая стоимость формируется из параметров: количество товаров, сумма товара, скидка на товар */
@@ -18,12 +18,17 @@ public class Purchase {
             System.out.println("Значения 'numberOfGoods' и 'Price' должны быть больше нуля, 'Discount' может принимать значения от 0 до 100");
             return;
         }
+        double sumWithoutDiscount = purchase.numberOfGoods * purchase.price;
+        double sumWithDiscount = purchase.numberOfGoods * purchase.price * (1 - purchase.discount / 100);
+        String resultWithoutDiscount = String.format("%.2f", sumWithoutDiscount);
+        String resultWithDiscount = String.format("%.2f", sumWithDiscount);
+
         if (purchase.discount == 0) {
-            System.out.printf("Стоимость покупки без скидки - %.2f, стоимость покупки со скидкой - %.2f \n",
-                    purchase.numberOfGoods * purchase.price, purchase.numberOfGoods * purchase.price);
+            System.out.println("Стоимость покупки без скидки - " + resultWithoutDiscount + ", стоимость покупки со скидкой - "
+                    + resultWithoutDiscount);
         } else {
-            System.out.printf("Стоимость покупки без скидки - %.2f, стоимость покупки со скидкой - %.2f \n",
-                    purchase.numberOfGoods * purchase.price, purchase.numberOfGoods * purchase.price * (1 - purchase.discount / 100));
+            System.out.println("Стоимость покупки без скидки - " + resultWithoutDiscount + ", стоимость покупки со скидкой - "
+                    + resultWithDiscount);
         }
     }
 }
