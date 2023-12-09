@@ -3,27 +3,27 @@ package service;
 /* Класс Purchase(Покупка)
  * итоговая стоимость формируется из параметров: количество товаров, сумма товара, скидка на товар */
 public class Purchase {
-    private int NumberOfGoods; // количество товаров
-    private double Price; // цена товара
-    private double Discount; // скидка на товар
+    private int numberOfGoods; // количество товаров
+    private double price; // цена товара
+    private double discount; // скидка на товар
 
     public Purchase(int numberOfGoods, double price, double discount) {
-        NumberOfGoods = numberOfGoods;
-        Price = price;
-        Discount = discount;
+        this.numberOfGoods = numberOfGoods;
+        this.price = price;
+        this.discount = discount;
     }
 
     public static void countTotalSum(Purchase purchase) {
-        if (purchase.NumberOfGoods <= 0 || purchase.Price <= 0 || purchase.Discount < 0) {
-            System.out.println("Значения 'NumberOfGoods' и 'Price' должны быть больше нуля, 'Discount' может быть равным нулю");
+        if (purchase.numberOfGoods <= 0 || purchase.price <= 0 || purchase.discount < 0 || purchase.discount > 100) {
+            System.out.println("Значения 'numberOfGoods' и 'Price' должны быть больше нуля, 'Discount' может принимать значения от 0 до 100");
             return;
         }
-        if (purchase.Discount == 0) {
+        if (purchase.discount == 0) {
             System.out.printf("Стоимость покупки без скидки - %.2f, стоимость покупки со скидкой - %.2f \n",
-                    purchase.NumberOfGoods * purchase.Price, purchase.NumberOfGoods * purchase.Price);
+                    purchase.numberOfGoods * purchase.price, purchase.numberOfGoods * purchase.price);
         } else {
             System.out.printf("Стоимость покупки без скидки - %.2f, стоимость покупки со скидкой - %.2f \n",
-                    purchase.NumberOfGoods * purchase.Price, purchase.NumberOfGoods * purchase.Price * (1 - purchase.Discount / 100));
+                    purchase.numberOfGoods * purchase.price, purchase.numberOfGoods * purchase.price * (1 - purchase.discount / 100));
         }
     }
 }
