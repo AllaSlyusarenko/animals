@@ -4,7 +4,7 @@ package ru.mts.service;
  * итоговая стоимость формируется из параметров: количество товаров, сумма товара, скидка на товар */
 public class Purchase {
     private int numberOfGoods; // количество товаров
-    private double price; // цена товараgit branch -m master develop
+    private double price; // цена товара
     private double discount; // скидка на товар
 
     public Purchase(int numberOfGoods, double price, double discount) {
