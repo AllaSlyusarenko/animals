@@ -9,5 +9,6 @@ public class Main {
         Purchase.countTotalSum(new Purchase(0, 10, 59.1));
         Purchase.countTotalSum(new Purchase(5, 0, 59.1));
         Purchase.countTotalSum(new Purchase(5, 10, 0));
+        Purchase.countTotalSum(null);
     }
 }
