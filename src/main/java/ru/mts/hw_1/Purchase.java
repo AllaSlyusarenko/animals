@@ -1,13 +1,13 @@
-package ru.mts.service;
+package ru.mts.hw_1;
 
 import java.util.Optional;
 
 /* Класс Purchase(Покупка)
  * итоговая стоимость формируется из параметров: количество товаров, цена товара, скидка на товар */
 public class Purchase {
-    private int numberOfGoods; // количество товаров
-    private double price; // цена товара
-    private double discount; // скидка на товар
+    private final int numberOfGoods; // количество товаров
+    private final double price; // цена товара
+    private final double discount; // скидка на товар
 
     public Purchase(int numberOfGoods, double price, double discount) {
         this.numberOfGoods = numberOfGoods;
