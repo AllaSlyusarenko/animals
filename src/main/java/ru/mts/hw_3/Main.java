@@ -14,5 +14,6 @@ public class Main {
         System.out.println("---------------------------------------------------------------------------------------");
         CreateAnimalServiceImpl createAnimalServiceImpl2 = new CreateAnimalServiceImpl();
         createAnimalServiceImpl2.createAnimals(15);
+        createAnimalServiceImpl2.createAnimals(-5);
     }
 }

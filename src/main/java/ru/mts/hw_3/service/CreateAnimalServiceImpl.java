@@ -22,6 +22,10 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
     }
 
     public void createAnimals(int N) {
+        if (N <= 0) {
+            System.out.println("Количество животных должно быть больше 0");
+            return;
+        }
         for (int i = numberOfAnimals + 1; i <= numberOfAnimals + N; i++) {
             BigDecimal randomCost = CreateAnimalService.randomCost(1, 5000);
             Animal animal = new Wolf("breed" + i, "name" + i, randomCost,
