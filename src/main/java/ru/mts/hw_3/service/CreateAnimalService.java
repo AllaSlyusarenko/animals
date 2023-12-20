@@ -1,6 +1,6 @@
 package ru.mts.hw_3.service;
 
-import ru.mts.hw_3.entity.Animal;
+import ru.mts.hw_3.entity.AbstractAnimal;
 import ru.mts.hw_3.entity.Wolf;
 
 import java.math.BigDecimal;
@@ -19,7 +19,7 @@ public interface CreateAnimalService {
         int startNumber = 1;
         while (startNumber <= numberOfAnimals) {
             BigDecimal randomCost = randomCost(1, 5000);
-            Animal animal = new Wolf("breed" + startNumber, "name" + startNumber, randomCost,
+            AbstractAnimal animal = new Wolf("breed" + startNumber, "name" + startNumber, randomCost,
                     "character" + startNumber);
             System.out.println("Создано животное " + animal.getName() + " породы - " + animal.getBreed() + ", ценой - "
                     + animal.getCost() + "р. и характером - " + animal.getCharacter());
