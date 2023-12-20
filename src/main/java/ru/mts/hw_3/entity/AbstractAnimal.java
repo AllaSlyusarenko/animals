@@ -2,6 +2,7 @@ package ru.mts.hw_3.entity;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Objects;
 
 public abstract class AbstractAnimal implements Animal {
     protected String breed; // порода
@@ -33,5 +34,18 @@ public abstract class AbstractAnimal implements Animal {
     @Override
     public String getCharacter() {
         return this.character;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AbstractAnimal)) return false;
+        AbstractAnimal that = (AbstractAnimal) o;
+        return Objects.equals(breed, that.breed) && Objects.equals(name, that.name) && Objects.equals(cost, that.cost) && Objects.equals(character, that.character);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(breed, name, cost, character);
     }
 }

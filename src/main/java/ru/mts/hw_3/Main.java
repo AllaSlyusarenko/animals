@@ -9,11 +9,10 @@ public class Main {
         };
         createAnimalService.createAnimals();
         System.out.println("---------------------------------------------------------------------------------------");
-        CreateAnimalService createAnimalServiceImpl1 = new CreateAnimalServiceImpl();
-        createAnimalServiceImpl1.createAnimals();
+        CreateAnimalServiceImpl service = new CreateAnimalServiceImpl();
+        service.createAnimals();
         System.out.println("---------------------------------------------------------------------------------------");
-        CreateAnimalServiceImpl createAnimalServiceImpl2 = new CreateAnimalServiceImpl();
-        createAnimalServiceImpl2.createAnimals(15);
-        createAnimalServiceImpl2.createAnimals(-5);
+        service.createAnimals(15);
+        service.createAnimals(-5);
     }
 }
