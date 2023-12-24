@@ -1,9 +1,10 @@
 package ru.mts.hw_3.entity;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 /**
- *  интерфейс определяет поведение всех объектов "животные"
+ * интерфейс определяет поведение всех объектов "животные"
  *
  * @version 1.1
  * @autor Алла Слюсаренко
@@ -16,7 +17,6 @@ public interface Animal {
      * @return breed - название породы
      * @see Animal#getBreed()
      */
-
     String getBreed();
 
     /**
@@ -25,7 +25,6 @@ public interface Animal {
      * @return name - имя животного
      * @see Animal#getName()
      */
-
     String getName();
 
     /**
@@ -34,7 +33,6 @@ public interface Animal {
      * @return cost - цену животного
      * @see Animal#getCost()
      */
-
     BigDecimal getCost();
 
     /**
@@ -43,6 +41,13 @@ public interface Animal {
      * @return character - характер животного
      * @see Animal#getCharacter()
      */
-
     String getCharacter();
+
+    /**
+     * Метод - определение даты рождения животного
+     *
+     * @return birthDate - день рождения животного
+     * @see Animal#getBirthDate()
+     */
+    LocalDate getBirthDate();
 }
