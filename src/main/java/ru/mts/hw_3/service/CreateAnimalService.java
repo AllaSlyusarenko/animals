@@ -20,7 +20,7 @@ public interface CreateAnimalService {
 
     default Animal[] createAnimals() {
         int startNumber = 1;
-        Animal[] animals = new Animal[10];
+        Animal[] animals = new Animal[numberOfAnimals];
         int index = 0;
         while (startNumber <= numberOfAnimals) {
             BigDecimal randomCost = randomCost(1, 5000);
@@ -35,8 +35,7 @@ public interface CreateAnimalService {
     }
 
     static BigDecimal randomCost(int min, int max) {
-        Random rn = new Random();
-        int randomNum = rn.nextInt(max - min + 1) + min;
+        int randomNum = new Random().nextInt(max - min + 1) + min;
         return new BigDecimal(randomNum + ".67896789");
     }
 

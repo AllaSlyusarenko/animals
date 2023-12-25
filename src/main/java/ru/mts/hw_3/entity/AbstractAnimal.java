@@ -22,35 +22,56 @@ public abstract class AbstractAnimal implements Animal {
         this.birthDate = birthDate;
     }
 
+    /**
+     * Метод - определение породы животного
+     */
     @Override
     public String getBreed() {
         return this.breed;
     }
 
+    /**
+     * Метод - определение имени животного
+     */
     @Override
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Метод - определение цены животного с округлением до 2 знаков после запятой
+     */
     @Override
     public BigDecimal getCost() {
         return this.cost.setScale(2, RoundingMode.CEILING);
     }
 
+    /**
+     * Метод - определение характера животного
+     */
     @Override
     public String getCharacter() {
         return this.character;
     }
 
+    /**
+     * Метод - определение даты рождения животного
+     */
     @Override
     public LocalDate getBirthDate() {
         return this.birthDate;
     }
 
+    /**
+     * Метод - вывод даты рождения животного в формате "dd-MM-yyyy"
+     */
     public String getBirthDateString() {
         return getBirthDate().format(DATE_FORMATTER_OUT);
     }
 
+    /**
+     * Метод - для сравнения объектов класса
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -60,11 +81,17 @@ public abstract class AbstractAnimal implements Animal {
                 && Objects.equals(character, that.character) && Objects.equals(birthDate, that.birthDate);
     }
 
+    /**
+     * Метод - для генерации целочисленного кода объекта
+     */
     @Override
     public int hashCode() {
         return Objects.hash(breed, name, cost, character, birthDate);
     }
-
+   
+    /**
+     * Метод - возвращает строку, представляющую объект
+     */
     @Override
     public String toString() {
         return "Animal {" +

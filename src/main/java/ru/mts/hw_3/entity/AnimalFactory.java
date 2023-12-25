@@ -4,7 +4,12 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class AnimalFactory {
-    public Animal createAnimal(AnimalType animalType, String breed, String name, BigDecimal cost, String character, LocalDate birthDate) {
+    /**
+     * Метод - для создания животного по параметрам:
+     * тип животного, порода, имя, цена, характер, дата рождения
+     */
+    public Animal createAnimal(AnimalType animalType, String breed, String name, BigDecimal cost, String character,
+                               LocalDate birthDate) {
         Animal animal = null;
         switch (animalType) {
             case DOG:

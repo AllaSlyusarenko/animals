@@ -7,17 +7,21 @@ import java.time.LocalDate;
 import java.util.Random;
 
 public class CreateAnimalServiceImpl implements CreateAnimalService {
-    final int numberOfAnimals = CreateAnimalService.numberOfAnimals + 10;
+    final int numberOfNewAnimals = 10;
+    final int numberOfAnimalsImpl = CreateAnimalService.numberOfAnimals + numberOfNewAnimals;
     private final AnimalFactory animalFactory;
 
     public CreateAnimalServiceImpl(AnimalFactory animalFactory) {
         this.animalFactory = animalFactory;
     }
 
+    /**
+     * Метод - создает массив животных фиксированного количества (numberOfNewAnimals = 10)
+     */
     @Override
     public Animal[] createAnimals() {
         int startNumber = CreateAnimalService.numberOfAnimals + 1;
-        Animal[] animals = new AbstractAnimal[10];
+        Animal[] animals = new AbstractAnimal[numberOfNewAnimals];
         int index = 0;
         do {
             BigDecimal randomCost = CreateAnimalService.randomCost(1, 5000);
@@ -27,18 +31,21 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
             animals[index] = animal;
             startNumber++;
             index++;
-        } while (startNumber <= numberOfAnimals);
+        } while (startNumber <= numberOfAnimalsImpl);
         return animals;
     }
 
+    /**
+     * Метод - создает массив животных необходимого количества(N)
+     */
     public Animal[] createAnimals(int N) {
         if (N <= 0) {
-            System.out.print("Количество животных должно быть больше 0  ");
+            System.out.print("Количество животных должно быть больше 0 - ");
             return new Animal[0];
         }
         Animal[] animals = new AbstractAnimal[N];
         int index = 0;
-        for (int i = numberOfAnimals + 1; i <= numberOfAnimals + N; i++) {
+        for (int i = numberOfAnimalsImpl + 1; i <= numberOfAnimalsImpl + N; i++) {
             BigDecimal randomCost = CreateAnimalService.randomCost(1, 5000);
             LocalDate randomBirthDay = CreateAnimalService.randomBirthDay();
             Animal animal = animalFactory.createAnimal(getRandomAnimalType(), "breed" + i, "name" + i, randomCost,
@@ -50,7 +57,6 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
     }
 
     private AnimalType getRandomAnimalType() {
-        Random random = new Random();
-        return AnimalType.values()[random.nextInt(AnimalType.values().length)];
+        return AnimalType.values()[new Random().nextInt(AnimalType.values().length)];
     }
 }
