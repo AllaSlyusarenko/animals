@@ -18,6 +18,10 @@ import java.util.Random;
 public interface CreateAnimalService {
     int numberOfAnimals = 10;
 
+    /**
+     * Метод - создает новые объекты необходимого количества
+     *
+     */
     default Animal[] createAnimals() {
         int startNumber = 1;
         Animal[] animals = new Animal[numberOfAnimals];

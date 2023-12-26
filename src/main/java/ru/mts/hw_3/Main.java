@@ -17,7 +17,9 @@ public class Main {
         CreateAnimalServiceImpl service = new CreateAnimalServiceImpl(animalFactory);
         SearchService searchService = new SearchServiceImpl();
         Animal[] animals10 = service.createAnimals();
-        Animal[] animalsN = service.createAnimals(20);
+        int numberOfNewAnimals = 20;
+        Animal[] animalsN = service.createAnimals(numberOfNewAnimals);
+        int maxAge = 35;
 
         System.out.println("findLeapYearNames-------------------------------------------------------------------------------------");
         System.out.println(Arrays.toString(searchService.findLeapYearNames(animals10)));
@@ -26,10 +28,10 @@ public class Main {
         System.out.println(Arrays.toString(searchService.findLeapYearNames(new Animal[5])));
 
         System.out.println("findOlderAnimal---------------------------------------------------------------------------------------");
-        System.out.println(Arrays.toString(searchService.findOlderAnimal(animals10, 35)));
-        System.out.println(Arrays.toString(searchService.findOlderAnimal(animalsN, 35)));
-        System.out.println(Arrays.toString(searchService.findOlderAnimal(new Animal[0], 35)));
-        System.out.println(Arrays.toString(searchService.findOlderAnimal(new Animal[5], 35)));
+        System.out.println(Arrays.toString(searchService.findOlderAnimal(animals10, maxAge)));
+        System.out.println(Arrays.toString(searchService.findOlderAnimal(animalsN, maxAge)));
+        System.out.println(Arrays.toString(searchService.findOlderAnimal(new Animal[0], maxAge)));
+        System.out.println(Arrays.toString(searchService.findOlderAnimal(new Animal[5], maxAge)));
 
         System.out.println("findDuplicate-----------------------------------------------------------------------------------------");
         Animal[] animals = new Animal[8];

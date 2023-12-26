@@ -14,7 +14,7 @@ public class SearchServiceImpl implements SearchService {
      */
     @Override
     public String[] findLeapYearNames(Animal[] animals) {
-        if (emptyArray(animals)) {
+        if (isEmptyArray(animals)) {
             return new String[0];
         }
         List<String> namesList = new ArrayList<>();
@@ -36,7 +36,7 @@ public class SearchServiceImpl implements SearchService {
      */
     @Override
     public Animal[] findOlderAnimal(Animal[] animalsIn, int N) {
-        if (emptyArray(animalsIn)) {
+        if (isEmptyArray(animalsIn)) {
             return animalsIn;
         }
         if (N <= 0) {
@@ -61,7 +61,7 @@ public class SearchServiceImpl implements SearchService {
      */
     @Override
     public Animal[] findDuplicate(Animal[] animalsIn) {
-        if (emptyArray(animalsIn) || animalsIn.length == 1) {
+        if (isEmptyArray(animalsIn) || animalsIn.length == 1) {
             return new Animal[0];
         }
         Set<Animal> animalsList = new HashSet<>();
@@ -82,7 +82,7 @@ public class SearchServiceImpl implements SearchService {
         return animalsList.toArray(animalsOut);
     }
 
-    private boolean emptyArray(Animal[] animals) {
-        return animals == null || animals.length == 0  ;
+    private boolean isEmptyArray(Animal[] animals) {
+        return animals == null || animals.length == 0;
     }
 }
