@@ -83,6 +83,6 @@ public class SearchServiceImpl implements SearchService {
     }
 
     private boolean emptyArray(Animal[] animals) {
-        return animals.length == 0;
+        return animals == null || animals.length == 0  ;
     }
 }
