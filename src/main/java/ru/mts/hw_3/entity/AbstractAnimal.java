@@ -75,7 +75,7 @@ public abstract class AbstractAnimal implements Animal {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AbstractAnimal)) return false;
+        if (o == null || o.getClass() != this.getClass()) return false;
         AbstractAnimal that = (AbstractAnimal) o;
         return Objects.equals(breed, that.breed) && Objects.equals(name, that.name) && Objects.equals(cost, that.cost)
                 && Objects.equals(character, that.character) && Objects.equals(birthDate, that.birthDate);
@@ -88,7 +88,7 @@ public abstract class AbstractAnimal implements Animal {
     public int hashCode() {
         return Objects.hash(breed, name, cost, character, birthDate);
     }
-   
+
     /**
      * Метод - возвращает строку, представляющую объект
      */
