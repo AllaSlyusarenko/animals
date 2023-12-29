@@ -1,9 +1,12 @@
 package ru.mts.hw_3.service;
 
-import ru.mts.hw_3.entity.AbstractAnimal;
+import ru.mts.hw_3.entity.Animal;
 import ru.mts.hw_3.entity.Wolf;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.temporal.ChronoUnit;
 import java.util.Random;
 
 /**
@@ -15,21 +18,34 @@ import java.util.Random;
 public interface CreateAnimalService {
     int numberOfAnimals = 10;
 
-    default void createAnimals() {
+    /**
+     * Метод - создает новые объекты необходимого количества
+     *
+     */
+    default Animal[] createAnimals() {
         int startNumber = 1;
+        Animal[] animals = new Animal[numberOfAnimals];
+        int index = 0;
         while (startNumber <= numberOfAnimals) {
             BigDecimal randomCost = randomCost(1, 5000);
-            AbstractAnimal animal = new Wolf("breed" + startNumber, "name" + startNumber, randomCost,
-                    "character" + startNumber);
-            System.out.println("Создано животное " + animal.getName() + " породы - " + animal.getBreed() + ", ценой - "
-                    + animal.getCost() + "р. и характером - " + animal.getCharacter());
+            LocalDate randomBirthDay = randomBirthDay();
+            Animal animal = new Wolf("breed" + startNumber, "name" + startNumber, randomCost,
+                    "character" + startNumber, randomBirthDay);
+            animals[index] = animal;
             startNumber++;
+            index++;
         }
+        return animals;
     }
 
     static BigDecimal randomCost(int min, int max) {
-        Random rn = new Random();
-        int randomNum = rn.nextInt(max - min + 1) + min;
+        int randomNum = new Random().nextInt(max - min + 1) + min;
         return new BigDecimal(randomNum + ".67896789");
+    }
+
+    static LocalDate randomBirthDay() {
+        LocalDate start = LocalDate.of(1970, Month.JANUARY, 1);
+        long days = ChronoUnit.DAYS.between(start, LocalDate.now());
+        return start.plusDays(new Random().nextInt((int) days + 1));
     }
 }
