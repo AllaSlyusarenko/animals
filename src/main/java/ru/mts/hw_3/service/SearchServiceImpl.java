@@ -22,8 +22,7 @@ public class SearchServiceImpl implements SearchService {
             if (animal == null) {
                 continue;
             }
-            if ((animal.getBirthDate().getYear() % 4 == 0 && animal.getBirthDate().getYear() % 100 != 0) ||
-                    (animal.getBirthDate().getYear() % 400 == 0)) {
+            if (isLeapYear(animal.getBirthDate())) {
                 namesList.add(animal.getName());
             }
         }
@@ -84,5 +83,10 @@ public class SearchServiceImpl implements SearchService {
 
     private boolean isEmptyArray(Animal[] animals) {
         return animals == null || animals.length == 0;
+    }
+
+    private boolean isLeapYear(LocalDate localDate) {
+        return (localDate.getYear() % 4 == 0 && localDate.getYear() % 100 != 0) ||
+                (localDate.getYear() % 400 == 0);
     }
 }

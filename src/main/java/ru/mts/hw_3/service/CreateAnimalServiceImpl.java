@@ -8,7 +8,6 @@ import java.util.Random;
 
 public class CreateAnimalServiceImpl implements CreateAnimalService {
     final int numberOfNewAnimals = 10;
-    final int numberOfAnimalsImpl = CreateAnimalService.numberOfAnimals + numberOfNewAnimals;
     private final AnimalFactory animalFactory;
 
     public CreateAnimalServiceImpl(AnimalFactory animalFactory) {
@@ -20,7 +19,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
      */
     @Override
     public Animal[] createAnimals() {
-        int startNumber = CreateAnimalService.numberOfAnimals + 1;
+        int startNumber = 1;
         Animal[] animals = new AbstractAnimal[numberOfNewAnimals];
         int index = 0;
         do {
@@ -31,7 +30,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
             animals[index] = animal;
             startNumber++;
             index++;
-        } while (startNumber <= numberOfAnimalsImpl);
+        } while (startNumber <= numberOfNewAnimals);
         return animals;
     }
 
@@ -45,7 +44,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         }
         Animal[] animals = new AbstractAnimal[N];
         int index = 0;
-        for (int i = numberOfAnimalsImpl + 1; i <= numberOfAnimalsImpl + N; i++) {
+        for (int i = 1; i <= N; i++) {
             BigDecimal randomCost = CreateAnimalService.randomCost(1, 5000);
             LocalDate randomBirthDay = CreateAnimalService.randomBirthDay();
             Animal animal = animalFactory.createAnimal(getRandomAnimalType(), "breed" + i, "name" + i, randomCost,
