@@ -39,7 +39,7 @@ public class SearchServiceImpl implements SearchService {
             return animalsIn;
         }
         if (N <= 0) {
-            System.out.print("Количество лет должно быть больше 0 - ");
+            System.out.println("The number of years must be greater than 0");
             return new Animal[0];
         }
         List<Animal> animalsList = new ArrayList<>();
