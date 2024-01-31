@@ -48,7 +48,7 @@ class SearchServiceImplTest {
         assertEquals(0, names.length);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "Try to test with value: {arguments}")
     @ValueSource(ints = {100, 50, 30, 20, -50})
     void findOlderAnimal(Integer argument) {
         Animal[] animalsOut = searchService.findOlderAnimal(animals, argument);

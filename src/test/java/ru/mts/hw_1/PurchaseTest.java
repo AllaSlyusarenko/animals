@@ -22,62 +22,37 @@ class PurchaseTest {
 
     @Test
     void countTotalSumNull() {
-        boolean exceptionThrown = false;
         Purchase purchase = null;
-        try {
-            countTotalSum(purchase);
-        } catch (IllegalArgumentException e) {
-            exceptionThrown = true;
-        }
-        assertTrue(exceptionThrown);
+        Class<IllegalArgumentException> exceptionClass = IllegalArgumentException.class;
+        assertThrows(exceptionClass, () -> countTotalSum(purchase));
     }
 
     @Test
     void countTotalSumWithWrongNumberOfGoods() {
-        boolean exceptionThrown = false;
         Purchase purchase = new Purchase(-5, 15.05, 10);
-        try {
-            countTotalSum(purchase);
-        } catch (IllegalArgumentException e) {
-            exceptionThrown = true;
-        }
-        assertTrue(exceptionThrown);
+        Class<IllegalArgumentException> exceptionClass = IllegalArgumentException.class;
+        assertThrows(exceptionClass, () -> countTotalSum(purchase));
     }
 
     @Test
     void countTotalSumWithWrongPrice() {
-        boolean exceptionThrown = false;
         Purchase purchase = new Purchase(5, -15.05, 10);
-        try {
-            countTotalSum(purchase);
-        } catch (IllegalArgumentException e) {
-            exceptionThrown = true;
-        }
-        assertTrue(exceptionThrown);
+        Class<IllegalArgumentException> exceptionClass = IllegalArgumentException.class;
+        assertThrows(exceptionClass, () -> countTotalSum(purchase));
     }
 
     @Test
     void countTotalSumWithDiscountLess0() {
-        boolean exceptionThrown = false;
         Purchase purchase = new Purchase(5, 15.05, -10);
-        try {
-            countTotalSum(purchase);
-        } catch (IllegalArgumentException e) {
-            exceptionThrown = true;
-        }
-        assertTrue(exceptionThrown);
+        Class<IllegalArgumentException> exceptionClass = IllegalArgumentException.class;
+        assertThrows(exceptionClass, () -> countTotalSum(purchase));
     }
 
     @Test
     void countTotalSumWithDiscountMore100() {
-        boolean exceptionThrown = false;
         Purchase purchase = new Purchase(5, 15.05, 1000);
-        try {
-            countTotalSum(purchase);
-        } catch (IllegalArgumentException e) {
-            exceptionThrown = true;
-        }
-        assertTrue(exceptionThrown);
+        Class<IllegalArgumentException> exceptionClass = IllegalArgumentException.class;
+        assertThrows(exceptionClass, () -> countTotalSum(purchase));
     }
 
     @ParameterizedTest
