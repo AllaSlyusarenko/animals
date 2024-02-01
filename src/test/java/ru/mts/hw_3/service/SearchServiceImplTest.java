@@ -62,11 +62,27 @@ class SearchServiceImplTest {
     }
 
     @ParameterizedTest(name = "Try to test with value: {arguments}")
-    @ValueSource(ints = {100, 50, 30, 20, -50})
+    @ValueSource(ints = {100, 50, 30, 10, -50})
     @DisplayName(value = "Тест поиска списка животных, которые старше значений из списка ints")
     void findOlderAnimal(Integer argument) {
         Animal[] animalsOut = searchService.findOlderAnimal(animals, argument);
-        assertNotNull(animalsOut);
+        switch (argument) {
+            case 100:
+                assertEquals(0, animalsOut.length);
+                break;
+            case 50:
+                assertEquals(4, animalsOut.length);
+                break;
+            case 30:
+                assertEquals(4, animalsOut.length);
+                break;
+            case 10:
+                assertEquals(6, animalsOut.length);
+                break;
+            case -50:
+                assertEquals(0, animalsOut.length);
+                break;
+        }
     }
 
     @Test
@@ -75,30 +91,6 @@ class SearchServiceImplTest {
         int age = 100;
         Animal[] animalsNull = null;
         Animal[] animalsOut = searchService.findOlderAnimal(animalsNull, age);
-        assertEquals(0, animalsOut.length);
-    }
-
-    @Test
-    @DisplayName(value = "Тест поиска массива животных, которые старше age = 100")
-    void findOlderAnimal100() {
-        int age = 100;
-        Animal[] animalsOut = searchService.findOlderAnimal(animals, age);
-        assertEquals(0, animalsOut.length);
-    }
-
-    @Test
-    @DisplayName(value = "Тест поиска массива животных, которые старше age = 50")
-    void findOlderAnimal50() {
-        int age = 50;
-        Animal[] animalsOut = searchService.findOlderAnimal(animals, age);
-        assertEquals(4, animalsOut.length);
-    }
-
-    @Test
-    @DisplayName(value = "Тест поиска массива животных, которые старше age = -50")
-    void findOlderAnimalLess0() {
-        int age = -50;
-        Animal[] animalsOut = searchService.findOlderAnimal(animals, age);
         assertEquals(0, animalsOut.length);
     }
 
