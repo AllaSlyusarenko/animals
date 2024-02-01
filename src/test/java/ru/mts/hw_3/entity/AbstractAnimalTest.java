@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName(value = "Тесты сравнения объектов AbstractAnimal")
 class AbstractAnimalTest {
     @Test
     @DisplayName(value = "Тест сравнения объекта Dog с null")

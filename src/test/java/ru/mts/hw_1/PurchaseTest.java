@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 import static ru.mts.hw_1.Purchase.countTotalSum;
 
+@DisplayName(value = "Тесты расчёта суммы покупки")
 class PurchaseTest {
     @Test
     @DisplayName(value = "Тест расчёта суммы покупки с корректными входными данными")

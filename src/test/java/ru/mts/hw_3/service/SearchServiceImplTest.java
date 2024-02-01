@@ -15,6 +15,8 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName(value = "Тесты правильности работы методов: 1) поиска массива имён животных, рождённых в високосный год," +
+        " 2) поиска массива животных, которые старше age, 3)  поиска массива дубликатов животных")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SearchServiceImplTest {
     private SearchServiceImpl searchService;
