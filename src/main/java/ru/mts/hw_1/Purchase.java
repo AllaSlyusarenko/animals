@@ -15,23 +15,25 @@ public class Purchase {
         this.discount = discount;
     }
 
-    public static void countTotalSum(Purchase purchase) {
+    public static double countTotalSum(Purchase purchase) {
         Optional<Purchase> purchaseOptional = Optional.ofNullable(purchase);
         if (purchaseOptional.isPresent()) {
             Purchase purchaseWithOutNull = purchaseOptional.get();
             if (purchaseWithOutNull.numberOfGoods <= 0 || purchaseWithOutNull.price <= 0 ||
                     purchaseWithOutNull.discount < 0 || purchaseWithOutNull.discount > 100) {
-                System.out.println("Значения 'numberOfGoods' и 'Price' должны быть больше нуля, 'Discount' может принимать значения от 0 до 100 включительно");
-                return;
+                System.out.println("'numberOfGoods' and 'Price' values must be greater than zero, 'Discount' can take values from 0 to 100 inclusive");
+                throw new IllegalArgumentException("'numberOfGoods' and 'Price' values must be greater than zero, 'Discount' can take values from 0 to 100 inclusive");
             }
             double sumWithoutDiscount = purchaseWithOutNull.numberOfGoods * purchaseWithOutNull.price;
             double sumWithDiscount = sumWithoutDiscount * (1 - purchaseWithOutNull.discount / 100);
             String resultWithoutDiscount = String.format("%.2f", sumWithoutDiscount);
             String resultWithDiscount = String.format("%.2f", sumWithDiscount);
-            System.out.println("Стоимость покупки без скидки - " + resultWithoutDiscount + ", стоимость покупки со скидкой - "
+            System.out.println("Purchase price without discount - " + resultWithoutDiscount + ", Discount purchase price - "
                     + resultWithDiscount);
+            return Math.round(sumWithDiscount * 100.0) / 100.0;
         } else {
-            System.out.println("Нет данных для вычисления суммы покупки");
+            System.out.println("There is no data to calculate the purchase amount");
+            throw new IllegalArgumentException("There is no data to calculate the purchase amount");
         }
     }
 }
