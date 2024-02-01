@@ -36,7 +36,7 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public Animal[] findOlderAnimal(Animal[] animalsIn, int N) {
         if (isEmptyArray(animalsIn)) {
-            return animalsIn;
+            return new Animal[0];
         }
         if (N <= 0) {
             System.out.println("The number of years must be greater than 0");
