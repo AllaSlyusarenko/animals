@@ -65,6 +65,8 @@ class SearchServiceImplTest {
     @ValueSource(ints = {100, 50, 30, 10, -50})
     @DisplayName(value = "Тест поиска списка животных, которые старше значений из списка ints")
     void findOlderAnimal(Integer argument) {
+        LocalDate now = LocalDate.now();
+
         Animal[] animalsOut = searchService.findOlderAnimal(animals, argument);
         switch (argument) {
             case 100:
