@@ -1,14 +1,25 @@
 package ru.mts.hw_3.service;
 
-import ru.mts.hw_3.entity.*;
+import ru.mts.hw_3.entity.AbstractAnimal;
+import ru.mts.hw_3.entity.Animal;
+import ru.mts.hw_3.entity.AnimalFactory;
+import ru.mts.hw_3.entity.AnimalType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Random;
 
 public class CreateAnimalServiceImpl implements CreateAnimalService {
     final int numberOfNewAnimals = 10;
     private final AnimalFactory animalFactory;
+    private AnimalType animalType;
+
+    public AnimalType getAnimalType() {
+        return animalType;
+    }
+
+    public void setAnimalType(AnimalType animalType) {
+        this.animalType = animalType;
+    }
 
     public CreateAnimalServiceImpl(AnimalFactory animalFactory) {
         this.animalFactory = animalFactory;
@@ -25,7 +36,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         do {
             BigDecimal randomCost = CreateAnimalService.randomCost(1, 5000);
             LocalDate randomBirthDay = CreateAnimalService.randomBirthDay();
-            Animal animal = animalFactory.createAnimal(getRandomAnimalType(), "breed" + startNumber, "name" + startNumber, randomCost,
+            Animal animal = animalFactory.createAnimal(animalType, "breed" + startNumber, "name" + startNumber, randomCost,
                     "character" + startNumber, randomBirthDay);
             animals[index] = animal;
             startNumber++;
@@ -47,15 +58,11 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         for (int i = 1; i <= N; i++) {
             BigDecimal randomCost = CreateAnimalService.randomCost(1, 5000);
             LocalDate randomBirthDay = CreateAnimalService.randomBirthDay();
-            Animal animal = animalFactory.createAnimal(getRandomAnimalType(), "breed" + i, "name" + i, randomCost,
+            Animal animal = animalFactory.createAnimal(animalType, "breed" + i, "name" + i, randomCost,
                     "character" + i, randomBirthDay);
             animals[index] = animal;
             index++;
         }
         return animals;
-    }
-
-    private AnimalType getRandomAnimalType() {
-        return AnimalType.values()[new Random().nextInt(AnimalType.values().length)];
     }
 }

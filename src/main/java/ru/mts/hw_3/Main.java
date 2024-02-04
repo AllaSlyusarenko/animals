@@ -1,12 +1,19 @@
 package ru.mts.hw_3;
-import org.springframework.*;
+
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import ru.mts.hw_3.config.AppConfig;
+import ru.mts.hw_3.service.CreateAnimalServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
-        ApplicationContext applicationContext = new ApplicationConfig
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        CreateAnimalServiceImpl service = context.getBean(CreateAnimalServiceImpl.class);
+//        CreateAnimalServiceImpl service1 = context.getBean(CreateAnimalService.class);
+        System.out.println();
+        System.out.println("animal type = " + service.getAnimalType());
+//вызвать все методы AnimalsRepository и результаты вызовов вывести в стандартный поток вывода
 
-@Component
 //        AnimalFactory animalFactory = new AnimalFactory();
 //        CreateAnimalServiceImpl service = new CreateAnimalServiceImpl(animalFactory);
 //        SearchService searchService = new SearchServiceImpl();
