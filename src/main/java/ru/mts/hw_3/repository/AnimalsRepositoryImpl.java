@@ -1,6 +1,5 @@
 package ru.mts.hw_3.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import ru.mts.hw_3.entity.Animal;
 import ru.mts.hw_3.service.CreateAnimalService;
 
@@ -13,8 +12,11 @@ import java.util.Set;
 
 public class AnimalsRepositoryImpl implements AnimalsRepository {
     private Animal[] animals;
-    @Autowired
-    private CreateAnimalService createAnimalService;
+    private final CreateAnimalService createAnimalService;
+
+    public AnimalsRepositoryImpl(CreateAnimalService createAnimalService) {
+        this.createAnimalService = createAnimalService;
+    }
 
     @PostConstruct
     public void init() {

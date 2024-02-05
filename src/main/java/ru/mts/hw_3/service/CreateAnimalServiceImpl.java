@@ -13,10 +13,6 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
     private final AnimalFactory animalFactory;
     private AnimalType animalType;
 
-    public AnimalType getAnimalType() {
-        return animalType;
-    }
-
     public void setAnimalType(AnimalType animalType) {
         this.animalType = animalType;
     }

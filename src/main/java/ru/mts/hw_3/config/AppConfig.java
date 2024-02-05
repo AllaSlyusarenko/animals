@@ -20,13 +20,7 @@ public class AppConfig {
     }
 
     @Bean
-    public AnimalsRepository animalsRepository() {
-        return new AnimalsRepositoryImpl();
+    public AnimalsRepository animalsRepository(CreateAnimalService createAnimalService) {
+        return new AnimalsRepositoryImpl(createAnimalService);
     }
-
-//    @Bean
-//    public AnimalFactory animalFactory() {
-//        return new AnimalFactory();
-//    }
-
 }

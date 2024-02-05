@@ -20,7 +20,6 @@ public interface CreateAnimalService {
 
     /**
      * Метод - создает новые объекты необходимого количества
-     *
      */
     default Animal[] createAnimals() {
         int startNumber = 1;
