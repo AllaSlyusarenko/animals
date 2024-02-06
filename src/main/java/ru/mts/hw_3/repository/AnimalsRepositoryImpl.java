@@ -94,6 +94,9 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
         return animalsSet;
     }
 
+    /**
+     * Метод - производит печать массива дубликатов животных
+     */
     @Override
     public void printDuplicate() {
         Set<Animal> set = findDuplicate();
