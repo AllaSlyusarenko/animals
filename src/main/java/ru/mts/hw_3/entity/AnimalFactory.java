@@ -1,11 +1,8 @@
 package ru.mts.hw_3.entity;
 
-import org.springframework.stereotype.Component;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Component
 public class AnimalFactory {
     /**
      * Метод - для создания животного по параметрам:

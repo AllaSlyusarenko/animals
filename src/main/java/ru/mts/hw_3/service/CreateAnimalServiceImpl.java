@@ -10,15 +10,11 @@ import java.time.LocalDate;
 
 public class CreateAnimalServiceImpl implements CreateAnimalService {
     final int numberOfNewAnimals = 10;
-    private final AnimalFactory animalFactory;
+    private final AnimalFactory animalFactory = new AnimalFactory();
     private AnimalType animalType;
 
     public void setAnimalType(AnimalType animalType) {
         this.animalType = animalType;
-    }
-
-    public CreateAnimalServiceImpl(AnimalFactory animalFactory) {
-        this.animalFactory = animalFactory;
     }
 
     /**
