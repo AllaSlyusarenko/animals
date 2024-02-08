@@ -1,19 +1,33 @@
-package ru.mts.hw_3.service;
+package ru.mts.hw_3.repository;
 
 import ru.mts.hw_3.entity.Animal;
+import ru.mts.hw_3.service.CreateAnimalService;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class SearchServiceImpl implements SearchService {
+public class AnimalsRepositoryImpl implements AnimalsRepository {
+    private Animal[] animals;
+    private final CreateAnimalService createAnimalService;
+
+    public AnimalsRepositoryImpl(CreateAnimalService createAnimalService) {
+        this.createAnimalService = createAnimalService;
+    }
+
+    @PostConstruct
+    public void init() {
+        animals = createAnimalService.createAnimals();
+    }
+
     /**
      * Метод - производит поиск животных, которые родились в високосный год, и формирует массив их имён
      */
     @Override
-    public String[] findLeapYearNames(Animal[] animals) {
+    public String[] findLeapYearNames() {
         if (isEmptyArray(animals)) {
             return new String[0];
         }
@@ -34,8 +48,8 @@ public class SearchServiceImpl implements SearchService {
      * Метод - производит поиск животных, которые старше указанного возраста, и формирует из них массив
      */
     @Override
-    public Animal[] findOlderAnimal(Animal[] animalsIn, int N) {
-        if (isEmptyArray(animalsIn)) {
+    public Animal[] findOlderAnimal(int N) {
+        if (isEmptyArray(animals)) {
             return new Animal[0];
         }
         if (N <= 0) {
@@ -43,7 +57,7 @@ public class SearchServiceImpl implements SearchService {
             return new Animal[0];
         }
         List<Animal> animalsList = new ArrayList<>();
-        for (Animal animal : animalsIn) {
+        for (Animal animal : animals) {
             if (animal == null) {
                 continue;
             }
@@ -59,26 +73,36 @@ public class SearchServiceImpl implements SearchService {
      * Метод - производит поиск дубликатов животных и формирует из них массив
      */
     @Override
-    public Animal[] findDuplicate(Animal[] animalsIn) {
-        if (isEmptyArray(animalsIn) || animalsIn.length == 1) {
-            return new Animal[0];
+    public Set<Animal> findDuplicate() {
+        if (isEmptyArray(animals) || animals.length == 1) {
+            return new HashSet<Animal>();
         }
-        Set<Animal> animalsList = new HashSet<>();
-        for (int i = 0; i < animalsIn.length; i++) {
-            if (animalsIn[i] == null) {
+        Set<Animal> animalsSet = new HashSet<>();
+        for (int i = 0; i < animals.length; i++) {
+            if (animals[i] == null) {
                 continue;
             }
-            for (int j = i + 1; j < animalsIn.length; j++) {
-                if (animalsIn[j] == null) {
+            for (int j = i + 1; j < animals.length; j++) {
+                if (animals[j] == null) {
                     continue;
                 }
-                if (animalsIn[i].equals(animalsIn[j])) {
-                    animalsList.add(animalsIn[i]);
+                if (animals[i].equals(animals[j])) {
+                    animalsSet.add(animals[i]);
                 }
             }
         }
-        Animal[] animalsOut = new Animal[animalsList.size()];
-        return animalsList.toArray(animalsOut);
+        return animalsSet;
+    }
+
+    /**
+     * Метод - производит печать массива дубликатов животных
+     */
+    @Override
+    public void printDuplicate() {
+        Set<Animal> set = findDuplicate();
+        for (Animal animal : set) {
+            System.out.println(animal);
+        }
     }
 
     private boolean isEmptyArray(Animal[] animals) {
