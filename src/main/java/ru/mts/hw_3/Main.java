@@ -25,5 +25,6 @@ public class Main {
         System.out.println("findDuplicate-----------------------------------------------------------------------------------------");
         Set<Animal> animalsDuplicate = animalsRepository.findDuplicate();
         animalsRepository.printDuplicate();
+        //
     }
 }
