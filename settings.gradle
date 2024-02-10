@@ -1,2 +1,3 @@
 rootProject.name = 'education-project'
+include 'starter'
 
