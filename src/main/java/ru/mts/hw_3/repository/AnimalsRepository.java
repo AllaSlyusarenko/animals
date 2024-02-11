@@ -1,6 +1,6 @@
 package ru.mts.hw_3.repository;
 
-import ru.mts.hw_3.entity.Animal;
+import ru.mtsbank.entity.Animal;
 
 import java.util.Set;
 

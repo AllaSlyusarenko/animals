@@ -3,19 +3,17 @@ package ru.mts.hw_3;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ru.mts.hw_3.config.AppConfig;
-import ru.mts.hw_3.entity.Animal;
 import ru.mts.hw_3.repository.AnimalsRepository;
-import ru.mts.hw_3.repository.AnimalsRepositoryImpl;
 
 import java.util.Arrays;
-import java.util.Set;
 
 @SpringBootApplication
 public class Main {
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
+
+        ApplicationContext context = SpringApplication.run(Main.class, args);
+        AnimalsRepository animalsRepository = context.getBean(AnimalsRepository.class);
+        System.out.println(Arrays.toString(animalsRepository.findLeapYearNames()) + "\n");
     }
 //    public static void main(String[] args) {
 //        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);

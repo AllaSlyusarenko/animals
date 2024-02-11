@@ -2,6 +2,8 @@ package ru.mts.hw_3.entity;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import ru.mtsbank.entity.Dog;
+import ru.mtsbank.entity.Wolf;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

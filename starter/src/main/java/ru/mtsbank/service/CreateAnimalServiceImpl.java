@@ -1,9 +1,9 @@
-package ru.mts.hw_3.service;
+package ru.mtsbank.service;
 
-import ru.mts.hw_3.entity.AbstractAnimal;
-import ru.mts.hw_3.entity.Animal;
-import ru.mts.hw_3.entity.AnimalFactory;
-import ru.mts.hw_3.entity.AnimalType;
+import ru.mtsbank.entity.AbstractAnimal;
+import ru.mtsbank.entity.Animal;
+import ru.mtsbank.entity.AnimalFactory;
+import ru.mtsbank.entity.AnimalType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -28,6 +28,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         do {
             BigDecimal randomCost = CreateAnimalService.randomCost(1, 5000);
             LocalDate randomBirthDay = CreateAnimalService.randomBirthDay();
+            //получать рандомное имя из списка имен и вставлять его в фабрику животных
             Animal animal = animalFactory.createAnimal(animalType, "breed" + startNumber, "name" + startNumber, randomCost,
                     "character" + startNumber, randomBirthDay);
             animals[index] = animal;
@@ -50,6 +51,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         for (int i = 1; i <= N; i++) {
             BigDecimal randomCost = CreateAnimalService.randomCost(1, 5000);
             LocalDate randomBirthDay = CreateAnimalService.randomBirthDay();
+            //получать рандомное имя из списка имен и вставлять его в фабрику животных
             Animal animal = animalFactory.createAnimal(animalType, "breed" + i, "name" + i, randomCost,
                     "character" + i, randomBirthDay);
             animals[index] = animal;

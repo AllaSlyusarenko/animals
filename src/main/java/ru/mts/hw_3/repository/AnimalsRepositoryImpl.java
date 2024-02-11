@@ -1,7 +1,7 @@
 package ru.mts.hw_3.repository;
 
-import ru.mts.hw_3.entity.Animal;
-import ru.mts.hw_3.service.CreateAnimalService;
+import ru.mtsbank.entity.Animal;
+import ru.mtsbank.service.CreateAnimalService;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
