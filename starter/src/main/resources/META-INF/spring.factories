@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=ru.mtsbank.StarterConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=ru.mtsbank.config.StarterConfiguration

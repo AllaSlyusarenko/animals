@@ -1,6 +1,2 @@
 spring:
   application.name: education-project
-
-name:
-  names:
-    animal: barsik, persik
