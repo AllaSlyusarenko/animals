@@ -7,6 +7,20 @@ plugins {
 group 'ru.mts'
 version '1.0-SNAPSHOT'
 
+//application {
+//    mainModule = 'src.main' // name defined in module-info.java
+//    mainClass = 'src.main.java.ru.mts.hw_3.Main.java'
+//}
+//tasks.withType(Jar) {
+//    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+//
+//    manifest {
+//        attributes["Main-Class"] = "ru.mts.hw_3.Main"
+//    }
+//}
+jar {
+    manifest.attributes("Main-Class": "ru.mts.hw_3.Main");
+}
 repositories {
     mavenCentral()
     maven { url 'https://repo.spring.io/milestone' }
