@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.util.Random;
 
 public class CreateAnimalServiceImpl implements CreateAnimalService {
-    final int numberOfNewAnimals = 10;
     private final AnimalFactory animalFactory = new AnimalFactory();
     private AnimalType animalType;
     @Value("${names}")
@@ -27,6 +26,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
     @Override
     public Animal[] createAnimals() {
         int startNumber = 1;
+        int numberOfNewAnimals = 10;
         Animal[] animals = new AbstractAnimal[numberOfNewAnimals];
         int index = 0;
         do {

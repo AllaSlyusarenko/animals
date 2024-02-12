@@ -100,8 +100,12 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     @Override
     public void printDuplicate() {
         Set<Animal> set = findDuplicate();
-        for (Animal animal : set) {
-            System.out.println(animal);
+        if (set.isEmpty()) {
+            System.out.println(new HashSet<>());
+        } else {
+            for (Animal animal : set) {
+                System.out.println(animal);
+            }
         }
     }
 

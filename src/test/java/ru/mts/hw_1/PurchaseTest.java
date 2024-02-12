@@ -62,19 +62,4 @@ class PurchaseTest {
         Class<IllegalArgumentException> exceptionClass = IllegalArgumentException.class;
         assertThrows(exceptionClass, () -> countTotalSum(purchase));
     }
-
-//    @ParameterizedTest
-//    @DisplayName(value = "Тест расчёта суммы покупки с корректными и некорректными данными")
-//    @MethodSource("argsProviderFactory")
-//    void testWithMethodSource(Purchase argument) {
-//        assertNotNull(argument);
-//    }
-//
-//    static Stream<Purchase> argsProviderFactory() {
-//        return Stream.of(new Purchase(5, 15.05, 10),
-//                new Purchase(-5, 15.05, 10),
-//                new Purchase(5, -15.05, 10),
-//                new Purchase(5, 15.05, -10),
-//                new Purchase(5, 15.05, 1000));
-//    }
 }
