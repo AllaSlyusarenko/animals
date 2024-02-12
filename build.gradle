@@ -5,10 +5,9 @@ plugins {
 }
 
 group 'ru.mts'
-version '1.0-SNAPSHOT'
 
 jar {
-    manifest.attributes('Main-Class': 'ru.mts.hw_3.Main');
+    manifest.attributes('Main-Class': 'ru.mts.hw_3.Main')
 }
 repositories {
     mavenCentral()
