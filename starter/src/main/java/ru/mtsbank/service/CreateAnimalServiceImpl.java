@@ -13,8 +13,11 @@ import java.util.Random;
 public class CreateAnimalServiceImpl implements CreateAnimalService {
     private final AnimalFactory animalFactory = new AnimalFactory();
     private AnimalType animalType;
-    @Value("${names}")
-    private String[] names;
+    @Value("${dog.names}")
+    private String[] namesDog;
+
+    @Value("${wolf.names}")
+    private String[] namesWolf;
 
     public void setAnimalType(AnimalType animalType) {
         this.animalType = animalType;
@@ -32,7 +35,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         do {
             BigDecimal randomCost = CreateAnimalService.randomCost(1, 5000);
             LocalDate randomBirthDay = CreateAnimalService.randomBirthDay();
-            Animal animal = animalFactory.createAnimal(animalType, "breed" + startNumber, getRandomName(), randomCost,
+            Animal animal = animalFactory.createAnimal(animalType, "breed" + startNumber, getRandomNameByTypeAnimal(animalType), randomCost,
                     "character" + startNumber, randomBirthDay);
             animals[index] = animal;
             startNumber++;
@@ -54,7 +57,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         for (int i = 1; i <= N; i++) {
             BigDecimal randomCost = CreateAnimalService.randomCost(1, 5000);
             LocalDate randomBirthDay = CreateAnimalService.randomBirthDay();
-            Animal animal = animalFactory.createAnimal(animalType, "breed" + i, getRandomName(), randomCost,
+            Animal animal = animalFactory.createAnimal(animalType, "breed" + i, getRandomNameByTypeAnimal(animalType), randomCost,
                     "character" + i, randomBirthDay);
             animals[index] = animal;
             index++;
@@ -65,7 +68,16 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
     /**
      * Метод - получает случайное имя животного
      */
-    private String getRandomName() {
-        return names[new Random().nextInt(names.length)];
+    private String getRandomNameByTypeAnimal(AnimalType animalType) {
+        String name = null;
+        switch (animalType) {
+            case DOG:
+                name = namesDog[new Random().nextInt(namesDog.length)];
+                break;
+            case WOLF:
+                name = namesWolf[new Random().nextInt(namesWolf.length)];
+                break;
+        }
+        return name;
     }
 }
