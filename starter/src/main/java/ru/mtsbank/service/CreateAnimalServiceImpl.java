@@ -1,17 +1,23 @@
-package ru.mts.hw_3.service;
+package ru.mtsbank.service;
 
-import ru.mts.hw_3.entity.AbstractAnimal;
-import ru.mts.hw_3.entity.Animal;
-import ru.mts.hw_3.entity.AnimalFactory;
-import ru.mts.hw_3.entity.AnimalType;
+import org.springframework.beans.factory.annotation.Value;
+import ru.mtsbank.entity.AbstractAnimal;
+import ru.mtsbank.entity.Animal;
+import ru.mtsbank.entity.AnimalFactory;
+import ru.mtsbank.entity.AnimalType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Random;
 
 public class CreateAnimalServiceImpl implements CreateAnimalService {
-    final int numberOfNewAnimals = 10;
     private final AnimalFactory animalFactory = new AnimalFactory();
     private AnimalType animalType;
+    @Value("${application.dog.names}")
+    private String[] namesDog;
+
+    @Value("${application.wolf.names}")
+    private String[] namesWolf;
 
     public void setAnimalType(AnimalType animalType) {
         this.animalType = animalType;
@@ -23,12 +29,13 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
     @Override
     public Animal[] createAnimals() {
         int startNumber = 1;
+        int numberOfNewAnimals = 10;
         Animal[] animals = new AbstractAnimal[numberOfNewAnimals];
         int index = 0;
         do {
             BigDecimal randomCost = CreateAnimalService.randomCost(1, 5000);
             LocalDate randomBirthDay = CreateAnimalService.randomBirthDay();
-            Animal animal = animalFactory.createAnimal(animalType, "breed" + startNumber, "name" + startNumber, randomCost,
+            Animal animal = animalFactory.createAnimal(animalType, "breed" + startNumber, getRandomNameByTypeAnimal(animalType), randomCost,
                     "character" + startNumber, randomBirthDay);
             animals[index] = animal;
             startNumber++;
@@ -50,11 +57,27 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         for (int i = 1; i <= N; i++) {
             BigDecimal randomCost = CreateAnimalService.randomCost(1, 5000);
             LocalDate randomBirthDay = CreateAnimalService.randomBirthDay();
-            Animal animal = animalFactory.createAnimal(animalType, "breed" + i, "name" + i, randomCost,
+            Animal animal = animalFactory.createAnimal(animalType, "breed" + i, getRandomNameByTypeAnimal(animalType), randomCost,
                     "character" + i, randomBirthDay);
             animals[index] = animal;
             index++;
         }
         return animals;
+    }
+
+    /**
+     * Метод - получает случайное имя животного
+     */
+    private String getRandomNameByTypeAnimal(AnimalType animalType) {
+        String name = null;
+        switch (animalType) {
+            case DOG:
+                name = namesDog[new Random().nextInt(namesDog.length)];
+                break;
+            case WOLF:
+                name = namesWolf[new Random().nextInt(namesWolf.length)];
+                break;
+        }
+        return name;
     }
 }

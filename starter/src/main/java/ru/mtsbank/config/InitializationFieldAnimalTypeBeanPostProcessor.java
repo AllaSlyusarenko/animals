@@ -1,10 +1,10 @@
-package ru.mts.hw_3.config;
+package ru.mtsbank.config;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
-import ru.mts.hw_3.entity.AnimalType;
-import ru.mts.hw_3.service.CreateAnimalServiceImpl;
+import ru.mtsbank.entity.AnimalType;
+import ru.mtsbank.service.CreateAnimalServiceImpl;
 
 @Component
 public class InitializationFieldAnimalTypeBeanPostProcessor implements BeanPostProcessor {

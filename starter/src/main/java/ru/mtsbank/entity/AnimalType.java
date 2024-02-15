@@ -1,4 +1,4 @@
-package ru.mts.hw_3.entity;
+package ru.mtsbank.entity;
 
 import java.util.Random;
 

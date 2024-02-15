@@ -1,4 +1,4 @@
-package ru.mts.hw_3.utility;
+package ru.mtsbank.utility;
 
 import java.time.format.DateTimeFormatter;
 

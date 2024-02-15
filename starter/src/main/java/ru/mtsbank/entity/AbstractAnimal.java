@@ -1,11 +1,11 @@
-package ru.mts.hw_3.entity;
+package ru.mtsbank.entity;
+
+import ru.mtsbank.utility.Constants;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.Objects;
-
-import static ru.mts.hw_3.utility.Constants.DATE_FORMATTER_OUT;
 
 public abstract class AbstractAnimal implements Animal {
     protected String breed; // порода
@@ -66,7 +66,7 @@ public abstract class AbstractAnimal implements Animal {
      * Метод - вывод даты рождения животного в формате "dd-MM-yyyy"
      */
     public String getBirthDateString() {
-        return getBirthDate().format(DATE_FORMATTER_OUT);
+        return getBirthDate().format(Constants.DATE_FORMATTER_OUT);
     }
 
     /**

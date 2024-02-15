@@ -2,12 +2,9 @@ package ru.mts.hw_1;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static ru.mts.hw_1.Purchase.countTotalSum;
 
 @DisplayName(value = "Тесты расчёта суммы покупки")
@@ -61,20 +58,5 @@ class PurchaseTest {
         Purchase purchase = new Purchase(5, 15.05, 1000);
         Class<IllegalArgumentException> exceptionClass = IllegalArgumentException.class;
         assertThrows(exceptionClass, () -> countTotalSum(purchase));
-    }
-
-    @ParameterizedTest
-    @DisplayName(value = "Тест расчёта суммы покупки с корректными и некорректными данными")
-    @MethodSource("argsProviderFactory")
-    void testWithMethodSource(Purchase argument) {
-        assertNotNull(argument);
-    }
-
-    static Stream<Purchase> argsProviderFactory() {
-        return Stream.of(new Purchase(5, 15.05, 10),
-                new Purchase(-5, 15.05, 10),
-                new Purchase(5, -15.05, 10),
-                new Purchase(5, 15.05, -10),
-                new Purchase(5, 15.05, 1000));
     }
 }

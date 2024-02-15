@@ -1,7 +1,7 @@
-package ru.mts.hw_3.service;
+package ru.mtsbank.service;
 
-import ru.mts.hw_3.entity.Animal;
-import ru.mts.hw_3.entity.Wolf;
+import ru.mtsbank.entity.Animal;
+import ru.mtsbank.entity.Wolf;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
