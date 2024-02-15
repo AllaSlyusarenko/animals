@@ -16,7 +16,7 @@ public class ScheduledTasks {
         this.animalsRepository = animalsRepository;
     }
 
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedDelayString = "${application.scheduled.time}")
     public void doRepositoryTasks() {
         System.out.println("findLeapYearNames-------------------------------------------------------------------------------------");
         System.out.println(Arrays.toString(animalsRepository.findLeapYearNames()) + "\n");

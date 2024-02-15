@@ -13,10 +13,10 @@ import java.util.Random;
 public class CreateAnimalServiceImpl implements CreateAnimalService {
     private final AnimalFactory animalFactory = new AnimalFactory();
     private AnimalType animalType;
-    @Value("${dog.names}")
+    @Value("${application.dog.names}")
     private String[] namesDog;
 
-    @Value("${wolf.names}")
+    @Value("${application.wolf.names}")
     private String[] namesWolf;
 
     public void setAnimalType(AnimalType animalType) {
