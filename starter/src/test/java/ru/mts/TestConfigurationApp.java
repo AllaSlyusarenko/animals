@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import ru.mts.entity.AnimalType;
 import ru.mts.service.CreateAnimalService;
 import ru.mts.service.CreateAnimalServiceImpl;
+
 @TestConfiguration
 @TestComponent
 public class TestConfigurationApp {

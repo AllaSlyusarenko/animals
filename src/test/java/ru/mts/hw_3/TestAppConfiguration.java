@@ -4,8 +4,6 @@ import org.springframework.boot.test.context.TestComponent;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import ru.mts.entity.AnimalType;
-import ru.mts.hw_3.repository.AnimalsRepository;
-import ru.mts.hw_3.repository.AnimalsRepositoryImpl;
 import ru.mts.service.CreateAnimalService;
 import ru.mts.service.CreateAnimalServiceImpl;
 
@@ -18,10 +16,5 @@ public class TestAppConfiguration {
         CreateAnimalServiceImpl createAnimalService = new CreateAnimalServiceImpl();
         createAnimalService.setAnimalType(AnimalType.getRandomAnimalType());
         return createAnimalService;
-    }
-
-    @Bean
-    public AnimalsRepository animalsRepository(CreateAnimalService createAnimalService) {
-        return new AnimalsRepositoryImpl(createAnimalService);
     }
 }

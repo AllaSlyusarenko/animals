@@ -23,10 +23,6 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
         animals = createAnimalService.createAnimals();
     }
 
-    public void setAnimals(Animal[] animals) {
-        this.animals = animals;
-    }
-
     /**
      * Метод - производит поиск животных, которые родились в високосный год, и формирует массив их имён
      */
@@ -111,6 +107,14 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 System.out.println(animal);
             }
         }
+    }
+
+    /**
+     * Метод - для внедрения внешнего списка животных
+     */
+    @Override
+    public void setAnimals(Animal[] animals) {
+        this.animals = animals;
     }
 
     private boolean isEmptyArray(Animal[] animals) {

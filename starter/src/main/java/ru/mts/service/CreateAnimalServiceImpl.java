@@ -16,10 +16,10 @@ import static ru.mts.service.CreateAnimalService.randomCost;
 public class CreateAnimalServiceImpl implements CreateAnimalService {
     private final AnimalFactory animalFactory = new AnimalFactory();
     private AnimalType animalType;
-    @Value("${application.dog.names}")
+    @Value("${dog.names}")
     private String[] namesDog;
 
-    @Value("${application.wolf.names}")
+    @Value("${wolf.names}")
     private String[] namesWolf;
 
     public void setAnimalType(AnimalType animalType) {

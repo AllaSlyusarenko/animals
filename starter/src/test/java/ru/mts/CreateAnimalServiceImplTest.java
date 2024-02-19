@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import ru.mts.entity.Animal;
 import ru.mts.service.CreateAnimalService;
 
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootConfiguration
+@ActiveProfiles("test")
 @SpringBootTest(classes = TestConfigurationApp.class)
 @DisplayName(value = "Animal creation service test")
 public class CreateAnimalServiceImplTest {
@@ -23,10 +25,7 @@ public class CreateAnimalServiceImplTest {
     @Test
     @DisplayName(value = "Animal creation test")
     void createAnimals() {
-        //given
-        //when
         Animal[] animals = createAnimalService.createAnimals();
-        //then
         assertEquals(10, animals.length);
         assertThat(animals[0], instanceOf(Animal.class));
         assertThat(animals[9], instanceOf(Animal.class));
@@ -36,11 +35,8 @@ public class CreateAnimalServiceImplTest {
     @Test
     @DisplayName(value = "Animal creation specified quantity test")
     void createAnimalsSpecifiedQuantity() {
-        //given
         int N = 15;
-        //when
         Animal[] animals = createAnimalService.createAnimals(N);
-        //then
         assertEquals(N, animals.length);
         assertThat(animals[0], instanceOf(Animal.class));
         assertThat(animals[N - 1], instanceOf(Animal.class));
