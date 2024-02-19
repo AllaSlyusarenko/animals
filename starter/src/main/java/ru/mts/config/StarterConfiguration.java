@@ -1,12 +1,12 @@
-package ru.mtsbank.config;
+package ru.mts.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import ru.mtsbank.ProjectListener;
-import ru.mtsbank.service.CreateAnimalService;
-import ru.mtsbank.service.CreateAnimalServiceImpl;
+import ru.mts.ProjectListener;
+import ru.mts.service.CreateAnimalService;
+import ru.mts.service.CreateAnimalServiceImpl;
 
 @Configuration
 @ComponentScan

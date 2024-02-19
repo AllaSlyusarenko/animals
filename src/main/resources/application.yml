@@ -1,2 +1,4 @@
 spring:
   application.name: education-project
+  main:
+    allow-bean-definition-overriding: true

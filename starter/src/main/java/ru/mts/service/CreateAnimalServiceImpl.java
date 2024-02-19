@@ -1,14 +1,17 @@
-package ru.mtsbank.service;
+package ru.mts.service;
 
 import org.springframework.beans.factory.annotation.Value;
-import ru.mtsbank.entity.AbstractAnimal;
-import ru.mtsbank.entity.Animal;
-import ru.mtsbank.entity.AnimalFactory;
-import ru.mtsbank.entity.AnimalType;
+import ru.mts.entity.AbstractAnimal;
+import ru.mts.entity.Animal;
+import ru.mts.entity.AnimalFactory;
+import ru.mts.entity.AnimalType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Random;
+
+import static ru.mts.service.CreateAnimalService.randomBirthDay;
+import static ru.mts.service.CreateAnimalService.randomCost;
 
 public class CreateAnimalServiceImpl implements CreateAnimalService {
     private final AnimalFactory animalFactory = new AnimalFactory();
@@ -33,8 +36,8 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         Animal[] animals = new AbstractAnimal[numberOfNewAnimals];
         int index = 0;
         do {
-            BigDecimal randomCost = CreateAnimalService.randomCost(1, 5000);
-            LocalDate randomBirthDay = CreateAnimalService.randomBirthDay();
+            BigDecimal randomCost = randomCost(1, 5000);
+            LocalDate randomBirthDay = randomBirthDay();
             Animal animal = animalFactory.createAnimal(animalType, "breed" + startNumber, getRandomNameByTypeAnimal(animalType), randomCost,
                     "character" + startNumber, randomBirthDay);
             animals[index] = animal;
@@ -47,16 +50,17 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
     /**
      * Метод - создает массив животных необходимого количества(N)
      */
+    @Override
     public Animal[] createAnimals(int N) {
         if (N <= 0) {
-            System.out.print("Количество животных должно быть больше 0 - ");
-            return new Animal[0];
+            System.out.print("The number of animals must be greater than 0");
+            throw new IllegalArgumentException("The number of animals must be greater than 0");
         }
         Animal[] animals = new AbstractAnimal[N];
         int index = 0;
         for (int i = 1; i <= N; i++) {
-            BigDecimal randomCost = CreateAnimalService.randomCost(1, 5000);
-            LocalDate randomBirthDay = CreateAnimalService.randomBirthDay();
+            BigDecimal randomCost = randomCost(1, 5000);
+            LocalDate randomBirthDay = randomBirthDay();
             Animal animal = animalFactory.createAnimal(animalType, "breed" + i, getRandomNameByTypeAnimal(animalType), randomCost,
                     "character" + i, randomBirthDay);
             animals[index] = animal;
