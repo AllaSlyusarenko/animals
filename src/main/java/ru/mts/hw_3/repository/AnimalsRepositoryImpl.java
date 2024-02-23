@@ -109,14 +109,6 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
         }
     }
 
-    /**
-     * Метод - для внедрения внешнего списка животных
-     */
-    @Override
-    public void setAnimals(Animal[] animals) {
-        this.animals = animals;
-    }
-
     private boolean isEmptyArray(Animal[] animals) {
         return animals == null || animals.length == 0;
     }

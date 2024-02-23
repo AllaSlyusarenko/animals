@@ -31,9 +31,4 @@ public interface AnimalsRepository {
      * Метод - для печати дубликатов
      */
     void printDuplicate();
-
-    /**
-     * Метод - для внешнего списка животных
-     */
-    void setAnimals(Animal[] animals);
 }

@@ -1,14 +1,12 @@
 package ru.mts;
 
-import org.springframework.boot.test.context.TestComponent;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.ContextConfiguration;
 import ru.mts.entity.AnimalType;
 import ru.mts.service.CreateAnimalService;
 import ru.mts.service.CreateAnimalServiceImpl;
 
-@TestConfiguration
-@TestComponent
+@ContextConfiguration
 public class TestConfigurationApp {
     @Bean
     public CreateAnimalService createAnimalService() {

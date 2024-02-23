@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.mts.entity.Animal;
 import ru.mts.entity.Dog;
-import ru.mts.hw_3.TestAppConfiguration;
 import ru.mts.service.CreateAnimalService;
 
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest(classes = TestAppConfiguration.class)
+@SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @DisplayName(value = "Tests of the AnimalsRepository class")
 class AnimalsRepositoryImplTest {
@@ -51,11 +51,12 @@ class AnimalsRepositoryImplTest {
 
     @Test
     @DisplayName(value = "Tests of the findLeapYearNames Correct")
-    void findLeapYearNamesCorrect() {
-        animalsRepository.setAnimals(animals);
+    void findLeapYearNamesCorrect() throws NoSuchFieldException, IllegalAccessException {
+        Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
+        animalNamesField.setAccessible(true);
+        animalNamesField.set(animalsRepository, animals);
         assertThat(animals[0], instanceOf(Animal.class));
         assertEquals("breed1", animals[0].getBreed());
-
         String[] names = animalsRepository.findLeapYearNames();
         assertEquals(3, names.length);
         assertEquals("tuzik", names[0]);
@@ -63,17 +64,21 @@ class AnimalsRepositoryImplTest {
 
     @Test
     @DisplayName(value = "Tests of the findLeapYearNames Incorrect - null")
-    void findLeapYearNamesIncorrect() {
-        animalsRepository.setAnimals(null);
+    void findLeapYearNamesIncorrect() throws NoSuchFieldException, IllegalAccessException {
+        Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
+        animalNamesField.setAccessible(true);
+        animalNamesField.set(animalsRepository, null);
         String[] names = animalsRepository.findLeapYearNames();
         assertEquals(0, names.length);
     }
 
     @Test
     @DisplayName(value = "Tests of the findOlderAnimal correct")
-    void findOlderAnimalCorrect() {
+    void findOlderAnimalCorrect() throws NoSuchFieldException, IllegalAccessException {
         int N = 15;
-        animalsRepository.setAnimals(animals);
+        Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
+        animalNamesField.setAccessible(true);
+        animalNamesField.set(animalsRepository, animals);
         Animal[] names = animalsRepository.findOlderAnimal(N);
         assertEquals(7, names.length);
         assertEquals("tuzik", names[0].getName());
@@ -81,17 +86,21 @@ class AnimalsRepositoryImplTest {
 
     @Test
     @DisplayName(value = "Tests of the findOlderAnimal incorrect")
-    void findOlderAnimalIncorrect() {
+    void findOlderAnimalIncorrect() throws NoSuchFieldException, IllegalAccessException {
         int N = 15;
-        animalsRepository.setAnimals(null);
+        Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
+        animalNamesField.setAccessible(true);
+        animalNamesField.set(animalsRepository, null);
         Animal[] names = animalsRepository.findOlderAnimal(N);
         assertEquals(0, names.length);
     }
 
     @Test
     @DisplayName(value = "Tests of the findDuplicate correct")
-    void findDuplicateCorrect() {
-        animalsRepository.setAnimals(animals);
+    void findDuplicateCorrect() throws NoSuchFieldException, IllegalAccessException {
+        Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
+        animalNamesField.setAccessible(true);
+        animalNamesField.set(animalsRepository, animals);
         Set<Animal> duplicateAnimals = animalsRepository.findDuplicate();
         assertEquals(1, duplicateAnimals.size());
         assertTrue(duplicateAnimals.contains(animals[0]));
@@ -99,8 +108,10 @@ class AnimalsRepositoryImplTest {
 
     @Test
     @DisplayName(value = "Tests of the findDuplicate incorrect")
-    void findDuplicateIncorrect() {
-        animalsRepository.setAnimals(null);
+    void findDuplicateIncorrect() throws NoSuchFieldException, IllegalAccessException {
+        Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
+        animalNamesField.setAccessible(true);
+        animalNamesField.set(animalsRepository, null);
         Set<Animal> duplicateAnimals = animalsRepository.findDuplicate();
         assertEquals(0, duplicateAnimals.size());
     }
