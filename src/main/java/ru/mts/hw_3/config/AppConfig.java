@@ -5,7 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import ru.mts.hw_3.repository.AnimalsRepository;
 import ru.mts.hw_3.repository.AnimalsRepositoryImpl;
-import ru.mtsbank.service.CreateAnimalService;
+import ru.mts.service.CreateAnimalService;
 
 @Configuration
 @ComponentScan(basePackages = "ru.mts")

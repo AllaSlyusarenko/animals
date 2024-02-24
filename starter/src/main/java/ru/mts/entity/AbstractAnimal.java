@@ -1,6 +1,6 @@
-package ru.mtsbank.entity;
+package ru.mts.entity;
 
-import ru.mtsbank.utility.Constants;
+import ru.mts.utility.Constants;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

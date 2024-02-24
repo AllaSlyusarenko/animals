@@ -1,7 +1,7 @@
-package ru.mtsbank.service;
+package ru.mts.service;
 
-import ru.mtsbank.entity.Animal;
-import ru.mtsbank.entity.Wolf;
+import ru.mts.entity.Animal;
+import ru.mts.entity.Wolf;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -26,6 +26,21 @@ public interface CreateAnimalService {
         Animal[] animals = new Animal[numberOfAnimals];
         int index = 0;
         while (startNumber <= numberOfAnimals) {
+            BigDecimal randomCost = randomCost(1, 5000);
+            LocalDate randomBirthDay = randomBirthDay();
+            Animal animal = new Wolf("breed" + startNumber, "name" + startNumber, randomCost,
+                    "character" + startNumber, randomBirthDay);
+            animals[index] = animal;
+            startNumber++;
+            index++;
+        }
+        return animals;
+    }
+    default Animal[] createAnimals(int N) {
+        int startNumber = 1;
+        Animal[] animals = new Animal[N];
+        int index = 0;
+        while (startNumber <= N) {
             BigDecimal randomCost = randomCost(1, 5000);
             LocalDate randomBirthDay = randomBirthDay();
             Animal animal = new Wolf("breed" + startNumber, "name" + startNumber, randomCost,

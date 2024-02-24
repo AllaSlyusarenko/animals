@@ -1,2 +1,13 @@
 spring:
   application.name: education-project
+  main:
+    allow-bean-definition-overriding: true
+
+application:
+  scheduled:
+    time: 60000
+
+dog:
+  names: barsik,persik,dushka,mushka,tuzik,taratuwka,bumburuwka
+wolf:
+  names: smelchak,wustrik,seriy,beliy,oskal,tigr,vozak

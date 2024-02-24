@@ -3,7 +3,7 @@ package ru.mts.hw_3.config;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import ru.mts.hw_3.repository.AnimalsRepository;
-import ru.mtsbank.entity.Animal;
+import ru.mts.entity.Animal;
 
 import java.util.Arrays;
 import java.util.Set;
