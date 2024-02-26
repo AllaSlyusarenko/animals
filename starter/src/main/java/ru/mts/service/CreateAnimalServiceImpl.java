@@ -26,7 +26,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
     }
 
     /**
-     * Метод - создает массив животных фиксированного количества (numberOfNewAnimals = 10)
+     * Метод - создает животных фиксированного количества (numberOfNewAnimals = 10)
      */
     @Override
     public Map<String, List<Animal>> createAnimals() {
@@ -47,7 +47,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
     }
 
     /**
-     * Метод - создает массив животных необходимого количества(N)
+     * Метод - создает животных необходимого количества(N)
      */
     @Override
     public Map<String, List<Animal>> createAnimals(int N) {

@@ -24,7 +24,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     }
 
     /**
-     * Метод - производит поиск животных, которые родились в високосный год, и формирует массив их имён
+     * Метод - производит поиск имен животных, которые родились в високосный год
      */
     @Override
     public Map<String, LocalDate> findLeapYearNames() {
@@ -33,9 +33,6 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
         }
         Map<String, LocalDate> animalsMap = new HashMap<>();
         for (String key : animals.keySet()) {
-//            if (key == null) {
-//                continue;
-//            }
             for (Animal animal : animals.get(key)) {
                 if (isLeapYear(animal.getBirthDate())) {
                     animalsMap.put("" + key + " " + animal.getName(), animal.getBirthDate());
@@ -46,7 +43,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     }
 
     /**
-     * Метод - производит поиск животных, которые старше указанного возраста, и формирует из них массив
+     * Метод - производит поиск животных, которые старше указанного возраста, иначе выводит старшего
      */
     @Override
     public Map<Animal, Integer> findOlderAnimal(int N) {
@@ -58,44 +55,43 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
             return new HashMap<>();
         }
         Map<Animal, Integer> animalsMap = new HashMap<>();
+        Animal oldestAnimal = null;
         for (String key : animals.keySet()) {
-//            if (key == null) {
-//                continue;
-//            }
             for (Animal animal : animals.get(key)) {
+                if (oldestAnimal == null) {
+                    oldestAnimal = animal;
+                } else if (animal.getBirthDate().isBefore(oldestAnimal.getBirthDate())) {
+                    oldestAnimal = animal;
+                }
                 if (animal.getBirthDate().isBefore(LocalDate.now().minusYears(N))) {
                     animalsMap.put(animal, countYears(animal.getBirthDate()));
                 }
             }
         }
+        if (animalsMap.isEmpty()) {
+            animalsMap.put(oldestAnimal, countYears(oldestAnimal.getBirthDate()));
+        }
         return animalsMap;
     }
 
     /**
-     * Метод - производит поиск дубликатов животных и формирует из них массив
+     * Метод - производит поиск дубликатов животных
      */
     @Override
     public Map<String, Integer> findDuplicate() {
-        if (isEmptyArray(animals) || animals.size() == 1) {
+        if (isEmptyArray(animals)) {
             return new HashMap<>();
         }
         Map<String, Integer> animalsMapFinal = new HashMap<>();
-//        Set<Animal> animalsSet = new HashSet<>();
-//        for (int i = 0; i < animals.size(); i++) {
-//            if (animals[i] == null) {
-//                continue;
-//            }
         for (String key : animals.keySet()) {
-            Map<Animal, Integer> animalsMap = new HashMap<>(); //промежуточная, чтобы собрать все дубликаты и не запутаться, что учтено, а что нет
+            Map<Animal, Integer> animalsMap = new HashMap<>(); //промежуточная, чтобы собрать все дубликаты
+            // и не запутаться, что учтено, а что нет, и не допустить двойного учета одного и того же элемента
             List<Animal> animalList = animals.get(key);
             for (int i = 0; i < animalList.size(); i++) {
                 if (animalsMap.containsKey(animalList.get(i))) {
                     continue;
                 }
                 for (int j = i + 1; j < animalList.size(); j++) {
-//                    if (animals[j] == null) {
-//                        continue;
-//                    }
                     if (animalList.get(i).equals(animalList.get(j))) {
                         if (!animalsMap.containsKey(animalList.get(i))) {
                             animalsMap.put(animalList.get(i), 2);
@@ -109,13 +105,15 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
             for (Integer count : animalsMap.values()) {
                 total += count;
             }
-            animalsMapFinal.put(key, total);
+            if (total != 0) {
+                animalsMapFinal.put(key, total);
+            }
         }
         return animalsMapFinal;
     }
 
     /**
-     * Метод - производит печать массива дубликатов животных
+     * Метод - производит печать дубликатов животных
      */
     @Override
     public void printDuplicate() {
