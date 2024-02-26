@@ -1,13 +1,16 @@
 package ru.mts.service;
 
 import ru.mts.entity.Animal;
-import ru.mts.entity.Wolf;
+import ru.mts.entity.AnimalFactory;
+import ru.mts.entity.AnimalType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.temporal.ChronoUnit;
-import java.util.Random;
+import java.util.*;
+
+import static ru.mts.entity.AnimalType.getRandomAnimalType;
 
 /**
  * интерфейс имеет default метод, который позволяет создавать новые объекты необходимого количества
@@ -15,41 +18,49 @@ import java.util.Random;
  * @version 1.1
  * @autor Алла Слюсаренко
  */
+
 public interface CreateAnimalService {
-    int numberOfAnimals = 10;
+    /**
+     * Метод - создает новые объекты фиксированного количества
+     */
+    default Map<String, List<Animal>> createAnimals() {
+        AnimalType animalType = getRandomAnimalType();
+        AnimalFactory animalFactory = new AnimalFactory();
+        int numberOfAnimals = 10;
+        int startNumber = 1;
+        Map<String, List<Animal>> animalsMap = new HashMap<>();
+        List<Animal> animals = new ArrayList<>();
+        while (startNumber <= numberOfAnimals) {
+            BigDecimal randomCost = randomCost(1, 5000);
+            LocalDate randomBirthDay = randomBirthDay();
+            Animal animal = animalFactory.createAnimal(animalType, "breed" + startNumber, "name" + startNumber, randomCost,
+                    "character" + startNumber, randomBirthDay);
+            animals.add(animal);
+            startNumber++;
+        }
+        animalsMap.put(animalType.name(), animals);
+        return animalsMap;
+    }
 
     /**
      * Метод - создает новые объекты необходимого количества
      */
-    default Animal[] createAnimals() {
+    default Map<String, List<Animal>> createAnimals(int N) {
+        AnimalType animalType = getRandomAnimalType();
+        AnimalFactory animalFactory = new AnimalFactory();
         int startNumber = 1;
-        Animal[] animals = new Animal[numberOfAnimals];
-        int index = 0;
-        while (startNumber <= numberOfAnimals) {
-            BigDecimal randomCost = randomCost(1, 5000);
-            LocalDate randomBirthDay = randomBirthDay();
-            Animal animal = new Wolf("breed" + startNumber, "name" + startNumber, randomCost,
-                    "character" + startNumber, randomBirthDay);
-            animals[index] = animal;
-            startNumber++;
-            index++;
-        }
-        return animals;
-    }
-    default Animal[] createAnimals(int N) {
-        int startNumber = 1;
-        Animal[] animals = new Animal[N];
-        int index = 0;
+        Map<String, List<Animal>> animalsMap = new HashMap<>();
+        List<Animal> animals = new ArrayList<>();
         while (startNumber <= N) {
             BigDecimal randomCost = randomCost(1, 5000);
             LocalDate randomBirthDay = randomBirthDay();
-            Animal animal = new Wolf("breed" + startNumber, "name" + startNumber, randomCost,
+            Animal animal = animalFactory.createAnimal(animalType, "breed" + startNumber, "name" + startNumber, randomCost,
                     "character" + startNumber, randomBirthDay);
-            animals[index] = animal;
+            animals.add(animal);
             startNumber++;
-            index++;
         }
-        return animals;
+        animalsMap.put(animalType.name(), animals);
+        return animalsMap;
     }
 
     static BigDecimal randomCost(int min, int max) {
