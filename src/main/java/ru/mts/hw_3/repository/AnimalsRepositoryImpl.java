@@ -35,7 +35,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
         for (String key : animals.keySet()) {
             for (Animal animal : animals.get(key)) {
                 if (isLeapYear(animal.getBirthDate())) {
-                    animalsMap.put("" + key + " " + animal.getName(), animal.getBirthDate());
+                    animalsMap.put(key + " " + animal.getName(), animal.getBirthDate());
                 }
             }
         }
