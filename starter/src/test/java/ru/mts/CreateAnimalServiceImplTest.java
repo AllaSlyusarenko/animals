@@ -8,6 +8,9 @@ import org.springframework.test.context.ActiveProfiles;
 import ru.mts.entity.Animal;
 import ru.mts.service.CreateAnimalService;
 
+import java.util.List;
+import java.util.Map;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,21 +26,25 @@ public class CreateAnimalServiceImplTest {
     @Test
     @DisplayName(value = "Animal creation test")
     void createAnimals() {
-        Animal[] animals = createAnimalService.createAnimals();
-        assertEquals(10, animals.length);
-        assertThat(animals[0], instanceOf(Animal.class));
-        assertThat(animals[9], instanceOf(Animal.class));
-        assertEquals(animals[0].getClass(), animals[1].getClass());
+        Map<String, List<Animal>> animals = createAnimalService.createAnimals();
+        for (List<Animal> value : animals.values()) {
+            assertEquals(10, value.size());
+            assertThat(value.get(0), instanceOf(Animal.class));
+            assertThat(value.get(9), instanceOf(Animal.class));
+            assertEquals(value.get(0).getClass(), value.get(1).getClass());
+        }
     }
 
     @Test
     @DisplayName(value = "Animal creation specified quantity test")
     void createAnimalsSpecifiedQuantity() {
         int N = 15;
-        Animal[] animals = createAnimalService.createAnimals(N);
-        assertEquals(N, animals.length);
-        assertThat(animals[0], instanceOf(Animal.class));
-        assertThat(animals[N - 1], instanceOf(Animal.class));
+        Map<String, List<Animal>> animals = createAnimalService.createAnimals(N);
+        for (List<Animal> value : animals.values()) {
+            assertEquals(N, value.size());
+            assertThat(value.get(0), instanceOf(Animal.class));
+            assertThat(value.get(N - 1), instanceOf(Animal.class));
+        }
     }
 
     @Test
