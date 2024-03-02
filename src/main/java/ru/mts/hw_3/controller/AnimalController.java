@@ -27,7 +27,7 @@ public class AnimalController {
 
     @ResponseBody
     @GetMapping("/leap")
-    public ResponseEntity<?> getLeapYearNames() {
+    public ResponseEntity<Object> getLeapYearNames() {
         log.info("Вызов всех методов репозитория");
         log.info("findLeapYearNames-------------------------------------------------------------------------------------");
         Map<String, LocalDate> names = animalsRepository.findLeapYearNames();
