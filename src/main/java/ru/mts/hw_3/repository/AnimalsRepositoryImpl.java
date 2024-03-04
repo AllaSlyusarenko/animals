@@ -6,9 +6,11 @@ import ru.mts.service.CreateAnimalService;
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class AnimalsRepositoryImpl implements AnimalsRepository {
     private Map<String, List<Animal>> animals;
@@ -31,16 +33,25 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
         if (isEmptyArray(animals)) {
             return new HashMap<>();
         }
-        Map<String, LocalDate> animalsMap = new HashMap<>();
-        for (String key : animals.keySet()) {
-            for (Animal animal : animals.get(key)) {
-                if (isLeapYear(animal.getBirthDate())) {
-                    animalsMap.put(key + " " + animal.getName(), animal.getBirthDate());
-                }
-            }
-        }
-        return animalsMap;
+        return animals.entrySet().stream()
+                .flatMap(entry -> entry.getValue().stream())
+                .filter(animal -> isLeapYear(animal.getBirthDate()))
+                .collect(Collectors.toMap(k -> k.getClass().getSimpleName().toUpperCase() + " " + k.getName(), v -> v.getBirthDate()));
+
+//        return animals.entrySet().stream()
+//                .flatMap(entry -> mapToList(entry.getKey(), entry.getValue()).stream())
+//                .collect(Collectors.toMap(entry -> entry.getKey() + " " + entry.getValue().getName(), entry -> entry.getValue().getBirthDate()));
+
+//        namesDateInString1;
     }
+
+//    private List<AbstractMap.SimpleEntry<String, Animal>> mapToList(String key, List<Animal> animalList) {
+//        return animalList.stream()
+//                .filter(animal -> isLeapYear(animal.getBirthDate()))
+//                .map(animal -> new AbstractMap.SimpleEntry<String, Animal>(key, animal))
+//                .collect(Collectors.toList());
+//
+//    }
 
     /**
      * Метод - производит поиск животных, которые старше указанного возраста, иначе выводит старшего
@@ -54,21 +65,15 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
             System.out.println("The number of years must be greater than 0");
             return new HashMap<>();
         }
-        Map<Animal, Integer> animalsMap = new HashMap<>();
-        Animal oldestAnimal = null;
-        for (String key : animals.keySet()) {
-            for (Animal animal : animals.get(key)) {
-                if (oldestAnimal == null) {
-                    oldestAnimal = animal;
-                } else if (animal.getBirthDate().isBefore(oldestAnimal.getBirthDate())) {
-                    oldestAnimal = animal;
-                }
-                if (animal.getBirthDate().isBefore(LocalDate.now().minusYears(N))) {
-                    animalsMap.put(animal, countYears(animal.getBirthDate()));
-                }
-            }
-        }
+        Map<Animal, Integer> animalsMap = animals.entrySet().stream()
+                .flatMap(entry -> entry.getValue().stream())
+                .filter(animal -> animal.getBirthDate().isBefore(LocalDate.now().minusYears(N)))
+                .collect(Collectors.toMap(k -> k, v -> countYears(v.getBirthDate()), (k1, k2) -> k1));
         if (animalsMap.isEmpty()) {
+            Animal oldestAnimal = animals.entrySet().stream()
+                    .flatMap(entry -> entry.getValue().stream())
+                    .min(Comparator.comparing(Animal::getBirthDate))
+                    .orElse(null);
             animalsMap.put(oldestAnimal, countYears(oldestAnimal.getBirthDate()));
         }
         return animalsMap;
