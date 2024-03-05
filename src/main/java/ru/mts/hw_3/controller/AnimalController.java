@@ -11,6 +11,7 @@ import ru.mts.entity.Animal;
 import ru.mts.hw_3.repository.AnimalsRepository;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -47,7 +48,7 @@ public class AnimalController {
     @GetMapping("/dupl")
     public ResponseEntity<Object> getDuplicate() {
         log.info("findDuplicate-----------------------------------------------------------------------------------------");
-        Map<String, Integer> animalsDuplicate = animalsRepository.findDuplicate();
+        Map<String, List<Animal>> animalsDuplicate = animalsRepository.findDuplicate();
         return new ResponseEntity<>(animalsDuplicate, HttpStatus.OK);
     }
 }

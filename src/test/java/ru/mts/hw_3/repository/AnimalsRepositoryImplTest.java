@@ -1,9 +1,6 @@
 package ru.mts.hw_3.repository;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.mts.entity.Animal;
@@ -15,6 +12,7 @@ import ru.mts.service.CreateAnimalService;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,13 +30,13 @@ class AnimalsRepositoryImplTest {
     AnimalType animalTypeDog = AnimalType.DOG;
     AnimalType animalTypeWolf = AnimalType.WOLF;
     private final Map<String, List<Animal>> animalsMap = new HashMap<>();
+    private final List<Animal> animalsDog = new ArrayList<>();
     @Autowired
     private AnimalsRepository animalsRepository;
     @Autowired
     private CreateAnimalService createAnimalService;
 
     protected void initAnimals() throws NoSuchFieldException, IllegalAccessException {
-        List<Animal> animalsDog = new ArrayList<>();
         animalsDog.add(new Dog("breed1", "tuzik", new BigDecimal("2844.68"), "character1", LocalDate.of(1980, 2, 8)));
         animalsDog.add(new Dog("breed2", "bumburuwka", new BigDecimal("3441.68"), "character2", LocalDate.of(1985, 4, 6)));
         animalsDog.add(new Dog("breed1", "tuzik", new BigDecimal("2844.68"), "character1", LocalDate.of(1983, 2, 8)));
@@ -48,7 +46,7 @@ class AnimalsRepositoryImplTest {
         animalsDog.add(new Dog("breed4", "mushka", new BigDecimal("3061.6"), "character4", LocalDate.of(1998, 4, 10)));
         animalsDog.add(new Dog("breed8", "mushka", new BigDecimal("3981.68"), "character8", LocalDate.of(2014, 9, 7)));
         animalsDog.add(new Dog("breed4", "mushka", new BigDecimal("3061.6"), "character4", LocalDate.of(1998, 4, 10)));
-        animalsDog.add(new Dog("breed10", "persik", new BigDecimal("1388.68"), "character10", LocalDate.of(1994, 6, 20)));
+        animalsDog.add(new Dog("breed10", "abrikos", new BigDecimal("1388.68"), "character10", LocalDate.of(1994, 6, 20)));
         Field animalTypeFieldDog = createAnimalService.getClass().getDeclaredField("animalType");
         animalTypeFieldDog.setAccessible(true);
         animalTypeFieldDog.set(createAnimalService, animalTypeDog);
@@ -146,10 +144,10 @@ class AnimalsRepositoryImplTest {
         Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
         animalNamesField.setAccessible(true);
         animalNamesField.set(animalsRepository, animalsMap);
-        Map<String, Integer> duplicateAnimals = animalsRepository.findDuplicate();
+        Map<String, List<Animal>> duplicateAnimals = animalsRepository.findDuplicate();
         assertEquals(2, duplicateAnimals.size());
-        assertEquals(3, duplicateAnimals.get(animalTypeDog.name()));
-        assertEquals(3, duplicateAnimals.get(animalTypeWolf.name()));
+        assertEquals(1, duplicateAnimals.get(animalTypeDog.name()).size());
+        assertEquals(1, duplicateAnimals.get(animalTypeWolf.name()).size());
     }
 
     @Test
@@ -158,7 +156,65 @@ class AnimalsRepositoryImplTest {
         Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
         animalNamesField.setAccessible(true);
         animalNamesField.set(animalsRepository, null);
-        Map<String, Integer> duplicateAnimals = animalsRepository.findDuplicate();
+        Map<String, List<Animal>> duplicateAnimals = animalsRepository.findDuplicate();
         assertEquals(0, duplicateAnimals.size());
+    }
+
+    @Test
+    @DisplayName(value = "Tests of the findAverageAge correct")
+    void findAverageAgeCorrect() {
+        Integer sum = animalsDog.stream()
+                .filter(x -> x.getBirthDate().isBefore(LocalDate.now()))
+                .map(animal -> countYears(animal.getBirthDate()))
+                .reduce(0, Integer::sum, Integer::sum);
+        Double expect = (double) (sum / animalsDog.size());
+        Double ageAverage = animalsRepository.findAverageAge(animalsDog);
+        assertEquals(expect, ageAverage);
+    }
+
+    @Test
+    @DisplayName(value = "Tests of the findAverageAge incorrect")
+    void findAverageAgeIncorrect() {
+        Double ageAverage = animalsRepository.findAverageAge(null);
+        assertEquals(-1, ageAverage);
+    }
+
+    @Test
+    @DisplayName(value = "Tests of the findOldAndExpensive correct")
+    void findOldAndExpensiveCorrect() {
+        List<Animal> oldAndExpensive = animalsRepository.findOldAndExpensive(animalsDog);
+        assertEquals(7, oldAndExpensive.size());
+        assertEquals(LocalDate.of(1980, 2, 8), oldAndExpensive.get(0).getBirthDate());
+        assertEquals(LocalDate.of(2014, 9, 7), oldAndExpensive.get(oldAndExpensive.size() - 1).getBirthDate());
+    }
+
+    @Test
+    @DisplayName(value = "Tests of the findOldAndExpensive InCorrect")
+    void findOldAndExpensiveInCorrect() {
+        List<Animal> oldAndExpensive = animalsRepository.findOldAndExpensive(null);
+        assertEquals(0, oldAndExpensive.size());
+    }
+
+    @Test
+    @DisplayName(value = "Tests of the findMinConstAnimals Correct")
+    void findMinConstAnimalsCorrect() {
+        List<String> names = animalsRepository.findMinConstAnimals(animalsDog);
+        List<String> namesExpexted = new ArrayList<>();
+        namesExpexted.add("persik");
+        namesExpexted.add("barsik");
+        namesExpexted.add("abrikos");
+        assertEquals(3, names.size());
+        Assertions.assertIterableEquals(namesExpexted, names);
+    }
+
+    @Test
+    @DisplayName(value = "Tests of the findMinConstAnimals InCorrect")
+    void findMinConstAnimalsInCorrect() {
+        List<String> names = animalsRepository.findMinConstAnimals(null);
+        assertEquals(0, names.size());
+    }
+
+    private Integer countYears(LocalDate localDate) {
+        return Period.between(localDate, LocalDate.now()).getYears();
     }
 }

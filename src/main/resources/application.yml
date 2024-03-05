@@ -8,6 +8,6 @@ application:
     time: 60000
 
 dog:
-  names: barsik,persik,dushka,mushka,tuzik,taratuwka,bumburuwka
+  names: barsik,persik,dushka,mushka,tuzik,taratuwka,bumburuwka,rizik, pesik, piksel, smelchak,wustrik,seriy,beliy,oskal,tigr,vozak, poned, vtorn, sred, chetv
 wolf:
-  names: smelchak,wustrik,seriy,beliy,oskal,tigr,vozak
+  names: smelchak,wustrik,seriy,beliy,oskal,tigr,vozak, poned, vtorn, sred, chetv, barsik,persik,dushka,mushka,tuzik,taratuwka,bumburuwka,rizik, pesik, piksel
