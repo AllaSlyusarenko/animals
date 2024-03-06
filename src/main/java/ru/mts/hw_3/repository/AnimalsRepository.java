@@ -27,8 +27,6 @@ public interface AnimalsRepository {
     /**
      * Метод - ищет животных по наличию дубликатов
      */
-//    Map<String, Integer> findDuplicate();
-
     Map<String, List<Animal>> findDuplicate();
 
     /**

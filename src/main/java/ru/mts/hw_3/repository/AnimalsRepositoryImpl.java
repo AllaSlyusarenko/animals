@@ -35,7 +35,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
         }
         return prepareListAnimals().stream()
                 .filter(animal -> isLeapYear(animal.getBirthDate()))
-                .collect(Collectors.toMap(k -> k.getClass().getSimpleName().toUpperCase() + " " + k.getName(), v -> v.getBirthDate()));
+                .collect(Collectors.toMap(k -> k.getClass().getSimpleName().toUpperCase() + " " + k.getName(), v -> v.getBirthDate(), (k1, k2) -> k1));
     }
 
     /**
@@ -86,7 +86,14 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     @Override
     public void printDuplicate() {
         Map<String, List<Animal>> map = findDuplicate();
-        System.out.println(map);
+        List<Animal> list = map.entrySet().stream()
+                .flatMap(entry -> entry.getValue().stream())
+                .collect(Collectors.toList());
+        if (list.isEmpty()) {
+            System.out.println("no duplicates found");
+        } else {
+            System.out.println(map);
+        }
     }
 
     /**

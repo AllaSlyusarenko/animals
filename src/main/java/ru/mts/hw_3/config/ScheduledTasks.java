@@ -28,15 +28,16 @@ public class ScheduledTasks {
         System.out.println("findDuplicate-----------------------------------------------------------------------------------------");
         Map<String, List<Animal>> animalsDuplicate = animalsRepository.findDuplicate();
         animalsRepository.printDuplicate();
+        System.out.println("");
 
         System.out.println("findAverageAge-----------------------------------------------------------------------------------------");
         List<Animal> animalList = animalsRepository.prepareListAnimals();
         System.out.println(Math.round(animalsRepository.findAverageAge(animalList) * 100.0) / 100.0 + "\n");
 
-        System.out.println("findOldAndExpensive-----------------------------------------------------------------------------------------");
+        System.out.println("findOldAndExpensive------------------------------------------------------------------------------------");
         System.out.println(animalsRepository.findOldAndExpensive(animalList) + "\n");
 
-        System.out.println("findMinConstAnimals-----------------------------------------------------------------------------------------");
+        System.out.println("findMinConstAnimals------------------------------------------------------------------------------------");
         System.out.println(animalsRepository.findMinConstAnimals(animalList) + "\n");
     }
 }
