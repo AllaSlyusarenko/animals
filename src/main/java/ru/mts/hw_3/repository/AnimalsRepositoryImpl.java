@@ -141,13 +141,12 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
         if (animalList == null || animalList.size() == 0) {
             return new ArrayList<>();
         }
-        List<String> names = animalList.stream()
+        return animalList.stream()
                 .sorted(Comparator.comparing(Animal::getCost))
                 .limit(3)
-                .map(x -> x.getName())
+                .map(Animal::getName)
                 .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
-        return names;
     }
 
     /**
