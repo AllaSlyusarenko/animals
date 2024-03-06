@@ -30,7 +30,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      */
     @Override
     public Map<String, LocalDate> findLeapYearNames() {
-        if (isEmptyArray(animals)) {
+        if (isEmptyMap(animals)) {
             return new HashMap<>();
         }
         return prepareListAnimals().stream()
@@ -43,7 +43,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      */
     @Override
     public Map<Animal, Integer> findOlderAnimal(int N) {
-        if (isEmptyArray(animals)) {
+        if (isEmptyMap(animals)) {
             return new HashMap<>();
         }
         if (N <= 0) {
@@ -68,7 +68,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      */
     @Override
     public Map<String, List<Animal>> findDuplicate() {
-        if (isEmptyArray(animals)) {
+        if (isEmptyMap(animals)) {
             return new HashMap<>();
         }
         return animals.entrySet().stream()
@@ -159,7 +159,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 .collect(Collectors.toList());
     }
 
-    private boolean isEmptyArray(Map<String, List<Animal>> animals) {
+    private boolean isEmptyMap(Map<String, List<Animal>> animals) {
         return animals == null || animals.size() == 0;
     }
 
