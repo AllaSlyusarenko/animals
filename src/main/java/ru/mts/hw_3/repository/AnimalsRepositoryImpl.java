@@ -1,5 +1,7 @@
 package ru.mts.hw_3.repository;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Repository;
 import ru.mts.entity.Animal;
 import ru.mts.service.CreateAnimalService;
 
@@ -9,9 +11,10 @@ import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@Slf4j
+@Repository
 public class AnimalsRepositoryImpl implements AnimalsRepository {
     private Map<String, List<Animal>> animals;
     private final CreateAnimalService createAnimalService;
@@ -71,13 +74,11 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
         if (isEmptyMap(animals)) {
             return new HashMap<>();
         }
+        Set<Animal> elements = new HashSet<>();
         return animals.entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, v -> v.getValue().stream()
-                        .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
-                        .entrySet().stream()
-                        .filter(e -> e.getValue() > 1)
-                        .map(Map.Entry::getKey)
-                        .collect(Collectors.toList())));
+                .flatMap(entry -> entry.getValue().stream())
+                .filter(e -> !elements.add(e))
+                .collect(Collectors.groupingBy(a -> a.getClass().getSimpleName().toUpperCase(), Collectors.toList()));
     }
 
     /**
@@ -90,7 +91,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 .flatMap(entry -> entry.getValue().stream())
                 .collect(Collectors.toList());
         if (list.isEmpty()) {
-            System.out.println("no duplicates found");
+            log.info("no duplicates found");
         } else {
             System.out.println(map);
         }
@@ -100,15 +101,17 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Метод - для нахождения среднего возраста животных в списке
      */
     @Override
-    public Double findAverageAge(List<Animal> animalList) {
+    public void findAverageAge(List<Animal> animalList) {
         if (animalList == null || animalList.size() == 0) {
-            return -1.0;
+            log.info("the list is empty");
+            throw new IllegalArgumentException("the list is empty");
         }
-        return animalList.stream()
+        double averageAge = animalList.stream()
                 .mapToInt(animal -> countYears(animal.getBirthDate()))
                 .filter(x -> x > 0)
                 .average()
                 .orElse(-1.0);
+        log.info(Double.toString((averageAge * 100.0) / 100.0));
     }
 
     /**
@@ -120,12 +123,10 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
         if (animalList == null || animalList.size() == 0) {
             return new ArrayList<>();
         }
-        BigDecimal sum = animalList.stream()
+        BigDecimal averageCost = animalList.stream()
                 .map(Animal::getCost)
-                .map(Objects::requireNonNull)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-        BigDecimal averageCost = sum.divide(new BigDecimal(animalList.size()), RoundingMode.CEILING);
-
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .divide(new BigDecimal(animalList.size()), RoundingMode.CEILING);
         return animalList.stream()
                 .filter(x -> countYears(x.getBirthDate()) > 5)
                 .filter(t -> t.getCost().compareTo(averageCost) > 0)
@@ -152,7 +153,6 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     /**
      * Метод - для подготовки списка всех животных из мапы
      */
-    @Override
     public List<Animal> prepareListAnimals() {
         return animals.entrySet().stream()
                 .flatMap(entry -> entry.getValue().stream())

@@ -1,7 +1,7 @@
 package ru.mts.hw_3.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,15 +14,14 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping("/animals")
-public class AnimalController {
+public class AnimalRepositoryMethodsController {
     private final AnimalsRepository animalsRepository;
-    private static final org.slf4j.Logger log
-            = org.slf4j.LoggerFactory.getLogger(AnimalController.class);
 
     @Autowired
-    public AnimalController(AnimalsRepository animalsRepository) {
+    public AnimalRepositoryMethodsController(AnimalsRepository animalsRepository) {
         this.animalsRepository = animalsRepository;
     }
 
@@ -32,7 +31,7 @@ public class AnimalController {
         log.info("Вызов всех методов репозитория");
         log.info("findLeapYearNames-------------------------------------------------------------------------------------");
         Map<String, LocalDate> names = animalsRepository.findLeapYearNames();
-        return new ResponseEntity<>(names, HttpStatus.OK);
+        return ResponseEntity.ok(names);
     }
 
     @ResponseBody
@@ -41,7 +40,7 @@ public class AnimalController {
         log.info("findOlderAnimal---------------------------------------------------------------------------------------");
         int age = 15;
         Map<Animal, Integer> olderAnimals = animalsRepository.findOlderAnimal(age);
-        return new ResponseEntity<>(olderAnimals, HttpStatus.OK);
+        return ResponseEntity.ok(olderAnimals);
     }
 
     @ResponseBody
@@ -49,6 +48,6 @@ public class AnimalController {
     public ResponseEntity<Object> getDuplicate() {
         log.info("findDuplicate-----------------------------------------------------------------------------------------");
         Map<String, List<Animal>> animalsDuplicate = animalsRepository.findDuplicate();
-        return new ResponseEntity<>(animalsDuplicate, HttpStatus.OK);
+        return ResponseEntity.ok(animalsDuplicate);
     }
 }

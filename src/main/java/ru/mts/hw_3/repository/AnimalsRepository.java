@@ -37,7 +37,7 @@ public interface AnimalsRepository {
     /**
      * Метод - для нахождения среднего возраста животных в списке
      */
-    Double findAverageAge(List<Animal> animalList);
+    void findAverageAge(List<Animal> animalList);
 
     /**
      * Метод - для нахождения животных в списке старше 5 лет и стоимость больше средней стоимости,
@@ -49,9 +49,4 @@ public interface AnimalsRepository {
      * Метод - для нахождения 3 животных с самой низкой ценой, вывод - список имен в обратном порядке
      */
     List<String> findMinConstAnimals(List<Animal> animalList);
-
-    /**
-     * Метод - для подготовки списка всех животных из мапы
-     */
-    List<Animal> prepareListAnimals();
 }

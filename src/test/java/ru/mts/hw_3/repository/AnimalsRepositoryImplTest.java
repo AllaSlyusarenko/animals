@@ -20,8 +20,7 @@ import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -146,8 +145,8 @@ class AnimalsRepositoryImplTest {
         animalNamesField.set(animalsRepository, animalsMap);
         Map<String, List<Animal>> duplicateAnimals = animalsRepository.findDuplicate();
         assertEquals(2, duplicateAnimals.size());
-        assertEquals(1, duplicateAnimals.get(animalTypeDog.name()).size());
-        assertEquals(1, duplicateAnimals.get(animalTypeWolf.name()).size());
+        assertEquals(2, duplicateAnimals.get(animalTypeDog.name()).size());
+        assertEquals(2, duplicateAnimals.get(animalTypeWolf.name()).size());
     }
 
     @Test
@@ -161,22 +160,10 @@ class AnimalsRepositoryImplTest {
     }
 
     @Test
-    @DisplayName(value = "Tests of the findAverageAge correct")
-    void findAverageAgeCorrect() {
-        Integer sum = animalsDog.stream()
-                .filter(x -> x.getBirthDate().isBefore(LocalDate.now()))
-                .map(animal -> countYears(animal.getBirthDate()))
-                .reduce(0, Integer::sum, Integer::sum);
-        Double expect = (double) (sum / animalsDog.size());
-        Double ageAverage = animalsRepository.findAverageAge(animalsDog);
-        assertEquals(expect, ageAverage);
-    }
-
-    @Test
     @DisplayName(value = "Tests of the findAverageAge incorrect")
     void findAverageAgeIncorrect() {
-        Double ageAverage = animalsRepository.findAverageAge(null);
-        assertEquals(-1, ageAverage);
+        Class<IllegalArgumentException> exceptionClass = IllegalArgumentException.class;
+        assertThrows(exceptionClass, () -> animalsRepository.findAverageAge(null));
     }
 
     @Test
