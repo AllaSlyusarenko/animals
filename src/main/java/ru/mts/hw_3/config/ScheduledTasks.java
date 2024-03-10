@@ -1,30 +1,43 @@
 package ru.mts.hw_3.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import ru.mts.hw_3.repository.AnimalsRepository;
+import ru.mts.entity.Animal;
+import ru.mts.hw_3.repository.AnimalsRepositoryImpl;
 
-import java.util.Map;
+import java.util.List;
 
+@Slf4j
 @Component
 public class ScheduledTasks {
-    private final AnimalsRepository animalsRepository;
+    private final AnimalsRepositoryImpl animalsRepository;
 
-    public ScheduledTasks(AnimalsRepository animalsRepository) {
+    public ScheduledTasks(AnimalsRepositoryImpl animalsRepository) {
         this.animalsRepository = animalsRepository;
     }
 
     @Scheduled(fixedDelayString = "${application.scheduled.time}")
     public void doRepositoryTasks() {
-        System.out.println("findLeapYearNames-------------------------------------------------------------------------------------");
-        System.out.println(animalsRepository.findLeapYearNames() + "\n");
+        log.info("findLeapYearNames-------------------------------------------------------------------------------------");
+        log.info(animalsRepository.findLeapYearNames() + "\n");
 
-        System.out.println("findOlderAnimal---------------------------------------------------------------------------------------");
+        log.info("findOlderAnimal---------------------------------------------------------------------------------------");
         int age = 15;
-        System.out.println(animalsRepository.findOlderAnimal(age) + "\n");
+        log.info(animalsRepository.findOlderAnimal(age) + "\n");
 
-        System.out.println("findDuplicate-----------------------------------------------------------------------------------------");
-        Map<String, Integer> animalsDuplicate = animalsRepository.findDuplicate();
+        log.info("findDuplicate-----------------------------------------------------------------------------------------");
         animalsRepository.printDuplicate();
+        log.info("");
+
+        log.info("findAverageAge-----------------------------------------------------------------------------------------");
+        List<Animal> animalList = animalsRepository.prepareListAnimals();
+        animalsRepository.findAverageAge(animalList);
+
+        log.info("findOldAndExpensive------------------------------------------------------------------------------------");
+        log.info(animalsRepository.findOldAndExpensive(animalList) + "\n");
+
+        log.info("findMinConstAnimals------------------------------------------------------------------------------------");
+        log.info(animalsRepository.findMinConstAnimals(animalList) + "\n");
     }
 }

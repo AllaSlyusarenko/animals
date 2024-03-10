@@ -8,6 +8,20 @@ application:
     time: 60000
 
 dog:
-  names: barsik,persik,dushka,mushka,tuzik,taratuwka,bumburuwka
+  names: barsik,persik,dushka,mushka,tuzik,taratuwka,bumburuwka,rizik, pesik, piksel, smelchak,wustrik,seriy,beliy,oskal,tigr,vozak, poned, vtorn, sred, chetv
 wolf:
-  names: smelchak,wustrik,seriy,beliy,oskal,tigr,vozak
+  names: smelchak,wustrik,seriy,beliy,oskal,tigr,vozak, poned, vtorn, sred, chetv, barsik,persik,dushka,mushka,tuzik,taratuwka,bumburuwka,rizik, pesik, piksel
+
+logging:
+  level:
+    root: INFO
+  #    org.springframework.web: DEBUG
+  #    org.hibernate: ERROR
+  file:
+    name: ./logs/app.log
+    logrotate:
+      max-history: 10
+      max-size: 10MB
+  pattern:
+    console: "%d{dd-MM-yyyy HH:mm:ss.SSS} %-5level - %msg%n"
+    file: "%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
