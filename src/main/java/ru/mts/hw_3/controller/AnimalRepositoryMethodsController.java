@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.mts.entity.Animal;
+import ru.mts.hw_3.exception.CollectionEmptyException;
 import ru.mts.hw_3.repository.AnimalsRepository;
 
 import java.time.LocalDate;
@@ -27,7 +28,7 @@ public class AnimalRepositoryMethodsController {
 
     @ResponseBody
     @GetMapping("/leap")
-    public ResponseEntity<Object> getLeapYearNames() {
+    public ResponseEntity<Object> getLeapYearNames() throws CollectionEmptyException {
         log.info("Вызов всех методов репозитория");
         log.info("findLeapYearNames-------------------------------------------------------------------------------------");
         Map<String, LocalDate> names = animalsRepository.findLeapYearNames();
@@ -36,7 +37,7 @@ public class AnimalRepositoryMethodsController {
 
     @ResponseBody
     @GetMapping("/old")
-    public ResponseEntity<Object> getOlderAnimal() {
+    public ResponseEntity<Object> getOlderAnimal() throws CollectionEmptyException {
         log.info("findOlderAnimal---------------------------------------------------------------------------------------");
         int age = 15;
         Map<Animal, Integer> olderAnimals = animalsRepository.findOlderAnimal(age);
@@ -45,7 +46,7 @@ public class AnimalRepositoryMethodsController {
 
     @ResponseBody
     @GetMapping("/dupl")
-    public ResponseEntity<Object> getDuplicate() {
+    public ResponseEntity<Object> getDuplicate() throws CollectionEmptyException {
         log.info("findDuplicate-----------------------------------------------------------------------------------------");
         Map<String, List<Animal>> animalsDuplicate = animalsRepository.findDuplicate();
         return ResponseEntity.ok(animalsDuplicate);

@@ -3,6 +3,8 @@ package ru.mts.hw_3.repository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import ru.mts.entity.Animal;
+import ru.mts.hw_3.exception.CollectionEmptyException;
+import ru.mts.hw_3.exception.IncorrectParameterException;
 import ru.mts.service.CreateAnimalService;
 
 import javax.annotation.PostConstruct;
@@ -32,9 +34,9 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Метод - производит поиск имен животных, которые родились в високосный год
      */
     @Override
-    public Map<String, LocalDate> findLeapYearNames() {
+    public Map<String, LocalDate> findLeapYearNames() throws CollectionEmptyException {
         if (isEmptyMap(animals)) {
-            return new HashMap<>();
+            throw new CollectionEmptyException("data collection cannot be empty");
         }
         return prepareListAnimals().stream()
                 .filter(animal -> isLeapYear(animal.getBirthDate()))
@@ -45,13 +47,12 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Метод - производит поиск животных, которые старше указанного возраста, иначе выводит старшего
      */
     @Override
-    public Map<Animal, Integer> findOlderAnimal(int N) {
+    public Map<Animal, Integer> findOlderAnimal(int N) throws CollectionEmptyException {
         if (isEmptyMap(animals)) {
-            return new HashMap<>();
+            throw new CollectionEmptyException("data collection cannot be empty");
         }
         if (N <= 0) {
-            System.out.println("The number of years must be greater than 0");
-            return new HashMap<>();
+            throw new IncorrectParameterException("The number of years must be greater than 0");
         }
         Map<Animal, Integer> animalsMap = prepareListAnimals().stream()
                 .filter(animal -> animal.getBirthDate().isBefore(LocalDate.now().minusYears(N)))
@@ -70,13 +71,12 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Метод - производит поиск дубликатов животных
      */
     @Override
-    public Map<String, List<Animal>> findDuplicate() {
+    public Map<String, List<Animal>> findDuplicate() throws CollectionEmptyException {
         if (isEmptyMap(animals)) {
-            return new HashMap<>();
+            throw new CollectionEmptyException("data collection cannot be empty");
         }
         Set<Animal> elements = new HashSet<>();
-        return animals.entrySet().stream()
-                .flatMap(entry -> entry.getValue().stream())
+        return prepareListAnimals().stream()
                 .filter(e -> !elements.add(e))
                 .collect(Collectors.groupingBy(a -> a.getClass().getSimpleName().toUpperCase(), Collectors.toList()));
     }
@@ -85,7 +85,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Метод - производит печать дубликатов животных
      */
     @Override
-    public void printDuplicate() {
+    public void printDuplicate() throws CollectionEmptyException {
         Map<String, List<Animal>> map = findDuplicate();
         List<Animal> list = map.entrySet().stream()
                 .flatMap(entry -> entry.getValue().stream())
@@ -101,10 +101,9 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Метод - для нахождения среднего возраста животных в списке
      */
     @Override
-    public void findAverageAge(List<Animal> animalList) {
+    public void findAverageAge(List<Animal> animalList) throws CollectionEmptyException {
         if (animalList == null || animalList.size() == 0) {
-            log.info("the list is empty");
-            throw new IllegalArgumentException("the list is empty");
+            throw new CollectionEmptyException("data collection cannot be empty");
         }
         double averageAge = animalList.stream()
                 .mapToInt(animal -> countYears(animal.getBirthDate()))
@@ -119,9 +118,9 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * отсортированный по дате рождения(по возрастанию)
      */
     @Override
-    public List<Animal> findOldAndExpensive(List<Animal> animalList) {
+    public List<Animal> findOldAndExpensive(List<Animal> animalList) throws CollectionEmptyException {
         if (animalList == null || animalList.size() == 0) {
-            return new ArrayList<>();
+            throw new CollectionEmptyException("data collection cannot be empty");
         }
         BigDecimal averageCost = animalList.stream()
                 .map(Animal::getCost)
@@ -138,9 +137,9 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Метод - для нахождения 3 животных с самой низкой ценой, вывод - список имен в обратном порядке
      */
     @Override
-    public List<String> findMinConstAnimals(List<Animal> animalList) {
+    public List<String> findMinConstAnimals(List<Animal> animalList) throws CollectionEmptyException {
         if (animalList == null || animalList.size() == 0) {
-            return new ArrayList<>();
+            throw new CollectionEmptyException("data collection cannot be empty");
         }
         return animalList.stream()
                 .sorted(Comparator.comparing(Animal::getCost))
