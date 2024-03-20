@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import ru.mts.entity.Animal;
+import ru.mts.hw_3.exception.CollectionEmptyException;
+import ru.mts.hw_3.exception.IncorrectParameterException;
 import ru.mts.hw_3.repository.AnimalsRepositoryImpl;
 
 import java.util.List;
@@ -19,25 +21,31 @@ public class ScheduledTasks {
 
     @Scheduled(fixedDelayString = "${application.scheduled.time}")
     public void doRepositoryTasks() {
-        log.info("findLeapYearNames-------------------------------------------------------------------------------------");
-        log.info(animalsRepository.findLeapYearNames() + "\n");
+        try {
+            log.info("findLeapYearNames-------------------------------------------------------------------------------------");
+            log.info(animalsRepository.findLeapYearNames() + "\n");
 
-        log.info("findOlderAnimal---------------------------------------------------------------------------------------");
-        int age = 15;
-        log.info(animalsRepository.findOlderAnimal(age) + "\n");
+            log.info("findOlderAnimal---------------------------------------------------------------------------------------");
+            int age = 15;
+            log.info(animalsRepository.findOlderAnimal(age) + "\n");
 
-        log.info("findDuplicate-----------------------------------------------------------------------------------------");
-        animalsRepository.printDuplicate();
-        log.info("");
+            log.info("findDuplicate-----------------------------------------------------------------------------------------");
+            animalsRepository.printDuplicate();
+            log.info("");
 
-        log.info("findAverageAge-----------------------------------------------------------------------------------------");
-        List<Animal> animalList = animalsRepository.prepareListAnimals();
-        animalsRepository.findAverageAge(animalList);
+            log.info("findAverageAge-----------------------------------------------------------------------------------------");
+            List<Animal> animalList = animalsRepository.prepareListAnimals();
+            animalsRepository.findAverageAge(animalList);
 
-        log.info("findOldAndExpensive------------------------------------------------------------------------------------");
-        log.info(animalsRepository.findOldAndExpensive(animalList) + "\n");
+            log.info("findOldAndExpensive------------------------------------------------------------------------------------");
+            log.info(animalsRepository.findOldAndExpensive(animalList) + "\n");
 
-        log.info("findMinConstAnimals------------------------------------------------------------------------------------");
-        log.info(animalsRepository.findMinConstAnimals(animalList) + "\n");
+            log.info("findMinConstAnimals------------------------------------------------------------------------------------");
+            log.info(animalsRepository.findMinConstAnimals(animalList) + "\n");
+        } catch (IncorrectParameterException ex) {
+            log.error("Incorrect parameter value", ex);
+        } catch (CollectionEmptyException e) {
+            log.error("Data collection does not meet the required conditions", e);
+        }
     }
 }

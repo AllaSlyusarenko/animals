@@ -7,6 +7,8 @@ import ru.mts.entity.Animal;
 import ru.mts.entity.AnimalType;
 import ru.mts.entity.Dog;
 import ru.mts.entity.Wolf;
+import ru.mts.hw_3.exception.CollectionEmptyException;
+import ru.mts.hw_3.exception.IncorrectParameterException;
 import ru.mts.service.CreateAnimalService;
 
 import java.lang.reflect.Field;
@@ -96,8 +98,8 @@ class AnimalsRepositoryImplTest {
         Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
         animalNamesField.setAccessible(true);
         animalNamesField.set(animalsRepository, null);
-        Map<String, LocalDate> names = animalsRepository.findLeapYearNames();
-        assertEquals(0, names.size());
+        Class<IllegalArgumentException> exceptionClass = IllegalArgumentException.class;
+        assertThrows(exceptionClass, () -> animalsRepository.findLeapYearNames());
     }
 
     @Test
@@ -120,8 +122,19 @@ class AnimalsRepositoryImplTest {
         Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
         animalNamesField.setAccessible(true);
         animalNamesField.set(animalsRepository, null);
-        Map<Animal, Integer> olderAnimals = animalsRepository.findOlderAnimal(N);
-        assertEquals(0, olderAnimals.size());
+        Class<IllegalArgumentException> exceptionClass = IllegalArgumentException.class;
+        assertThrows(exceptionClass, () -> animalsRepository.findOlderAnimal(N));
+    }
+
+    @Test
+    @DisplayName(value = "Tests of the findOlderAnimal age incorrect")
+    void findOlderAnimalAgeIncorrect() throws NoSuchFieldException, IllegalAccessException {
+        int N = -15;
+        Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
+        animalNamesField.setAccessible(true);
+        animalNamesField.set(animalsRepository, animalsMap);
+        Class<IncorrectParameterException> exceptionClass = IncorrectParameterException.class;
+        assertThrows(exceptionClass, () -> animalsRepository.findOlderAnimal(N));
     }
 
     @Test
@@ -155,20 +168,20 @@ class AnimalsRepositoryImplTest {
         Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
         animalNamesField.setAccessible(true);
         animalNamesField.set(animalsRepository, null);
-        Map<String, List<Animal>> duplicateAnimals = animalsRepository.findDuplicate();
-        assertEquals(0, duplicateAnimals.size());
+        Class<IllegalArgumentException> exceptionClass = IllegalArgumentException.class;
+        assertThrows(exceptionClass, () -> animalsRepository.findDuplicate());
     }
 
     @Test
     @DisplayName(value = "Tests of the findAverageAge incorrect")
     void findAverageAgeIncorrect() {
-        Class<IllegalArgumentException> exceptionClass = IllegalArgumentException.class;
+        Class<CollectionEmptyException> exceptionClass = CollectionEmptyException.class;
         assertThrows(exceptionClass, () -> animalsRepository.findAverageAge(null));
     }
 
     @Test
     @DisplayName(value = "Tests of the findOldAndExpensive correct")
-    void findOldAndExpensiveCorrect() {
+    void findOldAndExpensiveCorrect() throws CollectionEmptyException {
         List<Animal> oldAndExpensive = animalsRepository.findOldAndExpensive(animalsDog);
         assertEquals(7, oldAndExpensive.size());
         assertEquals(LocalDate.of(1980, 2, 8), oldAndExpensive.get(0).getBirthDate());
@@ -178,13 +191,13 @@ class AnimalsRepositoryImplTest {
     @Test
     @DisplayName(value = "Tests of the findOldAndExpensive InCorrect")
     void findOldAndExpensiveInCorrect() {
-        List<Animal> oldAndExpensive = animalsRepository.findOldAndExpensive(null);
-        assertEquals(0, oldAndExpensive.size());
+        Class<CollectionEmptyException> exceptionClass = CollectionEmptyException.class;
+        assertThrows(exceptionClass, () -> animalsRepository.findOldAndExpensive(null));
     }
 
     @Test
     @DisplayName(value = "Tests of the findMinConstAnimals Correct")
-    void findMinConstAnimalsCorrect() {
+    void findMinConstAnimalsCorrect() throws CollectionEmptyException {
         List<String> names = animalsRepository.findMinConstAnimals(animalsDog);
         List<String> namesExpexted = new ArrayList<>();
         namesExpexted.add("persik");
@@ -197,8 +210,8 @@ class AnimalsRepositoryImplTest {
     @Test
     @DisplayName(value = "Tests of the findMinConstAnimals InCorrect")
     void findMinConstAnimalsInCorrect() {
-        List<String> names = animalsRepository.findMinConstAnimals(null);
-        assertEquals(0, names.size());
+        Class<CollectionEmptyException> exceptionClass = CollectionEmptyException.class;
+        assertThrows(exceptionClass, () -> animalsRepository.findMinConstAnimals(null));
     }
 
     private Integer countYears(LocalDate localDate) {

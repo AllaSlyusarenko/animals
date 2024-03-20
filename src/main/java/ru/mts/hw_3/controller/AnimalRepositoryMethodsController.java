@@ -27,7 +27,7 @@ public class AnimalRepositoryMethodsController {
 
     @ResponseBody
     @GetMapping("/leap")
-    public ResponseEntity<Object> getLeapYearNames() {
+    public ResponseEntity<Map<String, LocalDate>> getLeapYearNames() {
         log.info("Вызов всех методов репозитория");
         log.info("findLeapYearNames-------------------------------------------------------------------------------------");
         Map<String, LocalDate> names = animalsRepository.findLeapYearNames();
@@ -36,7 +36,7 @@ public class AnimalRepositoryMethodsController {
 
     @ResponseBody
     @GetMapping("/old")
-    public ResponseEntity<Object> getOlderAnimal() {
+    public ResponseEntity<Map<Animal, Integer>> getOlderAnimal() {
         log.info("findOlderAnimal---------------------------------------------------------------------------------------");
         int age = 15;
         Map<Animal, Integer> olderAnimals = animalsRepository.findOlderAnimal(age);
@@ -45,7 +45,7 @@ public class AnimalRepositoryMethodsController {
 
     @ResponseBody
     @GetMapping("/dupl")
-    public ResponseEntity<Object> getDuplicate() {
+    public ResponseEntity<Map<String, List<Animal>>> getDuplicate() {
         log.info("findDuplicate-----------------------------------------------------------------------------------------");
         Map<String, List<Animal>> animalsDuplicate = animalsRepository.findDuplicate();
         return ResponseEntity.ok(animalsDuplicate);
