@@ -18,22 +18,22 @@ public interface AnimalsRepository {
     /**
      * Метод - ищет животных по дате рождения в високосный год
      */
-    Map<String, LocalDate> findLeapYearNames() throws CollectionEmptyException;
+    Map<String, LocalDate> findLeapYearNames();
 
     /**
      * Метод - ищет животных по возрасту, который больше, чем заданное значение
      */
-    Map<Animal, Integer> findOlderAnimal(int N) throws CollectionEmptyException;
+    Map<Animal, Integer> findOlderAnimal(int N);
 
     /**
      * Метод - ищет животных по наличию дубликатов
      */
-    Map<String, List<Animal>> findDuplicate() throws CollectionEmptyException;
+    Map<String, List<Animal>> findDuplicate();
 
     /**
      * Метод - для печати дубликатов
      */
-    void printDuplicate() throws CollectionEmptyException;
+    void printDuplicate();
 
     /**
      * Метод - для нахождения среднего возраста животных в списке

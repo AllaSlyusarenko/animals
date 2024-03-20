@@ -77,7 +77,7 @@ class AnimalsRepositoryImplTest {
 
     @Test
     @DisplayName(value = "Tests of the findLeapYearNames Correct")
-    void findLeapYearNamesCorrect() throws NoSuchFieldException, IllegalAccessException, CollectionEmptyException {
+    void findLeapYearNamesCorrect() throws NoSuchFieldException, IllegalAccessException {
         Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
         animalNamesField.setAccessible(true);
         animalNamesField.set(animalsRepository, animalsMap);
@@ -98,13 +98,13 @@ class AnimalsRepositoryImplTest {
         Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
         animalNamesField.setAccessible(true);
         animalNamesField.set(animalsRepository, null);
-        Class<CollectionEmptyException> exceptionClass = CollectionEmptyException.class;
+        Class<IllegalArgumentException> exceptionClass = IllegalArgumentException.class;
         assertThrows(exceptionClass, () -> animalsRepository.findLeapYearNames());
     }
 
     @Test
     @DisplayName(value = "Tests of the findOlderAnimal correct")
-    void findOlderAnimalCorrect() throws NoSuchFieldException, IllegalAccessException, CollectionEmptyException {
+    void findOlderAnimalCorrect() throws NoSuchFieldException, IllegalAccessException {
         int N = 15;
         Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
         animalNamesField.setAccessible(true);
@@ -122,7 +122,7 @@ class AnimalsRepositoryImplTest {
         Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
         animalNamesField.setAccessible(true);
         animalNamesField.set(animalsRepository, null);
-        Class<CollectionEmptyException> exceptionClass = CollectionEmptyException.class;
+        Class<IllegalArgumentException> exceptionClass = IllegalArgumentException.class;
         assertThrows(exceptionClass, () -> animalsRepository.findOlderAnimal(N));
     }
 
@@ -139,7 +139,7 @@ class AnimalsRepositoryImplTest {
 
     @Test
     @DisplayName(value = "Tests of the findOlderAnimal max")
-    void findOlderAnimalMax() throws NoSuchFieldException, IllegalAccessException, CollectionEmptyException {
+    void findOlderAnimalMax() throws NoSuchFieldException, IllegalAccessException {
         int N = 100;
         Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
         animalNamesField.setAccessible(true);
@@ -152,7 +152,7 @@ class AnimalsRepositoryImplTest {
 
     @Test
     @DisplayName(value = "Tests of the findDuplicate correct")
-    void findDuplicateCorrect() throws NoSuchFieldException, IllegalAccessException, CollectionEmptyException {
+    void findDuplicateCorrect() throws NoSuchFieldException, IllegalAccessException {
         Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
         animalNamesField.setAccessible(true);
         animalNamesField.set(animalsRepository, animalsMap);
@@ -168,7 +168,7 @@ class AnimalsRepositoryImplTest {
         Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
         animalNamesField.setAccessible(true);
         animalNamesField.set(animalsRepository, null);
-        Class<CollectionEmptyException> exceptionClass = CollectionEmptyException.class;
+        Class<IllegalArgumentException> exceptionClass = IllegalArgumentException.class;
         assertThrows(exceptionClass, () -> animalsRepository.findDuplicate());
     }
 

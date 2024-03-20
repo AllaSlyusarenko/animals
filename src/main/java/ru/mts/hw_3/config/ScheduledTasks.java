@@ -8,6 +8,7 @@ import ru.mts.hw_3.exception.CollectionEmptyException;
 import ru.mts.hw_3.exception.IncorrectParameterException;
 import ru.mts.hw_3.repository.AnimalsRepositoryImpl;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -43,9 +44,9 @@ public class ScheduledTasks {
             log.info("findMinConstAnimals------------------------------------------------------------------------------------");
             log.info(animalsRepository.findMinConstAnimals(animalList) + "\n");
         } catch (IncorrectParameterException ex) {
-            log.info(ex.getMessage());
+            log.error(Arrays.toString(ex.getStackTrace()), ex);
         } catch (CollectionEmptyException e) {
-            log.info(e.getMessage());
+            log.error(Arrays.toString(e.getStackTrace()), e);
         }
     }
 }

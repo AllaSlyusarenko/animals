@@ -34,9 +34,9 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Метод - производит поиск имен животных, которые родились в високосный год
      */
     @Override
-    public Map<String, LocalDate> findLeapYearNames() throws CollectionEmptyException {
+    public Map<String, LocalDate> findLeapYearNames() {
         if (isEmptyMap(animals)) {
-            throw new CollectionEmptyException("data collection cannot be empty");
+            throw new IllegalArgumentException("data collection cannot be empty");
         }
         return prepareListAnimals().stream()
                 .filter(animal -> isLeapYear(animal.getBirthDate()))
@@ -47,9 +47,9 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Метод - производит поиск животных, которые старше указанного возраста, иначе выводит старшего
      */
     @Override
-    public Map<Animal, Integer> findOlderAnimal(int N) throws CollectionEmptyException {
+    public Map<Animal, Integer> findOlderAnimal(int N) {
         if (isEmptyMap(animals)) {
-            throw new CollectionEmptyException("data collection cannot be empty");
+            throw new IllegalArgumentException("data collection cannot be empty");
         }
         if (N <= 0) {
             throw new IncorrectParameterException("The number of years must be greater than 0");
@@ -71,9 +71,9 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Метод - производит поиск дубликатов животных
      */
     @Override
-    public Map<String, List<Animal>> findDuplicate() throws CollectionEmptyException {
+    public Map<String, List<Animal>> findDuplicate() {
         if (isEmptyMap(animals)) {
-            throw new CollectionEmptyException("data collection cannot be empty");
+            throw new IllegalArgumentException("data collection cannot be empty");
         }
         Set<Animal> elements = new HashSet<>();
         return prepareListAnimals().stream()
@@ -85,7 +85,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Метод - производит печать дубликатов животных
      */
     @Override
-    public void printDuplicate() throws CollectionEmptyException {
+    public void printDuplicate() {
         Map<String, List<Animal>> map = findDuplicate();
         List<Animal> list = map.entrySet().stream()
                 .flatMap(entry -> entry.getValue().stream())
