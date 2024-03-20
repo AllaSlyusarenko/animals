@@ -8,7 +8,6 @@ import ru.mts.hw_3.exception.CollectionEmptyException;
 import ru.mts.hw_3.exception.IncorrectParameterException;
 import ru.mts.hw_3.repository.AnimalsRepositoryImpl;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -22,31 +21,38 @@ public class ScheduledTasks {
 
     @Scheduled(fixedDelayString = "${application.scheduled.time}")
     public void doRepositoryTasks() {
+        String taskName = null;
         try {
             log.info("findLeapYearNames-------------------------------------------------------------------------------------");
+            taskName = "findLeapYearNames";
             log.info(animalsRepository.findLeapYearNames() + "\n");
 
             log.info("findOlderAnimal---------------------------------------------------------------------------------------");
             int age = 15;
+            taskName = "findOlderAnimal";
             log.info(animalsRepository.findOlderAnimal(age) + "\n");
 
             log.info("findDuplicate-----------------------------------------------------------------------------------------");
+            taskName = "findDuplicate";
             animalsRepository.printDuplicate();
             log.info("");
 
             log.info("findAverageAge-----------------------------------------------------------------------------------------");
+            taskName = "findAverageAge";
             List<Animal> animalList = animalsRepository.prepareListAnimals();
             animalsRepository.findAverageAge(animalList);
 
             log.info("findOldAndExpensive------------------------------------------------------------------------------------");
+            taskName = "findOldAndExpensive";
             log.info(animalsRepository.findOldAndExpensive(animalList) + "\n");
 
             log.info("findMinConstAnimals------------------------------------------------------------------------------------");
+            taskName = "findMinConstAnimals";
             log.info(animalsRepository.findMinConstAnimals(animalList) + "\n");
         } catch (IncorrectParameterException ex) {
-            log.error(Arrays.toString(ex.getStackTrace()), ex);
+            log.error("Error on task: " + taskName, ex);
         } catch (CollectionEmptyException e) {
-            log.error(Arrays.toString(e.getStackTrace()), e);
+            log.error("Error on task: " + taskName, e);
         }
     }
 }
