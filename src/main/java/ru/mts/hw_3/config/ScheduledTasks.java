@@ -21,38 +21,31 @@ public class ScheduledTasks {
 
     @Scheduled(fixedDelayString = "${application.scheduled.time}")
     public void doRepositoryTasks() {
-        String taskName = null;
         try {
             log.info("findLeapYearNames-------------------------------------------------------------------------------------");
-            taskName = "findLeapYearNames";
             log.info(animalsRepository.findLeapYearNames() + "\n");
 
             log.info("findOlderAnimal---------------------------------------------------------------------------------------");
             int age = 15;
-            taskName = "findOlderAnimal";
             log.info(animalsRepository.findOlderAnimal(age) + "\n");
 
             log.info("findDuplicate-----------------------------------------------------------------------------------------");
-            taskName = "findDuplicate";
             animalsRepository.printDuplicate();
             log.info("");
 
             log.info("findAverageAge-----------------------------------------------------------------------------------------");
-            taskName = "findAverageAge";
             List<Animal> animalList = animalsRepository.prepareListAnimals();
             animalsRepository.findAverageAge(animalList);
 
             log.info("findOldAndExpensive------------------------------------------------------------------------------------");
-            taskName = "findOldAndExpensive";
             log.info(animalsRepository.findOldAndExpensive(animalList) + "\n");
 
             log.info("findMinConstAnimals------------------------------------------------------------------------------------");
-            taskName = "findMinConstAnimals";
             log.info(animalsRepository.findMinConstAnimals(animalList) + "\n");
         } catch (IncorrectParameterException ex) {
-            log.error("Error on task: " + taskName, ex);
+            log.error("Incorrect parameter value", ex);
         } catch (CollectionEmptyException e) {
-            log.error("Error on task: " + taskName, e);
+            log.error("Data collection does not meet the required conditions", e);
         }
     }
 }
