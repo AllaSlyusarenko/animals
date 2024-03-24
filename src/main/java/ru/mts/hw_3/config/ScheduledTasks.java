@@ -8,6 +8,7 @@ import ru.mts.hw_3.exception.CollectionEmptyException;
 import ru.mts.hw_3.exception.IncorrectParameterException;
 import ru.mts.hw_3.repository.AnimalsRepositoryImpl;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Slf4j
@@ -17,6 +18,16 @@ public class ScheduledTasks {
 
     public ScheduledTasks(AnimalsRepositoryImpl animalsRepository) {
         this.animalsRepository = animalsRepository;
+    }
+
+    @PostConstruct
+    public void startThreads() {
+        Thread thread1 = new Thread(new PrintDuplicateRunnable());
+        thread1.setName("PrintDuplicateTread");
+        Thread thread2 = new Thread(new FindAverageAgeRunnable());
+        thread2.setName("FindAverageAgeTread");
+        thread1.start();
+        thread2.start();
     }
 
     @Scheduled(fixedDelayString = "${application.scheduled.time}")
@@ -29,13 +40,7 @@ public class ScheduledTasks {
             int age = 15;
             log.info(animalsRepository.findOlderAnimal(age) + "\n");
 
-            log.info("findDuplicate-----------------------------------------------------------------------------------------");
-            animalsRepository.printDuplicate();
-            log.info("");
-
-            log.info("findAverageAge-----------------------------------------------------------------------------------------");
             List<Animal> animalList = animalsRepository.prepareListAnimals();
-            animalsRepository.findAverageAge(animalList);
 
             log.info("findOldAndExpensive------------------------------------------------------------------------------------");
             log.info(animalsRepository.findOldAndExpensive(animalList) + "\n");
@@ -46,6 +51,37 @@ public class ScheduledTasks {
             log.error("Incorrect parameter value", ex);
         } catch (CollectionEmptyException e) {
             log.error("Data collection does not meet the required conditions", e);
+        }
+    }
+
+    class PrintDuplicateRunnable implements Runnable {
+        public void run() {
+            while (true) {
+                try {
+                    log.info("Name of printDuplicateThread = " + Thread.currentThread().getName());
+                    log.info("findDuplicate-----------------------------------------------------------------------------------------");
+                    animalsRepository.printDuplicate();
+                    Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+
+    class FindAverageAgeRunnable implements Runnable {
+        public void run() {
+            while (true) {
+                try {
+                    log.info("Name of findAverageAgeThread = " + Thread.currentThread().getName());
+                    log.info("findAverageAge-----------------------------------------------------------------------------------------");
+                    List<Animal> animalList = animalsRepository.prepareListAnimals();
+                    animalsRepository.findAverageAge(animalList);
+                    Thread.sleep(20000);
+                } catch (InterruptedException | CollectionEmptyException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
     }
 }

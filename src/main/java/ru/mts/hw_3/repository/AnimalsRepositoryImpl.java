@@ -1,6 +1,7 @@
 package ru.mts.hw_3.repository;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.mts.entity.Animal;
 import ru.mts.hw_3.exception.CollectionEmptyException;
@@ -23,13 +24,14 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     private ConcurrentHashMap<String, List<Animal>> animals;
     private final CreateAnimalService createAnimalService;
 
+    @Autowired
     public AnimalsRepositoryImpl(CreateAnimalService createAnimalService) {
         this.createAnimalService = createAnimalService;
     }
 
     @PostConstruct
     public void init() {
-        animals = new ConcurrentHashMap<>(createAnimalService.createAnimals());
+        animals = new ConcurrentHashMap<>(createAnimalService.createAnimals(30));
     }
 
     /**
@@ -114,7 +116,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 .filter(x -> x > 0)
                 .average()
                 .orElse(-1.0);
-        log.info(Double.toString((averageAge * 100.0) / 100.0));
+        log.info(Double.toString(Math.round(averageAge * 100.0) / 100.0));
     }
 
     /**

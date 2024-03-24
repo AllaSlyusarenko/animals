@@ -15,11 +15,32 @@ import static ru.mts.service.CreateAnimalService.randomCost;
 public class CreateAnimalServiceImpl implements CreateAnimalService {
     private final AnimalFactory animalFactory = new AnimalFactory();
     private AnimalType animalType;
-    @Value("${dog.names}")
-    private String[] namesDog;
+    @Value("${dog.names.random}")
+    private String[] namesDogRandom;
+    @Value("${dog.names.nerandom}")
+    private String[] namesDogNeRandom;
+    @Value("${dog.breeds}")
+    private String[] breedsDog;
+    @Value("${dog.prices}")
+    private String[] pricesDog;
+    @Value("${dog.characters}")
+    private String[] charactersDog;
+    @Value("${dog.dates}")
+    private String[] datesDog;
 
-    @Value("${wolf.names}")
-    private String[] namesWolf;
+    @Value("${wolf.names.random}")
+    private String[] namesWolfRandom;
+
+    @Value("${wolf.names.nerandom}")
+    private String[] namesWolfNeRandom;
+    @Value("${wolf.breeds}")
+    private String[] breedsWolf;
+    @Value("${wolf.prices}")
+    private String[] pricesWolf;
+    @Value("${wolf.characters}")
+    private String[] charactersWolf;
+    @Value("${wolf.dates}")
+    private String[] datesWolf;
 
     public void setAnimalType(AnimalType animalType) {
         this.animalType = animalType;
@@ -41,6 +62,14 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
                     "character" + startNumber, randomBirthDay);
             animals.add(animal);
             startNumber++;
+        } while (startNumber <= numberOfNewAnimals / 2);
+
+        do {
+            Animal animal = animalFactory.createAnimal(animalType, getRandomBreedByTypeAnimal(animalType),
+                    getNameByTypeAnimal(animalType), getRandomPriceByTypeAnimal(animalType),
+                    getRandomCharacterByTypeAnimal(animalType), getRandomDateByTypeAnimal(animalType));
+            animals.add(animal);
+            startNumber++;
         } while (startNumber <= numberOfNewAnimals);
         animalsMap.put(animalType.name(), animals);
         return animalsMap;
@@ -57,11 +86,18 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         }
         Map<String, List<Animal>> animalsMap = new HashMap<>();
         List<Animal> animals = new ArrayList<>();
-        for (int i = 1; i <= N; i++) {
+        for (int i = 1; i < N / 2; i++) {
             BigDecimal randomCost = randomCost(1, 5000);
             LocalDate randomBirthDay = randomBirthDay();
             Animal animal = animalFactory.createAnimal(animalType, "breed" + i, getRandomNameByTypeAnimal(animalType), randomCost,
                     "character" + i, randomBirthDay);
+            animals.add(animal);
+        }
+
+        for (int i = N / 2; i <= N; i++) {
+            Animal animal = animalFactory.createAnimal(animalType, getRandomBreedByTypeAnimal(animalType),
+                    getNameByTypeAnimal(animalType), getRandomPriceByTypeAnimal(animalType),
+                    getRandomCharacterByTypeAnimal(animalType), getRandomDateByTypeAnimal(animalType));
             animals.add(animal);
         }
         animalsMap.put(animalType.name(), animals);
@@ -75,12 +111,92 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         String name = null;
         switch (animalType) {
             case DOG:
-                name = namesDog[new Random().nextInt(namesDog.length)];
+                name = namesDogRandom[new Random().nextInt(namesDogRandom.length)];
                 break;
             case WOLF:
-                name = namesWolf[new Random().nextInt(namesWolf.length)];
+                name = namesWolfRandom[new Random().nextInt(namesWolfRandom.length)];
                 break;
         }
         return name;
+    }
+
+    /**
+     * Метод - получает имя животного из списка
+     */
+    private String getNameByTypeAnimal(AnimalType animalType) {
+        String name = null;
+        switch (animalType) {
+            case DOG:
+                name = namesDogNeRandom[new Random().nextInt(namesDogNeRandom.length)];
+                break;
+            case WOLF:
+                name = namesWolfNeRandom[new Random().nextInt(namesWolfNeRandom.length)];
+                break;
+        }
+        return name;
+    }
+
+    /**
+     * Метод - получает породу животного из списка
+     */
+    private String getRandomBreedByTypeAnimal(AnimalType animalType) {
+        String breed = null;
+        switch (animalType) {
+            case DOG:
+                breed = breedsDog[new Random().nextInt(breedsDog.length)];
+                break;
+            case WOLF:
+                breed = breedsWolf[new Random().nextInt(breedsWolf.length)];
+                break;
+        }
+        return breed;
+    }
+
+    /**
+     * Метод - получает цену животного из списка
+     */
+    private BigDecimal getRandomPriceByTypeAnimal(AnimalType animalType) {
+        String price = null;
+        switch (animalType) {
+            case DOG:
+                price = pricesDog[new Random().nextInt(pricesDog.length)];
+                break;
+            case WOLF:
+                price = pricesWolf[new Random().nextInt(pricesWolf.length)];
+                break;
+        }
+        return new BigDecimal(price);
+    }
+
+    /**
+     * Метод - получает характер животного из списка
+     */
+    private String getRandomCharacterByTypeAnimal(AnimalType animalType) {
+        String character = null;
+        switch (animalType) {
+            case DOG:
+                character = charactersDog[new Random().nextInt(charactersDog.length)];
+                break;
+            case WOLF:
+                character = charactersWolf[new Random().nextInt(charactersWolf.length)];
+                break;
+        }
+        return character;
+    }
+
+    /**
+     * Метод - получает дату рождения животного из списка
+     */
+    private LocalDate getRandomDateByTypeAnimal(AnimalType animalType) {
+        String date = null;
+        switch (animalType) {
+            case DOG:
+                date = datesDog[new Random().nextInt(datesDog.length)];
+                break;
+            case WOLF:
+                date = datesWolf[new Random().nextInt(datesWolf.length)];
+                break;
+        }
+        return LocalDate.parse(date);
     }
 }
