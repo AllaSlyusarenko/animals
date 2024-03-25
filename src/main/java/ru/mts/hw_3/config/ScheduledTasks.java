@@ -55,6 +55,7 @@ public class ScheduledTasks {
     }
 
     class PrintDuplicateRunnable implements Runnable {
+        @Override
         public void run() {
             while (true) {
                 try {
@@ -70,6 +71,7 @@ public class ScheduledTasks {
     }
 
     class FindAverageAgeRunnable implements Runnable {
+        @Override
         public void run() {
             while (true) {
                 try {
