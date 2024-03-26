@@ -3,10 +3,7 @@ package ru.mts.hw_3.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.mts.entity.Animal;
 import ru.mts.hw_3.repository.AnimalsRepository;
 
@@ -28,17 +25,15 @@ public class AnimalRepositoryMethodsController {
     @ResponseBody
     @GetMapping("/leap")
     public ResponseEntity<Map<String, LocalDate>> getLeapYearNames() {
-        log.info("Вызов всех методов репозитория");
         log.info("findLeapYearNames-------------------------------------------------------------------------------------");
         Map<String, LocalDate> names = animalsRepository.findLeapYearNames();
         return ResponseEntity.ok(names);
     }
 
     @ResponseBody
-    @GetMapping("/old")
-    public ResponseEntity<Map<Animal, Integer>> getOlderAnimal() {
+    @GetMapping("/old/{age}")
+    public ResponseEntity<Map<Animal, Integer>> getOlderAnimal(@PathVariable(name = "age") Integer age) {
         log.info("findOlderAnimal---------------------------------------------------------------------------------------");
-        int age = 15;
         Map<Animal, Integer> olderAnimals = animalsRepository.findOlderAnimal(age);
         return ResponseEntity.ok(olderAnimals);
     }
