@@ -1,5 +1,6 @@
 package ru.mts.hw_3.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,10 @@ import java.util.List;
 @Slf4j
 @Component
 public class ScheduledTasks {
+    @Value("${duplicate.time}")
+    private String duplicateTime;
+    @Value("${average.time}")
+    private String averageAgeTime;
     private final AnimalsRepositoryImpl animalsRepository;
 
     public ScheduledTasks(AnimalsRepositoryImpl animalsRepository) {
@@ -22,9 +27,9 @@ public class ScheduledTasks {
 
     @PostConstruct
     public void startThreads() {
-        Thread thread1 = new Thread(new PrintDuplicateRunnable());
+        Thread thread1 = new Thread(new PrintDuplicateRunnable(duplicateTime));
         thread1.setName("PrintDuplicateTread");
-        Thread thread2 = new Thread(new FindAverageAgeRunnable());
+        Thread thread2 = new Thread(new FindAverageAgeRunnable(averageAgeTime));
         thread2.setName("FindAverageAgeTread");
         thread1.start();
         thread2.start();
@@ -55,6 +60,12 @@ public class ScheduledTasks {
     }
 
     class PrintDuplicateRunnable implements Runnable {
+        private final String duplicateTime;
+
+        public PrintDuplicateRunnable(String printDuplicateTime) {
+            this.duplicateTime = printDuplicateTime;
+        }
+
         @Override
         public void run() {
             while (true) {
@@ -62,7 +73,7 @@ public class ScheduledTasks {
                     log.info("Name of printDuplicateThread = " + Thread.currentThread().getName());
                     log.info("findDuplicate-----------------------------------------------------------------------------------------");
                     animalsRepository.printDuplicate();
-                    Thread.sleep(10000);
+                    Thread.sleep(Long.parseLong(duplicateTime));
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -71,6 +82,12 @@ public class ScheduledTasks {
     }
 
     class FindAverageAgeRunnable implements Runnable {
+        private final String averageAgeTime;
+
+        public FindAverageAgeRunnable(String averageAgeTime) {
+            this.averageAgeTime = averageAgeTime;
+        }
+
         @Override
         public void run() {
             while (true) {
@@ -79,7 +96,7 @@ public class ScheduledTasks {
                     log.info("findAverageAge-----------------------------------------------------------------------------------------");
                     List<Animal> animalList = animalsRepository.prepareListAnimals();
                     animalsRepository.findAverageAge(animalList);
-                    Thread.sleep(20000);
+                    Thread.sleep(Long.parseLong(averageAgeTime));
                 } catch (InterruptedException | CollectionEmptyException e) {
                     throw new RuntimeException(e);
                 }

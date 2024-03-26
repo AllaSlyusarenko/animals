@@ -7,6 +7,12 @@ application:
   scheduled:
     time: 60000
 
+duplicate:
+    time: 10000
+average:
+    time: 20000
+
+
 dog:
   names:
     random: barsikRandom,persikRandom
