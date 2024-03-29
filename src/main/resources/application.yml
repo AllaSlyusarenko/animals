@@ -7,10 +7,29 @@ application:
   scheduled:
     time: 60000
 
+duplicate:
+    time: 10000
+average:
+    time: 20000
+
+
 dog:
-  names: barsik,persik,dushka,mushka,tuzik,taratuwka,bumburuwka,rizik, pesik, piksel, smelchak,wustrik,seriy,beliy,oskal,tigr,vozak, poned, vtorn, sred, chetv
+  names:
+    random: barsikRandom,persikRandom
+    nerandom: pesik, piksel
+  breeds: bolwoi, malenkiy
+  prices: 1500, 3000
+  characters: veseliy, smeliy
+  dates: 1983-03-15, 1984-07-22
+
 wolf:
-  names: smelchak,wustrik,seriy,beliy,oskal,tigr,vozak, poned, vtorn, sred, chetv, barsik,persik,dushka,mushka,tuzik,taratuwka,bumburuwka,rizik, pesik, piksel
+  names:
+    random: smelchakRandom,wustrikRandom
+    nerandom: seriy,beliy
+  breeds: bolwoi, malenkiy
+  prices: 1500, 3000
+  characters: dobriy, silniy
+  dates: 1983-03-15, 1984-07-22
 
 logging:
   level:

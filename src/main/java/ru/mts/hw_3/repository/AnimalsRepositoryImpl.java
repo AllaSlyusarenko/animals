@@ -1,6 +1,7 @@
 package ru.mts.hw_3.repository;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.mts.entity.Animal;
 import ru.mts.hw_3.exception.CollectionEmptyException;
@@ -13,21 +14,25 @@ import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Repository
 public class AnimalsRepositoryImpl implements AnimalsRepository {
-    private Map<String, List<Animal>> animals;
+    private ConcurrentHashMap<String, List<Animal>> animals;
     private final CreateAnimalService createAnimalService;
 
+    @Autowired
     public AnimalsRepositoryImpl(CreateAnimalService createAnimalService) {
         this.createAnimalService = createAnimalService;
     }
 
     @PostConstruct
     public void init() {
-        animals = createAnimalService.createAnimals();
+        animals = new ConcurrentHashMap<>(createAnimalService.createAnimals(30));
     }
 
     /**
@@ -38,9 +43,10 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
         if (isEmptyMap(animals)) {
             throw new IllegalArgumentException("data collection cannot be empty");
         }
-        return prepareListAnimals().stream()
+        Map<String, LocalDate> animalsMap = prepareListAnimals().stream()
                 .filter(animal -> isLeapYear(animal.getBirthDate()))
                 .collect(Collectors.toMap(k -> k.getClass().getSimpleName().toUpperCase() + " " + k.getName(), v -> v.getBirthDate(), (k1, k2) -> k1));
+        return new ConcurrentHashMap<>(animalsMap);
     }
 
     /**
@@ -64,7 +70,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                     .orElse(null);
             animalsMap.put(oldestAnimal, countYears(oldestAnimal.getBirthDate()));
         }
-        return animalsMap;
+        return new ConcurrentHashMap<>(animalsMap);
     }
 
     /**
@@ -75,7 +81,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
         if (isEmptyMap(animals)) {
             throw new IllegalArgumentException("data collection cannot be empty");
         }
-        Set<Animal> elements = new HashSet<>();
+        Set<Animal> elements = new CopyOnWriteArraySet<>();
         return prepareListAnimals().stream()
                 .filter(e -> !elements.add(e))
                 .collect(Collectors.groupingBy(a -> a.getClass().getSimpleName().toUpperCase(), Collectors.toList()));
@@ -86,7 +92,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      */
     @Override
     public void printDuplicate() {
-        Map<String, List<Animal>> map = findDuplicate();
+        Map<String, List<Animal>> map = new ConcurrentHashMap<>(findDuplicate());
         List<Animal> list = map.entrySet().stream()
                 .flatMap(entry -> entry.getValue().stream())
                 .collect(Collectors.toList());
@@ -110,7 +116,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 .filter(x -> x > 0)
                 .average()
                 .orElse(-1.0);
-        log.info(Double.toString((averageAge * 100.0) / 100.0));
+        log.info(Double.toString(Math.round(averageAge * 100.0) / 100.0));
     }
 
     /**
@@ -129,8 +135,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
         return animalList.stream()
                 .filter(x -> countYears(x.getBirthDate()) > 5)
                 .filter(t -> t.getCost().compareTo(averageCost) > 0)
-                .sorted(Comparator.comparing(Animal::getBirthDate))
-                .collect(Collectors.toList());
+                .sorted(Comparator.comparing(Animal::getBirthDate)).collect(Collectors.toCollection(CopyOnWriteArrayList::new));
     }
 
     /**
@@ -145,8 +150,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 .sorted(Comparator.comparing(Animal::getCost))
                 .limit(3)
                 .map(Animal::getName)
-                .sorted(Comparator.reverseOrder())
-                .collect(Collectors.toList());
+                .sorted(Comparator.reverseOrder()).collect(Collectors.toCollection(CopyOnWriteArrayList::new));
     }
 
     /**
@@ -155,7 +159,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     public List<Animal> prepareListAnimals() {
         return animals.entrySet().stream()
                 .flatMap(entry -> entry.getValue().stream())
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(CopyOnWriteArrayList::new));
     }
 
     private boolean isEmptyMap(Map<String, List<Animal>> animals) {

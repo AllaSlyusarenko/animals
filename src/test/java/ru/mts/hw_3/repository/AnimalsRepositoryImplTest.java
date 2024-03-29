@@ -16,9 +16,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AnimalsRepositoryImplTest {
     AnimalType animalTypeDog = AnimalType.DOG;
     AnimalType animalTypeWolf = AnimalType.WOLF;
-    private final Map<String, List<Animal>> animalsMap = new HashMap<>();
+    private final Map<String, List<Animal>> animalsMap = new ConcurrentHashMap<>();
     private final List<Animal> animalsDog = new ArrayList<>();
     @Autowired
     private AnimalsRepository animalsRepository;

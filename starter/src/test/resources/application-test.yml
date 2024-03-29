@@ -1,4 +1,17 @@
 dog:
-  names: barsikTest,persikTest,dushkaTest,mushkaTest,tuzikTest,taratuwkaTest,bumburuwkaTest
+  names:
+    random: barsikRandomTest,persikRandomTest
+    nerandom: pesikTest, pikselTest
+  breeds: bolwoiTest, malenkiyTest
+  prices: 1500, 3000
+  characters: veseliyTest, smeliyTest
+  dates: 1983-03-15, 1984-07-22
+
 wolf:
-  names: smelchakTest,wustrikTest,seriyTest,beliyTest,oskalTest,tigrTest,vozakTest
+  names:
+    random: smelchakRandomTest,wustrikRandomTest
+    nerandom: seriyTest,beliyTest
+  breeds: bolwoiTest, malenkiyTest
+  prices: 1500, 3000
+  characters: dobriyTest, silniyTest
+  dates: 1983-03-15, 1984-07-22
