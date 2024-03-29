@@ -18,7 +18,8 @@ public class Dog extends Pet {
                 ", name='" + name + '\'' +
                 ", cost=" + cost +
                 ", character='" + character + '\'' +
-                ", birthDate=" + getBirthDateString() +
+                ", birthDate=" + birthDate +
+                ", secretInformation='" + secretInformation + '\'' +
                 '}';
     }
 }

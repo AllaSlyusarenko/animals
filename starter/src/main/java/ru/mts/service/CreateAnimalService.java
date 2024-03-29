@@ -4,6 +4,7 @@ import ru.mts.entity.Animal;
 import ru.mts.entity.AnimalFactory;
 import ru.mts.entity.AnimalType;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
@@ -23,7 +24,7 @@ public interface CreateAnimalService {
     /**
      * Метод - создает новые объекты фиксированного количества
      */
-    default Map<String, List<Animal>> createAnimals() {
+    default Map<String, List<Animal>> createAnimals() throws IOException {
         AnimalType animalType = getRandomAnimalType();
         AnimalFactory animalFactory = new AnimalFactory();
         int numberOfAnimals = 10;
@@ -45,7 +46,7 @@ public interface CreateAnimalService {
     /**
      * Метод - создает новые объекты необходимого количества
      */
-    default Map<String, List<Animal>> createAnimals(int N) {
+    default Map<String, List<Animal>> createAnimals(int N) throws IOException {
         AnimalType animalType = getRandomAnimalType();
         AnimalFactory animalFactory = new AnimalFactory();
         int startNumber = 1;

@@ -5,7 +5,12 @@ import ru.mts.entity.Animal;
 import ru.mts.entity.AnimalFactory;
 import ru.mts.entity.AnimalType;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -50,17 +55,21 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
      * Метод - создает животных фиксированного количества (numberOfNewAnimals = 10)
      */
     @Override
-    public Map<String, List<Animal>> createAnimals() {
+    public Map<String, List<Animal>> createAnimals() throws IOException {
         int startNumber = 1;
         int numberOfNewAnimals = 10;
         Map<String, List<Animal>> animalsMap = new HashMap<>();
         List<Animal> animals = new ArrayList<>();
+        Path path = Paths.get("src\\main\\resources\\animals\\logData.txt");
         do {
             BigDecimal randomCost = randomCost(1, 5000);
             LocalDate randomBirthDay = randomBirthDay();
             Animal animal = animalFactory.createAnimal(animalType, "breed" + startNumber, getRandomNameByTypeAnimal(animalType), randomCost,
                     "character" + startNumber, randomBirthDay);
             animals.add(animal);
+            String stringForWrite = startNumber + " " + animalType + " " + animal.getBreed() + " " + animal.getName()
+                    + " " + animal.getCost() + " " + animal.getBirthDate() + "\n";
+            Files.write(path, stringForWrite.getBytes(), StandardOpenOption.APPEND);
             startNumber++;
         } while (startNumber <= numberOfNewAnimals / 2);
 
@@ -69,6 +78,9 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
                     getNameByTypeAnimal(animalType), getRandomPriceByTypeAnimal(animalType),
                     getRandomCharacterByTypeAnimal(animalType), getRandomDateByTypeAnimal(animalType));
             animals.add(animal);
+            String stringForWrite = startNumber + " " + animalType + " " + animal.getBreed() + " " + animal.getName()
+                    + " " + animal.getCost() + " " + animal.getBirthDate() + "\n";
+            Files.write(path, stringForWrite.getBytes(), StandardOpenOption.APPEND);
             startNumber++;
         } while (startNumber <= numberOfNewAnimals);
         animalsMap.put(animalType.name(), animals);
@@ -79,19 +91,23 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
      * Метод - создает животных необходимого количества(N)
      */
     @Override
-    public Map<String, List<Animal>> createAnimals(int N) {
+    public Map<String, List<Animal>> createAnimals(int N) throws IOException {
         if (N <= 0) {
             System.out.print("The number of animals must be greater than 0");
             throw new IllegalArgumentException("The number of animals must be greater than 0");
         }
         Map<String, List<Animal>> animalsMap = new HashMap<>();
         List<Animal> animals = new ArrayList<>();
+        Path path = Paths.get("src\\main\\resources\\animals\\logData.txt");
         for (int i = 1; i < N / 2; i++) {
             BigDecimal randomCost = randomCost(1, 5000);
             LocalDate randomBirthDay = randomBirthDay();
             Animal animal = animalFactory.createAnimal(animalType, "breed" + i, getRandomNameByTypeAnimal(animalType), randomCost,
                     "character" + i, randomBirthDay);
             animals.add(animal);
+            String stringForWrite = i + " " + animalType + " " + animal.getBreed() + " " + animal.getName()
+                    + " " + animal.getCost() + " " + animal.getBirthDate() + "\n";
+            Files.write(path, stringForWrite.getBytes(), StandardOpenOption.APPEND);
         }
 
         for (int i = N / 2; i <= N; i++) {
@@ -99,6 +115,9 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
                     getNameByTypeAnimal(animalType), getRandomPriceByTypeAnimal(animalType),
                     getRandomCharacterByTypeAnimal(animalType), getRandomDateByTypeAnimal(animalType));
             animals.add(animal);
+            String stringForWrite = i + " " + animalType + " " + animal.getBreed() + " " + animal.getName()
+                    + " " + animal.getCost() + " " + animal.getBirthDate() + "\n";
+            Files.write(path, stringForWrite.getBytes(), StandardOpenOption.APPEND);
         }
         animalsMap.put(animalType.name(), animals);
         return animalsMap;

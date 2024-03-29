@@ -1,14 +1,17 @@
 package ru.mts.hw_3.repository;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.mts.entity.Animal;
+import ru.mts.hw_3.config.MapperConfig;
 import ru.mts.hw_3.exception.CollectionEmptyException;
 import ru.mts.hw_3.exception.IncorrectParameterException;
 import ru.mts.service.CreateAnimalService;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
@@ -24,6 +27,8 @@ import java.util.stream.Collectors;
 public class AnimalsRepositoryImpl implements AnimalsRepository {
     private ConcurrentHashMap<String, List<Animal>> animals;
     private final CreateAnimalService createAnimalService;
+    private String firstPartOfPath = "src\\main\\resources\\results\\";
+    private MapperConfig mapper;
 
     @Autowired
     public AnimalsRepositoryImpl(CreateAnimalService createAnimalService) {
@@ -31,7 +36,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     }
 
     @PostConstruct
-    public void init() {
+    public void init() throws IOException {
         animals = new ConcurrentHashMap<>(createAnimalService.createAnimals(30));
     }
 

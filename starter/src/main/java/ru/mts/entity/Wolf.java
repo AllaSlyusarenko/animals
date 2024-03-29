@@ -18,8 +18,8 @@ public class Wolf extends Predator {
                 ", name='" + name + '\'' +
                 ", cost=" + cost +
                 ", character='" + character + '\'' +
-                ", birthDate=" + getBirthDateString()
-                +
+                ", birthDate=" + birthDate +
+                ", secretInformation='" + secretInformation + '\'' +
                 '}';
     }
 }
