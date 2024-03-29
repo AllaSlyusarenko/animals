@@ -16,6 +16,7 @@ import java.time.Period;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -38,7 +39,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Метод - производит поиск имен животных, которые родились в високосный год
      */
     @Override
-    public ConcurrentHashMap<String, LocalDate> findLeapYearNames() {
+    public Map<String, LocalDate> findLeapYearNames() {
         if (isEmptyMap(animals)) {
             throw new IllegalArgumentException("data collection cannot be empty");
         }
@@ -52,7 +53,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Метод - производит поиск животных, которые старше указанного возраста, иначе выводит старшего
      */
     @Override
-    public ConcurrentHashMap<Animal, Integer> findOlderAnimal(int N) {
+    public Map<Animal, Integer> findOlderAnimal(int N) {
         if (isEmptyMap(animals)) {
             throw new IllegalArgumentException("data collection cannot be empty");
         }
@@ -76,15 +77,14 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Метод - производит поиск дубликатов животных
      */
     @Override
-    public ConcurrentHashMap<String, List<Animal>> findDuplicate() {
+    public Map<String, List<Animal>> findDuplicate() {
         if (isEmptyMap(animals)) {
             throw new IllegalArgumentException("data collection cannot be empty");
         }
-        Set<Animal> elements = new HashSet<>();
-        Map<String, List<Animal>> animalsMap = prepareListAnimals().stream()
+        Set<Animal> elements = new CopyOnWriteArraySet<>();
+        return prepareListAnimals().stream()
                 .filter(e -> !elements.add(e))
                 .collect(Collectors.groupingBy(a -> a.getClass().getSimpleName().toUpperCase(), Collectors.toList()));
-        return new ConcurrentHashMap<>(animalsMap);
     }
 
     /**
@@ -92,7 +92,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      */
     @Override
     public void printDuplicate() {
-        ConcurrentHashMap<String, List<Animal>> map = findDuplicate();
+        Map<String, List<Animal>> map = new ConcurrentHashMap<>(findDuplicate());
         List<Animal> list = map.entrySet().stream()
                 .flatMap(entry -> entry.getValue().stream())
                 .collect(Collectors.toList());
@@ -124,7 +124,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * отсортированный по дате рождения(по возрастанию)
      */
     @Override
-    public CopyOnWriteArrayList<Animal> findOldAndExpensive(List<Animal> animalList) throws CollectionEmptyException {
+    public List<Animal> findOldAndExpensive(List<Animal> animalList) throws CollectionEmptyException {
         if (animalList == null || animalList.size() == 0) {
             throw new CollectionEmptyException("data collection cannot be empty");
         }
@@ -142,7 +142,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Метод - для нахождения 3 животных с самой низкой ценой, вывод - список имен в обратном порядке
      */
     @Override
-    public CopyOnWriteArrayList<String> findMinConstAnimals(List<Animal> animalList) throws CollectionEmptyException {
+    public List<String> findMinConstAnimals(List<Animal> animalList) throws CollectionEmptyException {
         if (animalList == null || animalList.size() == 0) {
             throw new CollectionEmptyException("data collection cannot be empty");
         }
@@ -156,7 +156,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     /**
      * Метод - для подготовки списка всех животных из мапы
      */
-    public CopyOnWriteArrayList<Animal> prepareListAnimals() {
+    public List<Animal> prepareListAnimals() {
         return animals.entrySet().stream()
                 .flatMap(entry -> entry.getValue().stream())
                 .collect(Collectors.toCollection(CopyOnWriteArrayList::new));

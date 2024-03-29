@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AnimalsRepositoryImplTest {
     AnimalType animalTypeDog = AnimalType.DOG;
     AnimalType animalTypeWolf = AnimalType.WOLF;
-    private final ConcurrentHashMap<String, List<Animal>> animalsMap = new ConcurrentHashMap<>();
+    private final Map<String, List<Animal>> animalsMap = new ConcurrentHashMap<>();
     private final List<Animal> animalsDog = new ArrayList<>();
     @Autowired
     private AnimalsRepository animalsRepository;
