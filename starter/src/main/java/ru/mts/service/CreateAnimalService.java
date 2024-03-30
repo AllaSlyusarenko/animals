@@ -1,6 +1,6 @@
 package ru.mts.service;
 
-import ru.mts.entity.Animal;
+import ru.mts.entity.AbstractAnimal;
 import ru.mts.entity.AnimalFactory;
 import ru.mts.entity.AnimalType;
 
@@ -24,17 +24,17 @@ public interface CreateAnimalService {
     /**
      * Метод - создает новые объекты фиксированного количества
      */
-    default Map<String, List<Animal>> createAnimals() throws IOException {
+    default Map<String, List<AbstractAnimal>> createAnimals() throws IOException {
         AnimalType animalType = getRandomAnimalType();
         AnimalFactory animalFactory = new AnimalFactory();
         int numberOfAnimals = 10;
         int startNumber = 1;
-        Map<String, List<Animal>> animalsMap = new HashMap<>();
-        List<Animal> animals = new ArrayList<>();
+        Map<String, List<AbstractAnimal>> animalsMap = new HashMap<>();
+        List<AbstractAnimal> animals = new ArrayList<>();
         while (startNumber <= numberOfAnimals) {
             BigDecimal randomCost = randomCost(1, 5000);
             LocalDate randomBirthDay = randomBirthDay();
-            Animal animal = animalFactory.createAnimal(animalType, "breed" + startNumber, "name" + startNumber, randomCost,
+            AbstractAnimal animal = animalFactory.createAnimal(animalType, "breed" + startNumber, "name" + startNumber, randomCost,
                     "character" + startNumber, randomBirthDay);
             animals.add(animal);
             startNumber++;
@@ -46,16 +46,16 @@ public interface CreateAnimalService {
     /**
      * Метод - создает новые объекты необходимого количества
      */
-    default Map<String, List<Animal>> createAnimals(int N) throws IOException {
+    default Map<String, List<AbstractAnimal>> createAnimals(int N) throws IOException {
         AnimalType animalType = getRandomAnimalType();
         AnimalFactory animalFactory = new AnimalFactory();
         int startNumber = 1;
-        Map<String, List<Animal>> animalsMap = new HashMap<>();
-        List<Animal> animals = new ArrayList<>();
+        Map<String, List<AbstractAnimal>> animalsMap = new HashMap<>();
+        List<AbstractAnimal> animals = new ArrayList<>();
         while (startNumber <= N) {
             BigDecimal randomCost = randomCost(1, 5000);
             LocalDate randomBirthDay = randomBirthDay();
-            Animal animal = animalFactory.createAnimal(animalType, "breed" + startNumber, "name" + startNumber, randomCost,
+            AbstractAnimal animal = animalFactory.createAnimal(animalType, "breed" + startNumber, "name" + startNumber, randomCost,
                     "character" + startNumber, randomBirthDay);
             animals.add(animal);
             startNumber++;

@@ -1,8 +1,11 @@
 package ru.mts.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+//import ru.mts.config.AnimalSerializer;
 import ru.mts.utility.Constants;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.file.Files;
@@ -13,7 +16,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-public abstract class AbstractAnimal implements Animal {
+//@JsonSerialize(using = AnimalSerializer.class)
+public abstract class AbstractAnimal implements Animal, Serializable {
     protected String breed; // порода
     protected String name; // имя
     protected BigDecimal cost; // цена в магазине
@@ -94,6 +98,26 @@ public abstract class AbstractAnimal implements Animal {
             throw new RuntimeException(e);
         }
         return secretWord;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
+    public void setCharacter(String character) {
+        this.character = character;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     /**

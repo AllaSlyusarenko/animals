@@ -1,7 +1,8 @@
 package ru.mts.service;
 
 import org.springframework.beans.factory.annotation.Value;
-import ru.mts.entity.Animal;
+
+import ru.mts.entity.AbstractAnimal;
 import ru.mts.entity.AnimalFactory;
 import ru.mts.entity.AnimalType;
 
@@ -55,16 +56,16 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
      * Метод - создает животных фиксированного количества (numberOfNewAnimals = 10)
      */
     @Override
-    public Map<String, List<Animal>> createAnimals() throws IOException {
+    public Map<String, List<AbstractAnimal>> createAnimals() throws IOException {
         int startNumber = 1;
         int numberOfNewAnimals = 10;
-        Map<String, List<Animal>> animalsMap = new HashMap<>();
-        List<Animal> animals = new ArrayList<>();
+        Map<String, List<AbstractAnimal>> animalsMap = new HashMap<>();
+        List<AbstractAnimal> animals = new ArrayList<>();
         Path path = Paths.get("src\\main\\resources\\animals\\logData.txt");
         do {
             BigDecimal randomCost = randomCost(1, 5000);
             LocalDate randomBirthDay = randomBirthDay();
-            Animal animal = animalFactory.createAnimal(animalType, "breed" + startNumber, getRandomNameByTypeAnimal(animalType), randomCost,
+            AbstractAnimal animal = animalFactory.createAnimal(animalType, "breed" + startNumber, getRandomNameByTypeAnimal(animalType), randomCost,
                     "character" + startNumber, randomBirthDay);
             animals.add(animal);
             String stringForWrite = startNumber + " " + animalType + " " + animal.getBreed() + " " + animal.getName()
@@ -74,7 +75,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         } while (startNumber <= numberOfNewAnimals / 2);
 
         do {
-            Animal animal = animalFactory.createAnimal(animalType, getRandomBreedByTypeAnimal(animalType),
+            AbstractAnimal animal = animalFactory.createAnimal(animalType, getRandomBreedByTypeAnimal(animalType),
                     getNameByTypeAnimal(animalType), getRandomPriceByTypeAnimal(animalType),
                     getRandomCharacterByTypeAnimal(animalType), getRandomDateByTypeAnimal(animalType));
             animals.add(animal);
@@ -91,18 +92,18 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
      * Метод - создает животных необходимого количества(N)
      */
     @Override
-    public Map<String, List<Animal>> createAnimals(int N) throws IOException {
+    public Map<String, List<AbstractAnimal>> createAnimals(int N) throws IOException {
         if (N <= 0) {
             System.out.print("The number of animals must be greater than 0");
             throw new IllegalArgumentException("The number of animals must be greater than 0");
         }
-        Map<String, List<Animal>> animalsMap = new HashMap<>();
-        List<Animal> animals = new ArrayList<>();
+        Map<String, List<AbstractAnimal>> animalsMap = new HashMap<>();
+        List<AbstractAnimal> animals = new ArrayList<>();
         Path path = Paths.get("src\\main\\resources\\animals\\logData.txt");
         for (int i = 1; i < N / 2; i++) {
             BigDecimal randomCost = randomCost(1, 5000);
             LocalDate randomBirthDay = randomBirthDay();
-            Animal animal = animalFactory.createAnimal(animalType, "breed" + i, getRandomNameByTypeAnimal(animalType), randomCost,
+            AbstractAnimal animal = animalFactory.createAnimal(animalType, "breed" + i, getRandomNameByTypeAnimal(animalType), randomCost,
                     "character" + i, randomBirthDay);
             animals.add(animal);
             String stringForWrite = i + " " + animalType + " " + animal.getBreed() + " " + animal.getName()
@@ -111,7 +112,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         }
 
         for (int i = N / 2; i <= N; i++) {
-            Animal animal = animalFactory.createAnimal(animalType, getRandomBreedByTypeAnimal(animalType),
+            AbstractAnimal animal = animalFactory.createAnimal(animalType, getRandomBreedByTypeAnimal(animalType),
                     getNameByTypeAnimal(animalType), getRandomPriceByTypeAnimal(animalType),
                     getRandomCharacterByTypeAnimal(animalType), getRandomDateByTypeAnimal(animalType));
             animals.add(animal);

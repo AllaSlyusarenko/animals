@@ -1,0 +1,20 @@
+{
+  "DOG persikRandom" : "1984-08-19",
+  "DOG pesik" : "1984-07-22",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "1980-02-06",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1984-01-23"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "2008-02-26",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1992-08-05"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "2020-10-04",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1996-12-24"
+}
