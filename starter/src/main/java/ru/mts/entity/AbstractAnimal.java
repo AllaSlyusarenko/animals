@@ -1,7 +1,9 @@
 package ru.mts.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-//import ru.mts.config.AnimalSerializer;
+import ru.mts.config.AnimalSerializer;
 import ru.mts.utility.Constants;
 
 import java.io.IOException;
@@ -22,8 +24,13 @@ public abstract class AbstractAnimal implements Animal, Serializable {
     protected String name; // имя
     protected BigDecimal cost; // цена в магазине
     protected String character; // характер
+//    @JsonFormat(pattern = "yyyy-MM-dd")
     protected LocalDate birthDate; // день рождения животного
-    protected transient String secretInformation; // секретная информация из файла
+    @JsonSerialize(using = SecretInformationSerializer.class, as = String.class)
+    protected String secretInformation; // секретная информация из файла
+
+    public AbstractAnimal() {
+    }
 
     public AbstractAnimal(String breed, String name, BigDecimal cost, String character, LocalDate birthDate) {
         this.breed = breed;
@@ -72,13 +79,6 @@ public abstract class AbstractAnimal implements Animal, Serializable {
     @Override
     public LocalDate getBirthDate() {
         return this.birthDate;
-    }
-
-    /**
-     * Метод - вывод даты рождения животного в формате "dd-MM-yyyy"
-     */
-    public String getBirthDateString() {
-        return getBirthDate().format(Constants.DATE_FORMATTER_OUT);
     }
 
     /**

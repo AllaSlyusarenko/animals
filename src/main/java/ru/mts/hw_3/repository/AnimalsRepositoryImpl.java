@@ -19,10 +19,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -34,7 +31,6 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     private ConcurrentHashMap<String, List<AbstractAnimal>> animals;
     private final CreateAnimalService createAnimalService;
     private String firstPartOfPath = "src\\main\\resources\\results\\";
-//    @Autowired
     @Qualifier("animalMapper")
     private final ObjectMapper mapper;
 
@@ -86,7 +82,25 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                     .orElse(null);
             animalsMap.put(oldestAnimal, countYears(oldestAnimal.getBirthDate()));
         }
-        String jacksonData = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(animalsMap);
+
+//        AbstractAnimal qwe = new Dog("breed1", "tuzik", new BigDecimal("2844.68"), "character1", LocalDate.of(1980, 2, 8));
+//        AbstractAnimal qwe2 = new Dog("breed2", "tuzik", new BigDecimal("2844.68"), "character1", LocalDate.of(1980, 2, 8));
+//        List<AbstractAnimal> ls = new ArrayList<>();
+//        ls.add(qwe);
+//        ls.add(qwe2);
+//        Set<AbstractAnimal> st = new HashSet<>();
+//        st.add(qwe);
+//        st.add(qwe2);
+//        Map<AbstractAnimal, Integer> an = new HashMap<>();
+//        an.put(qwe, 1);
+//        an.put(qwe2, 2);
+
+        Map<String, Integer> result = new HashMap<>();
+        for (AbstractAnimal key : animalsMap.keySet()) {
+            String jacksonKey = mapper.writeValueAsString(key);
+            result.put(jacksonKey, animalsMap.get(key));
+        }
+        String jacksonData = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(result).replace("\\", "");
         Files.write(Paths.get(firstPartOfPath, "findOlderAnimal.txt"), jacksonData.getBytes(), StandardOpenOption.APPEND);
         return new ConcurrentHashMap<>(animalsMap);
     }

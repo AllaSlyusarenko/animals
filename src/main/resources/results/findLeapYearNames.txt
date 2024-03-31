@@ -1,20 +1,376 @@
 {
-  "DOG persikRandom" : "1984-08-19",
+  "DOG persikRandom" : "1988-04-02",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "2000-10-29",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1988-02-25"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "2004-06-14",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "2008-01-24"
+}{
+  "DOG persikRandom" : "2016-10-20",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "1996-05-02",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "1984-05-03",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1980-11-19"
+}{
+  "DOG persikRandom" : "1984-08-02",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "2016-08-29",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "1984-10-18",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "2000-02-13"
+}{
+  "DOG persikRandom" : "2020-09-13",
+  "DOG pesik" : "1984-07-22",
+  "DOG piksel" : "1984-07-22"
+}{
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "1980-07-25",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "1996-05-24",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1972-09-17"
+}{
+  "DOG persikRandom" : "1988-02-23",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "2012-03-16",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "2000-06-16",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1984-08-07"
+}{
+  "DOG persikRandom" : "1984-12-26",
   "DOG pesik" : "1984-07-22",
   "DOG piksel" : "1984-07-22"
 }{
   "WOLF seriy" : "1984-07-22",
-  "WOLF wustrikRandom" : "1980-02-06",
+  "WOLF wustrikRandom" : "2016-04-11",
   "WOLF beliy" : "1984-07-22",
-  "WOLF smelchakRandom" : "1984-01-23"
+  "WOLF smelchakRandom" : "1976-10-16"
 }{
   "WOLF seriy" : "1984-07-22",
-  "WOLF wustrikRandom" : "2008-02-26",
+  "WOLF wustrikRandom" : "2020-03-08",
   "WOLF beliy" : "1984-07-22",
-  "WOLF smelchakRandom" : "1992-08-05"
+  "WOLF smelchakRandom" : "1984-09-30"
+}{
+  "DOG persikRandom" : "1988-05-09",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "1976-03-21",
+  "DOG piksel" : "1984-07-22"
 }{
   "WOLF seriy" : "1984-07-22",
-  "WOLF wustrikRandom" : "2020-10-04",
+  "WOLF wustrikRandom" : "2012-03-13",
   "WOLF beliy" : "1984-07-22",
-  "WOLF smelchakRandom" : "1996-12-24"
+  "WOLF smelchakRandom" : "2008-02-23"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "2000-01-06",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "2012-08-11"
+}{
+  "DOG persikRandom" : "2012-09-29",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "2020-05-12",
+  "DOG piksel" : "1984-07-22"
+}{
+  "DOG persikRandom" : "2016-08-06",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "2020-01-06",
+  "DOG piksel" : "1984-07-22"
+}{
+  "DOG persikRandom" : "1988-05-14",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "2012-08-17",
+  "DOG piksel" : "1984-07-22"
+}{
+  "DOG persikRandom" : "1988-07-24",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "2000-03-29",
+  "DOG piksel" : "1984-07-22"
+}{
+  "DOG persikRandom" : "2020-02-16",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "1988-03-14",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "1976-06-23",
+  "WOLF beliy" : "1984-07-22"
+}{
+  "DOG persikRandom" : "1992-04-13",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "1988-10-24",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "1984-07-22",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1972-07-04"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "2016-05-05",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1976-10-03"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "1992-09-09",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1996-01-19"
+}{
+  "DOG persikRandom" : "2008-06-12",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "2000-05-08",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "2004-08-28",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1984-12-17"
+}{
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "1984-04-26",
+  "DOG piksel" : "1984-07-22"
+}{
+  "DOG persikRandom" : "1976-05-15",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "2012-08-23",
+  "DOG piksel" : "1984-07-22"
+}{
+  "DOG persikRandom" : "2016-01-17",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "2004-07-16",
+  "DOG piksel" : "1984-07-22"
+}{
+  "DOG pesik" : "1984-07-22",
+  "DOG piksel" : "1984-07-22"
+}{
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "2016-03-09",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "1980-06-25",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "2012-06-07"
+}{
+  "DOG persikRandom" : "1980-11-21",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "2000-09-17",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "1992-07-01",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1984-11-25"
+}{
+  "DOG persikRandom" : "1972-09-25",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "1988-11-21",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "2000-10-26",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "2004-08-19"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "2020-10-21",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1984-04-02"
+}{
+  "DOG persikRandom" : "1992-09-08",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "1972-07-19",
+  "DOG piksel" : "1984-07-22"
+}{
+  "DOG persikRandom" : "1992-01-13",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "2004-04-24",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "2004-10-24",
+  "WOLF beliy" : "1984-07-22"
+}{
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "2004-08-16",
+  "DOG piksel" : "1984-07-22"
+}{
+  "DOG persikRandom" : "1980-05-30",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "2008-02-02",
+  "DOG piksel" : "1984-07-22"
+}{
+  "DOG persikRandom" : "2012-04-05",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "1984-09-22",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "2012-06-02",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1996-03-11"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "1972-12-31",
+  "WOLF beliy" : "1984-07-22"
+}{
+  "DOG persikRandom" : "1984-01-11",
+  "DOG pesik" : "1984-07-22",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "1992-01-18",
+  "WOLF beliy" : "1984-07-22"
+}{
+  "DOG persikRandom" : "1988-08-29",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "1984-10-10",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "1980-04-20",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1988-03-19"
+}{
+  "DOG persikRandom" : "1992-05-12",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "1972-08-10",
+  "DOG piksel" : "1984-07-22"
+}{
+  "DOG persikRandom" : "1976-02-16",
+  "DOG pesik" : "1984-07-22",
+  "DOG piksel" : "1984-07-22"
+}{
+  "DOG persikRandom" : "1988-12-03",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "1984-06-08",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "1972-08-24",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1992-04-21"
+}{
+  "DOG persikRandom" : "1996-09-03",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "1972-09-26",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "1980-08-06",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "2024-02-11"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "2024-02-24",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "2000-10-24"
+}{
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "2020-01-19",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "2012-02-13",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1976-08-29"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "2000-10-30",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1992-03-26"
+}{
+  "DOG persikRandom" : "1972-11-11",
+  "DOG pesik" : "1984-07-22",
+  "DOG piksel" : "1984-07-22"
+}{
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "1996-08-14",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "2000-09-13",
+  "WOLF beliy" : "1984-07-22"
+}{
+  "DOG persikRandom" : "2004-02-20",
+  "DOG piksel" : "1984-07-22"
+}{
+  "DOG persikRandom" : "1976-10-20",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "1988-08-25",
+  "DOG piksel" : "1984-07-22"
+}{
+  "DOG persikRandom" : "2004-05-11",
+  "DOG pesik" : "1984-07-22",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "2012-07-29",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1988-06-19"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "2008-01-03",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "2004-12-08"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1980-03-05"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "1976-12-20",
+  "WOLF beliy" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "1972-12-11",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1976-05-20"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "1972-06-21",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "1992-09-19"
+}{
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "1984-12-11",
+  "DOG piksel" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "1984-04-02",
+  "WOLF beliy" : "1984-07-22",
+  "WOLF smelchakRandom" : "2004-06-28"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF beliy" : "1984-07-22"
+}{
+  "WOLF seriy" : "1984-07-22",
+  "WOLF wustrikRandom" : "2012-11-11",
+  "WOLF beliy" : "1984-07-22"
+}{
+  "DOG persikRandom" : "2000-08-13",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "1988-12-19",
+  "DOG piksel" : "1984-07-22"
+}{
+  "DOG pesik" : "1984-07-22",
+  "DOG piksel" : "1984-07-22"
 }
