@@ -74,4 +74,5 @@ public interface CreateAnimalService {
         long days = ChronoUnit.DAYS.between(start, LocalDate.now());
         return start.plusDays(new Random().nextInt((int) days + 1));
     }
+    AnimalType getAnimalType();
 }

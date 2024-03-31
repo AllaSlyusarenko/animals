@@ -52,6 +52,11 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         this.animalType = animalType;
     }
 
+    @Override
+    public AnimalType getAnimalType() {
+        return animalType;
+    }
+
     /**
      * Метод - создает животных фиксированного количества (numberOfNewAnimals = 10)
      */
@@ -62,6 +67,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         Map<String, List<AbstractAnimal>> animalsMap = new HashMap<>();
         List<AbstractAnimal> animals = new ArrayList<>();
         Path path = Paths.get("src\\main\\resources\\animals\\logData.txt");
+        Files.write(path, "".getBytes());
         do {
             BigDecimal randomCost = randomCost(1, 5000);
             LocalDate randomBirthDay = randomBirthDay();
@@ -100,6 +106,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         Map<String, List<AbstractAnimal>> animalsMap = new HashMap<>();
         List<AbstractAnimal> animals = new ArrayList<>();
         Path path = Paths.get("src\\main\\resources\\animals\\logData.txt");
+        Files.write(path, "".getBytes());
         for (int i = 1; i < N / 2; i++) {
             BigDecimal randomCost = randomCost(1, 5000);
             LocalDate randomBirthDay = randomBirthDay();

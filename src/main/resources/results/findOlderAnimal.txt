@@ -1,47 +1,12 @@
+DOG
 {
-  "{\"breed\":\"breed2\",\"name\":\"tuzik\",\"cost\":5,\"character\":\"character1\",\"birthDate\":\"1980-02-08\",\"secretInformation\":\"VG8gYmUsIG9yIG5vdCB0byBiZSw=\"}" : 2,
-  "{\"breed\":\"breed1\",\"name\":\"tuzik\",\"cost\":5,\"character\":\"character1\",\"birthDate\":\"1980-02-08\",\"secretInformation\":\"aW4gdGhlIG1pbmQgdG8gc3VmZmVy\"}" : 1
-}{
-  "{\r\n  \"breed\" : \"breed2\",\r\n  \"name\" : \"tuzik\",\r\n  \"cost\" : 5,\r\n  \"character\" : \"character1\",\r\n  \"birthDate\" : \"1980-02-08\",\r\n  \"secretInformation\" : \"aW4gdGhlIG1pbmQgdG8gc3VmZmVy\"\r\n}" : 2,
-  "{\r\n  \"breed\" : \"breed1\",\r\n  \"name\" : \"tuzik\",\r\n  \"cost\" : 5,\r\n  \"character\" : \"character1\",\r\n  \"birthDate\" : \"1980-02-08\",\r\n  \"secretInformation\" : \"V2hldGhlciAndGlzIG5vYmxlcg==\"\r\n}" : 1
-}{
-  "{\"breed\":\"breed2\",\"name\":\"tuzik\",\"cost\":5,\"character\":\"character1\",\"birthDate\":\"1980-02-08\",\"secretInformation\":\"V2hldGhlciAndGlzIG5vYmxlcg==\"}" : 2,
-  "{\"breed\":\"breed1\",\"name\":\"tuzik\",\"cost\":5,\"character\":\"character1\",\"birthDate\":\"1980-02-08\",\"secretInformation\":\"dGhhdCBpcyB0aGUgcXVlc3Rpb246\"}" : 1
-}{
-  "{\"breed\":\"breed2\",\"name\":\"tuzik\",\"cost\":5,\"character\":\"character1\",\"birthDate\":\"1980-02-08\",\"secretInformation\":\"V2hldGhlciAndGlzIG5vYmxlcg==\"}" : 2,
-  "{\"breed\":\"breed1\",\"name\":\"tuzik\",\"cost\":5,\"character\":\"character1\",\"birthDate\":\"1980-02-08\",\"secretInformation\":\"aW4gdGhlIG1pbmQgdG8gc3VmZmVy\"}" : 1
-}{
-  "{"breed":"breed1","name":"tuzik","cost":5,"character":"character1","birthDate":"1980-02-08","secretInformation":"VG8gYmUsIG9yIG5vdCB0byBiZSw="}" : 1,
-  "{"breed":"breed2","name":"tuzik","cost":5,"character":"character1","birthDate":"1980-02-08","secretInformation":"dGhhdCBpcyB0aGUgcXVlc3Rpb246"}" : 2
-}{
-  "{"breed":"breed2","name":"tuzik","cost":5,"character":"character1","birthDate":"1980-02-08","secretInformation":"V2hldGhlciAndGlzIG5vYmxlcg=="}" : 2,
-  "{"breed":"breed1","name":"tuzik","cost":5,"character":"character1","birthDate":"1980-02-08","secretInformation":"aW4gdGhlIG1pbmQgdG8gc3VmZmVy"}" : 1
-}{
-  "{"breed":"breed2","name":"tuzik","cost":2844.68,"character":"character1","birthDate":"1980-02-08","secretInformation":"aW4gdGhlIG1pbmQgdG8gc3VmZmVy"}" : 2,
-  "{"breed":"breed1","name":"tuzik","cost":2844.68,"character":"character1","birthDate":"1980-02-08","secretInformation":"VG8gYmUsIG9yIG5vdCB0byBiZSw="}" : 1
-}{
-  "{"breed":"bolwoi","name":"piksel","cost":3000.00,"character":"veseliy","birthDate":"1984-07-22","secretInformation":"VG8gYmUsIG9yIG5vdCB0byBiZSw="}" : 39,
-  "{"breed":"malenkiy","name":"piksel","cost":3000.00,"character":"smeliy","birthDate":"1984-07-22","secretInformation":"VG8gYmUsIG9yIG5vdCB0byBiZSw="}" : 39,
-  "{"breed":"breed4","name":"persikRandom","cost":2107.68,"character":"character4","birthDate":"2002-03-31","secretInformation":"VG8gYmUsIG9yIG5vdCB0byBiZSw="}" : 22,
-  "{"breed":"breed13","name":"barsikRandom","cost":1871.68,"character":"character13","birthDate":"1985-05-14","secretInformation":"VG8gYmUsIG9yIG5vdCB0byBiZSw="}" : 38,
-  "{"breed":"breed2","name":"barsikRandom","cost":2536.68,"character":"character2","birthDate":"1998-03-12","secretInformation":"VG8gYmUsIG9yIG5vdCB0byBiZSw="}" : 26,
-  "{"breed":"malenkiy","name":"pesik","cost":1500.00,"character":"veseliy","birthDate":"1984-07-22","secretInformation":"VG8gYmUsIG9yIG5vdCB0byBiZSw="}" : 39,
-  "{"breed":"breed7","name":"persikRandom","cost":1744.68,"character":"character7","birthDate":"1973-11-21","secretInformation":"V2hldGhlciAndGlzIG5vYmxlcg=="}" : 50,
-  "{"breed":"bolwoi","name":"piksel","cost":1500.00,"character":"veseliy","birthDate":"1983-03-15","secretInformation":"VG8gYmUsIG9yIG5vdCB0byBiZSw="}" : 41,
-  "{"breed":"malenkiy","name":"piksel","cost":1500.00,"character":"veseliy","birthDate":"1984-07-22","secretInformation":"V2hldGhlciAndGlzIG5vYmxlcg=="}" : 39,
-  "{"breed":"breed3","name":"barsikRandom","cost":1088.68,"character":"character3","birthDate":"1970-03-19","secretInformation":"V2hldGhlciAndGlzIG5vYmxlcg=="}" : 54,
-  "{"breed":"breed14","name":"persikRandom","cost":4553.68,"character":"character14","birthDate":"1993-04-13","secretInformation":"V2hldGhlciAndGlzIG5vYmxlcg=="}" : 30,
-  "{"breed":"breed10","name":"barsikRandom","cost":4902.68,"character":"character10","birthDate":"1987-12-14","secretInformation":"aW4gdGhlIG1pbmQgdG8gc3VmZmVy"}" : 36,
-  "{"breed":"breed6","name":"barsikRandom","cost":3643.68,"character":"character6","birthDate":"1973-09-01","secretInformation":"aW4gdGhlIG1pbmQgdG8gc3VmZmVy"}" : 50,
-  "{"breed":"bolwoi","name":"pesik","cost":1500.00,"character":"veseliy","birthDate":"1984-07-22","secretInformation":"VG8gYmUsIG9yIG5vdCB0byBiZSw="}" : 39,
-  "{"breed":"malenkiy","name":"piksel","cost":1500.00,"character":"smeliy","birthDate":"1983-03-15","secretInformation":"V2hldGhlciAndGlzIG5vYmxlcg=="}" : 41,
-  "{"breed":"malenkiy","name":"piksel","cost":3000.00,"character":"smeliy","birthDate":"1984-07-22","secretInformation":"dGhhdCBpcyB0aGUgcXVlc3Rpb246"}" : 39,
-  "{"breed":"bolwoi","name":"piksel","cost":3000.00,"character":"veseliy","birthDate":"1984-07-22","secretInformation":"dGhhdCBpcyB0aGUgcXVlc3Rpb246"}" : 39,
-  "{"breed":"bolwoi","name":"pesik","cost":3000.00,"character":"smeliy","birthDate":"1984-07-22","secretInformation":"VG8gYmUsIG9yIG5vdCB0byBiZSw="}" : 39,
-  "{"breed":"breed1","name":"persikRandom","cost":1884.68,"character":"character1","birthDate":"1987-11-04","secretInformation":"VG8gYmUsIG9yIG5vdCB0byBiZSw="}" : 36,
-  "{"breed":"bolwoi","name":"piksel","cost":3000.00,"character":"smeliy","birthDate":"1984-07-22","secretInformation":"V2hldGhlciAndGlzIG5vYmxlcg=="}" : 39,
-  "{"breed":"bolwoi","name":"piksel","cost":1500.00,"character":"veseliy","birthDate":"1984-07-22","secretInformation":"V2hldGhlciAndGlzIG5vYmxlcg=="}" : 39,
-  "{"breed":"malenkiy","name":"piksel","cost":3000.00,"character":"veseliy","birthDate":"1983-03-15","secretInformation":"aW4gdGhlIG1pbmQgdG8gc3VmZmVy"}" : 41,
-  "{"breed":"bolwoi","name":"piksel","cost":1500.00,"character":"smeliy","birthDate":"1984-07-22","secretInformation":"VG8gYmUsIG9yIG5vdCB0byBiZSw="}" : 39,
-  "{"breed":"breed11","name":"barsikRandom","cost":84.68,"character":"character11","birthDate":"1975-06-23","secretInformation":"dGhhdCBpcyB0aGUgcXVlc3Rpb246"}" : 48
+  "{"breed":"breed5","name":"barsik","cost":718.68,"character":"character5","birthDate":"1965-01-04","secretInformation":"dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="}" : 59,
+  "{"breed":"breed10","name":"persik","cost":1388.68,"character":"character10","birthDate":"1994-06-20","secretInformation":"dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="}" : 29,
+  "{"breed":"breed6","name":"persik","cost":939.68,"character":"character6","birthDate":"1988-04-30","secretInformation":"dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="}" : 35,
+  "{"breed":"breed1","name":"tuzik","cost":2844.68,"character":"character1","birthDate":"1980-02-08","secretInformation":"dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="}" : 44,
+  "{"breed":"breed5","name":"barsik","cost":718.68,"character":"character5","birthDate":"1970-01-04","secretInformation":"dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="}" : 54,
+  "{"breed":"breed10","name":"abrikos","cost":1388.68,"character":"character10","birthDate":"1994-06-20","secretInformation":"dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="}" : 29,
+  "{"breed":"breed1","name":"tuzik","cost":2844.68,"character":"character1","birthDate":"1983-02-08","secretInformation":"dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="}" : 41,
+  "{"breed":"breed4","name":"mushka","cost":3061.60,"character":"character4","birthDate":"1998-04-10","secretInformation":"dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="}" : 25,
+  "{"breed":"breed2","name":"bumburuwka","cost":3441.68,"character":"character2","birthDate":"1985-04-06","secretInformation":"dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="}" : 38
 }

@@ -77,7 +77,7 @@ public class ScheduledTasks {
                     log.info("findDuplicate-----------------------------------------------------------------------------------------");
                     animalsRepository.printDuplicate();
                     Thread.sleep(Long.parseLong(duplicateTime));
-                } catch (InterruptedException e) {
+                } catch (InterruptedException | IOException e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -100,7 +100,7 @@ public class ScheduledTasks {
                     List<AbstractAnimal> animalList = animalsRepository.prepareListAnimals();
                     animalsRepository.findAverageAge(animalList);
                     Thread.sleep(Long.parseLong(averageAgeTime));
-                } catch (InterruptedException | CollectionEmptyException e) {
+                } catch (InterruptedException | CollectionEmptyException | IOException e) {
                     throw new RuntimeException(e);
                 }
             }

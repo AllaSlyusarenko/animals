@@ -29,26 +29,26 @@ public interface AnimalsRepository {
     /**
      * Метод - ищет животных по наличию дубликатов
      */
-    Map<String, List<AbstractAnimal>> findDuplicate();
+    Map<String, List<AbstractAnimal>> findDuplicate() throws IOException;
 
     /**
      * Метод - для печати дубликатов
      */
-    void printDuplicate();
+    void printDuplicate() throws IOException;
 
     /**
      * Метод - для нахождения среднего возраста животных в списке
      */
-    void findAverageAge(List<AbstractAnimal> animalList) throws CollectionEmptyException;
+    void findAverageAge(List<AbstractAnimal> animalList) throws CollectionEmptyException, IOException;
 
     /**
      * Метод - для нахождения животных в списке старше 5 лет и стоимость больше средней стоимости,
      * отсортированный по дате рождения(по возрастанию)
      */
-    List<AbstractAnimal> findOldAndExpensive(List<AbstractAnimal> animalList) throws CollectionEmptyException;
+    List<AbstractAnimal> findOldAndExpensive(List<AbstractAnimal> animalList) throws CollectionEmptyException, IOException;
 
     /**
      * Метод - для нахождения 3 животных с самой низкой ценой, вывод - список имен в обратном порядке
      */
-    List<String> findMinConstAnimals(List<AbstractAnimal> animalList) throws CollectionEmptyException;
+    List<String> findMinConstAnimals(List<AbstractAnimal> animalList) throws CollectionEmptyException, IOException;
 }

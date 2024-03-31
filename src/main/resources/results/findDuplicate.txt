@@ -1,0 +1,32 @@
+{
+  "WOLF" : [ {
+    "breed" : "breed4",
+    "name" : "mushka",
+    "cost" : 3061.60,
+    "character" : "character4",
+    "birthDate" : "1998-04-10",
+    "secretInformation" : "dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="
+  }, {
+    "breed" : "breed4",
+    "name" : "mushka",
+    "cost" : 3061.60,
+    "character" : "character4",
+    "birthDate" : "1998-04-10",
+    "secretInformation" : "dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="
+  } ],
+  "DOG" : [ {
+    "breed" : "breed4",
+    "name" : "mushka",
+    "cost" : 3061.60,
+    "character" : "character4",
+    "birthDate" : "1998-04-10",
+    "secretInformation" : "dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="
+  }, {
+    "breed" : "breed4",
+    "name" : "mushka",
+    "cost" : 3061.60,
+    "character" : "character4",
+    "birthDate" : "1998-04-10",
+    "secretInformation" : "dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="
+  } ]
+}

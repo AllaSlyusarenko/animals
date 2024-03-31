@@ -1,10 +1,7 @@
 package ru.mts.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import ru.mts.config.AnimalSerializer;
-import ru.mts.utility.Constants;
+import ru.mts.config.SecretInformationSerializer;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -18,13 +15,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-//@JsonSerialize(using = AnimalSerializer.class)
 public abstract class AbstractAnimal implements Animal, Serializable {
     protected String breed; // порода
     protected String name; // имя
     protected BigDecimal cost; // цена в магазине
     protected String character; // характер
-//    @JsonFormat(pattern = "yyyy-MM-dd")
     protected LocalDate birthDate; // день рождения животного
     @JsonSerialize(using = SecretInformationSerializer.class, as = String.class)
     protected String secretInformation; // секретная информация из файла
@@ -38,7 +33,7 @@ public abstract class AbstractAnimal implements Animal, Serializable {
         this.cost = cost.setScale(2, RoundingMode.CEILING);
         this.character = character;
         this.birthDate = birthDate;
-        this.secretInformation = setSecretInformation();
+        this.secretInformation = setSecretInformationFromFile();
     }
 
     /**
@@ -88,7 +83,7 @@ public abstract class AbstractAnimal implements Animal, Serializable {
         return this.secretInformation;
     }
 
-    private String setSecretInformation() {
+    private String setSecretInformationFromFile() {
         Path path = Paths.get("src\\main\\resources\\secretStore\\secretInformation.txt");
         String secretWord;
         try {
@@ -98,6 +93,10 @@ public abstract class AbstractAnimal implements Animal, Serializable {
             throw new RuntimeException(e);
         }
         return secretWord;
+    }
+
+    public void setSecretInformation(String secretInformation) {
+        this.secretInformation = secretInformation;
     }
 
     public void setBreed(String breed) {

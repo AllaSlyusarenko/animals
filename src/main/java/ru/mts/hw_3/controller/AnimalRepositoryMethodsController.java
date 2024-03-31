@@ -41,7 +41,7 @@ public class AnimalRepositoryMethodsController {
 
     @ResponseBody
     @GetMapping("/dupl")
-    public ResponseEntity<Map<String, List<AbstractAnimal>>> getDuplicate() {
+    public ResponseEntity<Map<String, List<AbstractAnimal>>> getDuplicate() throws IOException {
         log.info("findDuplicate-----------------------------------------------------------------------------------------");
         Map<String, List<AbstractAnimal>> animalsDuplicate = animalsRepository.findDuplicate();
         return ResponseEntity.ok(animalsDuplicate);
