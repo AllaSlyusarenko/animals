@@ -21,10 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -45,27 +42,27 @@ public class ScheduledTasks {
         this.animalsRepository = animalsRepository;
     }
 
-//    @PostConstruct
-//    public void startThreads() {
-//        Thread thread1 = new Thread(new PrintDuplicateRunnable(duplicateTime));
-//        thread1.setName("PrintDuplicateTread");
+    @PostConstruct
+    public void startThreads() {
+        Thread thread1 = new Thread(new PrintDuplicateRunnable(duplicateTime));
+        thread1.setName("PrintDuplicateTread");
 //        Thread thread2 = new Thread(new FindAverageAgeRunnable(averageAgeTime));
 //        thread2.setName("FindAverageAgeTread");
-//        thread1.start();
+        thread1.start();
 //        thread2.start();
-//    }
+    }
 
     @Scheduled(fixedDelayString = "${application.scheduled.time}")
     public void doRepositoryTasks() {
         try {
-//            log.info("findLeapYearNames-------------------------------------------------------------------------------------");
-//            animalsRepository.findLeapYearNames();
-//            log.info(deserializationFindLeapYearNames() + "\n");
+            log.info("findLeapYearNames-------------------------------------------------------------------------------------");
+            animalsRepository.findLeapYearNames();
+            log.info(deserializationFindLeapYearNames() + "\n");
 
-//            log.info("findOlderAnimal---------------------------------------------------------------------------------------");
-//            int age = 15;
-//            animalsRepository.findOlderAnimal(age);
-//            log.info(deserializationFindOlderAnimal() + "\n");
+            log.info("findOlderAnimal---------------------------------------------------------------------------------------");
+            int age = 15;
+            animalsRepository.findOlderAnimal(age);
+            log.info(deserializationFindOlderAnimal() + "\n");
 
 //
 //            List<AbstractAnimal> animalList = animalsRepository.prepareListAnimals();
@@ -97,7 +94,8 @@ public class ScheduledTasks {
                 try {
                     log.info("Name of printDuplicateThread = " + Thread.currentThread().getName());
                     log.info("findDuplicate-----------------------------------------------------------------------------------------");
-                    animalsRepository.printDuplicate();
+                    animalsRepository.findDuplicate();
+                    log.info(deserializationFindDuplicate() + "\n");
                     Thread.sleep(Long.parseLong(duplicateTime));
                 } catch (InterruptedException | IOException e) {
                     throw new RuntimeException(e);
@@ -182,5 +180,40 @@ public class ScheduledTasks {
             throw new RuntimeException(e);
         }
         return dataFindOlderAnimal;
+    }
+
+    private Map<String, List<AbstractAnimal>> deserializationFindDuplicate() {
+        String fileName = "src/main/resources/results/findDuplicate.txt";
+        Map<String, List<AbstractAnimal>> dataFindDuplicate = new HashMap<>();
+        try (FileReader fis = new FileReader(fileName);
+             BufferedReader bfr = new BufferedReader(fis)) {
+            List<String> linesFindOlderAnimal = bfr.lines().collect(Collectors.toList());
+            if (linesFindOlderAnimal.get(0).equals("{}")) {
+                log.info("no duplicates found");
+                return dataFindDuplicate;
+            }
+            if (!linesFindOlderAnimal.isEmpty()) {
+                int index = linesFindOlderAnimal.get(0).indexOf(":");
+                AnimalType animalType = AnimalType.valueOf(linesFindOlderAnimal.get(0).substring(2, index - 1));
+                int indexStart = linesFindOlderAnimal.get(0).indexOf("[");
+                int indexEnd = linesFindOlderAnimal.get(0).indexOf("]");
+                String workLine = linesFindOlderAnimal.get(0).substring(indexStart, indexEnd + 1);
+                AbstractAnimal[] animals;
+                switch (animalType) {
+                    case DOG:
+                        animals = mapper.readValue(workLine, Dog[].class);
+                        break;
+                    case WOLF:
+                        animals = mapper.readValue(workLine, Wolf[].class);
+                        break;
+                    default:
+                        throw new RuntimeException("Unknown type of animal");
+                }
+                dataFindDuplicate.put(animalType.toString(), Arrays.asList(animals));
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return dataFindDuplicate;
     }
 }

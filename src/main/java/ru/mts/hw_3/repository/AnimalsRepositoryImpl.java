@@ -90,8 +90,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
             result.put(jacksonKey, animalsMap.get(key));
         }
         String jacksonData = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(result).replace("\\", "");
-        Files.write(Paths.get(firstPartOfPath, "findOlderAnimal.txt"),
-                (animalType.toString() + "\n" + jacksonData + "\n").getBytes());
+        Files.write(Paths.get(firstPartOfPath, "findOlderAnimal.txt"), (animalType.toString() + "\n" + jacksonData + "\n").getBytes());
         return new ConcurrentHashMap<>(animalsMap);
     }
 
@@ -107,9 +106,8 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
         Map<String, List<AbstractAnimal>> animalsMap = prepareListAnimals().stream()
                 .filter(e -> !elements.add(e))
                 .collect(Collectors.groupingBy(a -> a.getClass().getSimpleName().toUpperCase(), Collectors.toList()));
-        String jacksonData = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(animalsMap);
-        Files.write(Paths.get(firstPartOfPath, "findDuplicate.txt"),
-                (jacksonData + "\n").getBytes());
+        String jacksonData = mapper.writeValueAsString(animalsMap);
+        Files.write(Paths.get(firstPartOfPath, "findDuplicate.txt"), (jacksonData + "\n").getBytes());
         return animalsMap;
     }
 
