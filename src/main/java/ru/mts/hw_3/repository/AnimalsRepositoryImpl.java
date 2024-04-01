@@ -32,13 +32,13 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     private final CreateAnimalService createAnimalService;
     private String firstPartOfPath = "src\\main\\resources\\results\\";
     @Qualifier("animalMapper")
-    private final ObjectMapper mapper;
+    @Autowired
+    private ObjectMapper mapper;
     private AnimalType animalType;
 
     @Autowired
-    public AnimalsRepositoryImpl(CreateAnimalService createAnimalService, ObjectMapper mapper) {
+    public AnimalsRepositoryImpl(CreateAnimalService createAnimalService) {
         this.createAnimalService = createAnimalService;
-        this.mapper = mapper;
     }
 
     @PostConstruct

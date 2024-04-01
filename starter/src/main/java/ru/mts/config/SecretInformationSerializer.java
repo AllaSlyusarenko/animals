@@ -1,7 +1,6 @@
 package ru.mts.config;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import org.apache.tomcat.util.codec.binary.Base64;
@@ -14,7 +13,7 @@ public class SecretInformationSerializer extends JsonSerializer<String> {
     public void serialize(String information,
                           JsonGenerator jsonGenerator,
                           SerializerProvider serializerProvider)
-            throws IOException, JsonProcessingException {
+            throws IOException {
         jsonGenerator.writeObject(new String(new Base64().encode(information.getBytes())));
     }
 }

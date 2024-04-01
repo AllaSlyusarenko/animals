@@ -1,1 +1,1 @@
-[ "persik", "barsik", "abrikos" ]
+[ "persikRandom", "barsikRandom", "barsikRandom" ]

@@ -1,6 +1,8 @@
 package ru.mts.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import ru.mts.config.SecretInformationDeserializer;
 import ru.mts.config.SecretInformationSerializer;
 
 import java.io.IOException;
@@ -22,6 +24,7 @@ public abstract class AbstractAnimal implements Animal, Serializable {
     protected String character; // характер
     protected LocalDate birthDate; // день рождения животного
     @JsonSerialize(using = SecretInformationSerializer.class, as = String.class)
+    @JsonDeserialize(using = SecretInformationDeserializer.class)
     protected String secretInformation; // секретная информация из файла
 
     public AbstractAnimal() {
@@ -85,6 +88,7 @@ public abstract class AbstractAnimal implements Animal, Serializable {
 
     private String setSecretInformationFromFile() {
         Path path = Paths.get("src\\main\\resources\\secretStore\\secretInformation.txt");
+//        Path path = Paths.get(getResourceFileAsString("secretInformation.txt"));
         String secretWord;
         try {
             List<String> words = Files.readAllLines(path);
@@ -94,6 +98,20 @@ public abstract class AbstractAnimal implements Animal, Serializable {
         }
         return secretWord;
     }
+//    protected String getResourceFileAsString(String fileName) {
+//        var is = getResourceFileAsInputStream(fileName);
+//        if (is != null) {
+//            var reader = new BufferedReader(new InputStreamReader(is));
+//            return reader.lines().collect(Collectors.joining(System.lineSeparator()));
+//        } else {
+//            throw new RuntimeException("resource not found");
+//        }
+//    }
+//
+//    protected InputStream getResourceFileAsInputStream(String fileName) {
+//        ClassLoader classLoader = AbstractAnimal.class.getClassLoader();
+//        return classLoader.getResourceAsStream(fileName);
+//    }
 
     public void setSecretInformation(String secretInformation) {
         this.secretInformation = secretInformation;

@@ -21,6 +21,7 @@ import static ru.mts.service.CreateAnimalService.randomCost;
 public class CreateAnimalServiceImpl implements CreateAnimalService {
     private final AnimalFactory animalFactory = new AnimalFactory();
     private AnimalType animalType;
+    private Path path = Paths.get("src\\main\\resources\\animals\\logData.txt");
     @Value("${dog.names.random}")
     private String[] namesDogRandom;
     @Value("${dog.names.nerandom}")
@@ -66,7 +67,6 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         int numberOfNewAnimals = 10;
         Map<String, List<AbstractAnimal>> animalsMap = new HashMap<>();
         List<AbstractAnimal> animals = new ArrayList<>();
-        Path path = Paths.get("src\\main\\resources\\animals\\logData.txt");
         Files.write(path, "".getBytes());
         do {
             BigDecimal randomCost = randomCost(1, 5000);
@@ -105,7 +105,6 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         }
         Map<String, List<AbstractAnimal>> animalsMap = new HashMap<>();
         List<AbstractAnimal> animals = new ArrayList<>();
-        Path path = Paths.get("src\\main\\resources\\animals\\logData.txt");
         Files.write(path, "".getBytes());
         for (int i = 1; i < N / 2; i++) {
             BigDecimal randomCost = randomCost(1, 5000);

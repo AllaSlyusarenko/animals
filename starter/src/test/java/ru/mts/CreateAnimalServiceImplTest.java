@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import ru.mts.entity.AbstractAnimal;
-import ru.mts.entity.Animal;
 import ru.mts.service.CreateAnimalService;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +29,11 @@ public class CreateAnimalServiceImplTest {
 
     @Test
     @DisplayName(value = "Animal creation test")
-    void createAnimals() throws IOException {
+    void createAnimals() throws IOException, NoSuchFieldException, IllegalAccessException {
+        Path path = Paths.get("src\\test\\resources\\animals\\logData.txt");
+        Field pathField = createAnimalService.getClass().getDeclaredField("path");
+        pathField.setAccessible(true);
+        pathField.set(createAnimalService, path);
         Map<String, List<AbstractAnimal>> animals = createAnimalService.createAnimals(10);
         for (List<AbstractAnimal> value : animals.values()) {
             assertEquals(10, value.size());
