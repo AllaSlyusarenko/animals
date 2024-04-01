@@ -1,6 +1,6 @@
 {
-  "WOLF seriy" : "1984-07-22",
-  "WOLF wustrikRandom" : "2012-06-16",
-  "WOLF beliy" : "1984-07-22",
-  "WOLF smelchakRandom" : "1988-01-12"
+  "DOG persikRandom" : "1972-09-16",
+  "DOG pesik" : "1984-07-22",
+  "DOG barsikRandom" : "2000-04-10",
+  "DOG piksel" : "1984-07-22"
 }

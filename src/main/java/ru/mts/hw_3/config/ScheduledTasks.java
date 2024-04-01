@@ -54,45 +54,14 @@ public class ScheduledTasks {
     @Scheduled(fixedDelayString = "${application.scheduled.time}")
     public void doRepositoryTasks() {
         try {
-//            log.info("findLeapYearNames-------------------------------------------------------------------------------------");
-//            animalsRepository.findLeapYearNames();
-//            log.info(deserializationFindLeapYearNames() + "\n");
+            log.info("findLeapYearNames-------------------------------------------------------------------------------------");
+            animalsRepository.findLeapYearNames();
+            log.info(deserializationFindLeapYearNames() + "\n");
 
             log.info("findOlderAnimal---------------------------------------------------------------------------------------");
             int age = 15;
             animalsRepository.findOlderAnimal(age);
-            String fileName = "src/main/resources/results/findOlderAnimal.txt";
-            List<String> dataFindOlderAnimal = new ArrayList<>();
-            try (FileReader fis = new FileReader(fileName);
-                 BufferedReader bfr = new BufferedReader(fis)) {
-                String line;
-                List<String> linesFindOlderAnimal = bfr.lines().collect(Collectors.toList());
-                if (!linesFindOlderAnimal.isEmpty()) {
-                    AnimalType animalType = AnimalType.valueOf(linesFindOlderAnimal.get(0).toUpperCase());
-                    for (int i = 2; i < linesFindOlderAnimal.size() - 2; i++) {
-                        String workLine = linesFindOlderAnimal.get(i);
-                        int indexStart = workLine.indexOf("{");
-                        int indexEnd = workLine.indexOf("}");
-                        String sub = "{ " + workLine.substring(indexStart + 1, indexEnd) + "}";
-                        AbstractAnimal animal;
-                        switch (animalType) {
-                            case DOG:
-                                animal = mapper.readValue(sub, Dog.class);
-                                break;
-                            case WOLF:
-                                animal = mapper.readValue(sub, Wolf.class);
-                                break;
-                            default:
-                                throw new RuntimeException("Unknown type of animal");
-                        }
-                        System.out.println(animal);
-                    }
-                }
-
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            log.info(dataFindOlderAnimal + "\n");
+            log.info(deserializationFindOlderAnimal() + "\n");
 
 //
 //            List<AbstractAnimal> animalList = animalsRepository.prepareListAnimals();
@@ -171,5 +140,40 @@ public class ScheduledTasks {
         String result = dataFindLeapYearNames.toString().replace("\"", "").replace(":", "=")
                 .replace(",  ", ", ");
         return result;
+    }
+
+    private List<String> deserializationFindOlderAnimal() {
+        String fileName = "src/main/resources/results/findOlderAnimal.txt";
+        List<String> dataFindOlderAnimal = new ArrayList<>();
+        try (FileReader fis = new FileReader(fileName);
+             BufferedReader bfr = new BufferedReader(fis)) {
+            String line;
+            List<String> linesFindOlderAnimal = bfr.lines().collect(Collectors.toList());
+            if (!linesFindOlderAnimal.isEmpty()) {
+                AnimalType animalType = AnimalType.valueOf(linesFindOlderAnimal.get(0).toUpperCase());
+                for (int i = 2; i < linesFindOlderAnimal.size() - 2; i++) {
+                    String workLine = linesFindOlderAnimal.get(i);
+                    int indexStart = workLine.indexOf("{");
+                    int indexEnd = workLine.indexOf("}");
+                    String sub = "{ " + workLine.substring(indexStart + 1, indexEnd) + "}";
+                    AbstractAnimal animal;
+                    switch (animalType) {
+                        case DOG:
+                            animal = mapper.readValue(sub, Dog.class);
+                            break;
+                        case WOLF:
+                            animal = mapper.readValue(sub, Wolf.class);
+                            break;
+                        default:
+                            throw new RuntimeException("Unknown type of animal");
+                    }
+                    String stringResult = animal + "=" + workLine.substring(indexEnd + 5, workLine.length() - 1);
+                    dataFindOlderAnimal.add(stringResult);
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return dataFindOlderAnimal;
     }
 }
