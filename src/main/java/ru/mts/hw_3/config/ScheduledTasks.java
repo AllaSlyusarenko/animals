@@ -17,10 +17,14 @@ import ru.mts.hw_3.repository.AnimalsRepositoryImpl;
 
 import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -54,14 +58,14 @@ public class ScheduledTasks {
     @Scheduled(fixedDelayString = "${application.scheduled.time}")
     public void doRepositoryTasks() {
         try {
-            log.info("findLeapYearNames-------------------------------------------------------------------------------------");
-            animalsRepository.findLeapYearNames();
-            log.info(deserializationFindLeapYearNames() + "\n");
+//            log.info("findLeapYearNames-------------------------------------------------------------------------------------");
+//            animalsRepository.findLeapYearNames();
+//            log.info(deserializationFindLeapYearNames() + "\n");
 
-            log.info("findOlderAnimal---------------------------------------------------------------------------------------");
-            int age = 15;
-            animalsRepository.findOlderAnimal(age);
-            log.info(deserializationFindOlderAnimal() + "\n");
+//            log.info("findOlderAnimal---------------------------------------------------------------------------------------");
+//            int age = 15;
+//            animalsRepository.findOlderAnimal(age);
+//            log.info(deserializationFindOlderAnimal() + "\n");
 
 //
 //            List<AbstractAnimal> animalList = animalsRepository.prepareListAnimals();
@@ -125,33 +129,36 @@ public class ScheduledTasks {
         }
     }
 
-    private String deserializationFindLeapYearNames() {
+    private Map<String, LocalDate> deserializationFindLeapYearNames() {
         String fileName = "src\\main\\resources\\results\\findLeapYearNames.txt";
-        StringBuilder dataFindLeapYearNames = new StringBuilder();
+        Map<String, LocalDate> dataFindLeapYearNames = new HashMap<>();
         try (FileReader fis = new FileReader(fileName);
              BufferedReader bfr = new BufferedReader(fis)) {
-            String line;
-            while ((line = bfr.readLine()) != null) {
-                dataFindLeapYearNames.append(line);
+            List<String> linesFindOlderAnimal = bfr.lines().collect(Collectors.toList());
+            if (!linesFindOlderAnimal.isEmpty()) {
+                for (int i = 1; i < linesFindOlderAnimal.size() - 2; i++) {
+                    String workLine = linesFindOlderAnimal.get(i);
+                    int index = workLine.indexOf(":");
+                    String key = workLine.substring(3, index - 2);
+                    LocalDate value = LocalDate.parse(workLine.substring(index + 3, workLine.length() - 2));
+                    dataFindLeapYearNames.put(key, value);
+                }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        String result = dataFindLeapYearNames.toString().replace("\"", "").replace(":", "=")
-                .replace(",  ", ", ");
-        return result;
+        return dataFindLeapYearNames;
     }
 
-    private List<String> deserializationFindOlderAnimal() {
+    private Map<AbstractAnimal, Integer> deserializationFindOlderAnimal() {
         String fileName = "src/main/resources/results/findOlderAnimal.txt";
-        List<String> dataFindOlderAnimal = new ArrayList<>();
+        Map<AbstractAnimal, Integer> dataFindOlderAnimal = new HashMap<>();
         try (FileReader fis = new FileReader(fileName);
              BufferedReader bfr = new BufferedReader(fis)) {
-            String line;
             List<String> linesFindOlderAnimal = bfr.lines().collect(Collectors.toList());
             if (!linesFindOlderAnimal.isEmpty()) {
                 AnimalType animalType = AnimalType.valueOf(linesFindOlderAnimal.get(0).toUpperCase());
-                for (int i = 2; i < linesFindOlderAnimal.size() - 2; i++) {
+                for (int i = 2; i < linesFindOlderAnimal.size() - 1; i++) {
                     String workLine = linesFindOlderAnimal.get(i);
                     int indexStart = workLine.indexOf("{");
                     int indexEnd = workLine.indexOf("}");
@@ -167,8 +174,8 @@ public class ScheduledTasks {
                         default:
                             throw new RuntimeException("Unknown type of animal");
                     }
-                    String stringResult = animal + "=" + workLine.substring(indexEnd + 5, workLine.length() - 1);
-                    dataFindOlderAnimal.add(stringResult);
+                    Integer value = Integer.parseInt(workLine.substring(indexEnd + 5, workLine.length() - 1));
+                    dataFindOlderAnimal.put(animal, value);
                 }
             }
         } catch (IOException e) {
