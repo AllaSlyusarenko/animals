@@ -88,7 +88,6 @@ public abstract class AbstractAnimal implements Animal, Serializable {
 
     private String setSecretInformationFromFile() {
         Path path = Paths.get("src\\main\\resources\\secretStore\\secretInformation.txt");
-//        Path path = Paths.get(getResourceFileAsString("secretInformation.txt"));
         String secretWord;
         try {
             List<String> words = Files.readAllLines(path);
@@ -98,20 +97,6 @@ public abstract class AbstractAnimal implements Animal, Serializable {
         }
         return secretWord;
     }
-//    protected String getResourceFileAsString(String fileName) {
-//        var is = getResourceFileAsInputStream(fileName);
-//        if (is != null) {
-//            var reader = new BufferedReader(new InputStreamReader(is));
-//            return reader.lines().collect(Collectors.joining(System.lineSeparator()));
-//        } else {
-//            throw new RuntimeException("resource not found");
-//        }
-//    }
-//
-//    protected InputStream getResourceFileAsInputStream(String fileName) {
-//        ClassLoader classLoader = AbstractAnimal.class.getClassLoader();
-//        return classLoader.getResourceAsStream(fileName);
-//    }
 
     public void setSecretInformation(String secretInformation) {
         this.secretInformation = secretInformation;

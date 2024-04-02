@@ -1,0 +1,10 @@
+1 WOLF breed1 smelchakRandomTest 3907.68 1975-04-01
+2 WOLF breed2 wustrikRandomTest 800.68 1974-02-22
+3 WOLF breed3 wustrikRandomTest 3830.68 2016-06-27
+4 WOLF breed4 smelchakRandomTest 308.68 1991-03-24
+5 WOLF malenkiyTest seriyTest 1500.00 1983-03-15
+6 WOLF malenkiyTest seriyTest 3000.00 1983-03-15
+7 WOLF bolwoiTest seriyTest 3000.00 1984-07-22
+8 WOLF malenkiyTest beliyTest 3000.00 1984-07-22
+9 WOLF malenkiyTest seriyTest 3000.00 1983-03-15
+10 WOLF bolwoiTest seriyTest 3000.00 1983-03-15

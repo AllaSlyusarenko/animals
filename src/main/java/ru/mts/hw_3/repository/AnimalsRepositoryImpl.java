@@ -141,11 +141,9 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 .average()
                 .orElse(-1.0);
         String averageAgeString = Double.toString(Math.round(averageAge * 100.0) / 100.0);
-        log.info(averageAgeString);
         Double averageAgeRounding = Double.parseDouble(averageAgeString);
         String jacksonData = mapper.writeValueAsString(averageAgeRounding);
-        Files.write(Paths.get(firstPartOfPath, "findAverageAge.txt"),
-                (jacksonData + "\n").getBytes());
+        Files.write(Paths.get(firstPartOfPath, "findAverageAge.txt"), (jacksonData + "\n").getBytes());
     }
 
     /**

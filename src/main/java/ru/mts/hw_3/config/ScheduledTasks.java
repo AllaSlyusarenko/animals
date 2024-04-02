@@ -17,13 +17,11 @@ import ru.mts.hw_3.repository.AnimalsRepositoryImpl;
 
 import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Slf4j
 @Component
@@ -46,10 +44,10 @@ public class ScheduledTasks {
     public void startThreads() {
         Thread thread1 = new Thread(new PrintDuplicateRunnable(duplicateTime));
         thread1.setName("PrintDuplicateTread");
-//        Thread thread2 = new Thread(new FindAverageAgeRunnable(averageAgeTime));
-//        thread2.setName("FindAverageAgeTread");
+        Thread thread2 = new Thread(new FindAverageAgeRunnable(averageAgeTime));
+        thread2.setName("FindAverageAgeTread");
         thread1.start();
-//        thread2.start();
+        thread2.start();
     }
 
     @Scheduled(fixedDelayString = "${application.scheduled.time}")
@@ -69,9 +67,10 @@ public class ScheduledTasks {
             log.info("findOldAndExpensive------------------------------------------------------------------------------------");
             animalsRepository.findOldAndExpensive(animalList);
             log.info(deserializationFindOldAndExpensive() + "\n");
-//
-//            log.info("findMinConstAnimals------------------------------------------------------------------------------------");
-//            log.info(animalsRepository.findMinConstAnimals(animalList) + "\n");
+
+            log.info("findMinConstAnimals------------------------------------------------------------------------------------");
+            animalsRepository.findMinConstAnimals(animalList);
+            log.info(deserializationFindMinConstAnimals() + "\n");
         } catch (IncorrectParameterException ex) {
             log.error("Incorrect parameter value", ex);
         } catch (CollectionEmptyException e) {
@@ -119,6 +118,7 @@ public class ScheduledTasks {
                     log.info("findAverageAge-----------------------------------------------------------------------------------------");
                     List<AbstractAnimal> animalList = animalsRepository.prepareListAnimals();
                     animalsRepository.findAverageAge(animalList);
+                    log.info(deserializationFindAverageAge() + "\n");
                     Thread.sleep(Long.parseLong(averageAgeTime));
                 } catch (InterruptedException | CollectionEmptyException | IOException e) {
                     throw new RuntimeException(e);
@@ -128,7 +128,7 @@ public class ScheduledTasks {
     }
 
     private Map<String, LocalDate> deserializationFindLeapYearNames() {
-        String fileName = "src\\main\\resources\\results\\findLeapYearNames.txt";
+        String fileName = "src/main/resources/results/findLeapYearNames.txt";
         Map<String, LocalDate> dataFindLeapYearNames = new HashMap<>();
         try (FileReader fis = new FileReader(fileName);
              BufferedReader bfr = new BufferedReader(fis)) {
@@ -147,7 +147,7 @@ public class ScheduledTasks {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            log.error("No data, empty file - findLeapYearNames.txt", e);
         }
         return dataFindLeapYearNames;
     }
@@ -185,7 +185,7 @@ public class ScheduledTasks {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            log.error("No data, empty file - findOlderAnimal.txt", e);
         }
         return dataFindOlderAnimal;
     }
@@ -220,7 +220,7 @@ public class ScheduledTasks {
                 dataFindDuplicate.put(animalType.toString(), Arrays.asList(animals));
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            log.error("No data, empty file - findDuplicate.txt", e);
         }
         return dataFindDuplicate;
     }
@@ -231,7 +231,7 @@ public class ScheduledTasks {
         try (FileReader fis = new FileReader(fileName);
              BufferedReader bfr = new BufferedReader(fis)) {
             List<String> linesFindOldAndExpensive = bfr.lines().collect(Collectors.toList());
-            if (linesFindOldAndExpensive.get(0).equals("{}")) {
+            if (linesFindOldAndExpensive.get(1).equals("[]")) {
                 log.info("There are no animals that meet the specified parameters");
                 return dataFindOldAndExpensive;
             }
@@ -252,8 +252,47 @@ public class ScheduledTasks {
                 dataFindOldAndExpensive.addAll(Arrays.asList(animals));
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            log.error("No data, empty file - findOldAndExpensive.txt", e);
         }
         return dataFindOldAndExpensive;
+    }
+
+    private List<String> deserializationFindMinConstAnimals() {
+        String fileName = "src/main/resources/results/findMinConstAnimals.txt";
+        List<String> dataFindMinConstAnimals = new ArrayList<>();
+        try (FileReader fis = new FileReader(fileName);
+             BufferedReader bfr = new BufferedReader(fis)) {
+            List<String> linesFindMinConstAnimals = bfr.lines().collect(Collectors.toList());
+            if (linesFindMinConstAnimals.get(0).equals("[]")) {
+                log.info("There are no animals that meet the specified parameters");
+                return dataFindMinConstAnimals;
+            }
+            if (!linesFindMinConstAnimals.isEmpty()) {
+                String workLine = linesFindMinConstAnimals.get(0);
+                String[] names = mapper.readValue(workLine, String[].class);
+                dataFindMinConstAnimals.addAll(Arrays.asList(names));
+            }
+        } catch (IOException e) {
+            log.error("No data, empty file - findMinConstAnimals.txt", e);
+        }
+        return dataFindMinConstAnimals;
+    }
+
+    private Double deserializationFindAverageAge() {
+        String fileName = "src/main/resources/results/findAverageAge.txt";
+        Double age = null;
+        try (FileReader fis = new FileReader(fileName);
+             BufferedReader bfr = new BufferedReader(fis)) {
+            List<String> linesFindMinConstAnimals = bfr.lines().collect(Collectors.toList());
+            if (linesFindMinConstAnimals.isEmpty()) {
+                log.info("There are no animals that meet the specified parameters");
+                return -1.0;
+            }
+            String workLine = linesFindMinConstAnimals.get(0);
+            age = mapper.readValue(workLine, Double.class);
+        } catch (IOException e) {
+            log.error("No data, empty file - findMinConstAnimals.txt", e);
+        }
+        return age;
     }
 }

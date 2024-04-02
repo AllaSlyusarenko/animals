@@ -45,7 +45,11 @@ public class CreateAnimalServiceImplTest {
 
     @Test
     @DisplayName(value = "Animal creation specified quantity test")
-    void createAnimalsSpecifiedQuantity() throws IOException {
+    void createAnimalsSpecifiedQuantity() throws IOException, NoSuchFieldException, IllegalAccessException {
+        Path path = Paths.get("src\\test\\resources\\animals\\logData.txt");
+        Field pathField = createAnimalService.getClass().getDeclaredField("path");
+        pathField.setAccessible(true);
+        pathField.set(createAnimalService, path);
         int N = 15;
         Map<String, List<AbstractAnimal>> animals = createAnimalService.createAnimals(N);
         for (List<AbstractAnimal> value : animals.values()) {
