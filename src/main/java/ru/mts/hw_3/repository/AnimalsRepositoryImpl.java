@@ -165,7 +165,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 .filter(x -> countYears(x.getBirthDate()) > 5)
                 .filter(t -> t.getCost().compareTo(averageCost) > 0)
                 .sorted(Comparator.comparing(AbstractAnimal::getBirthDate)).collect(Collectors.toCollection(CopyOnWriteArrayList::new));
-        String jacksonData = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(result);
+        String jacksonData = mapper.writeValueAsString(result);
         Files.write(Paths.get(firstPartOfPath, "findOldAndExpensive.txt"),
                 (animalType.toString() + "\n" + jacksonData + "\n").getBytes());
         return result;

@@ -64,18 +64,18 @@ public class ScheduledTasks {
             animalsRepository.findOlderAnimal(age);
             log.info(deserializationFindOlderAnimal() + "\n");
 
-//
-//            List<AbstractAnimal> animalList = animalsRepository.prepareListAnimals();
-//
-//            log.info("findOldAndExpensive------------------------------------------------------------------------------------");
-//            log.info(animalsRepository.findOldAndExpensive(animalList) + "\n");
+            List<AbstractAnimal> animalList = animalsRepository.prepareListAnimals();
+
+            log.info("findOldAndExpensive------------------------------------------------------------------------------------");
+            animalsRepository.findOldAndExpensive(animalList);
+            log.info(deserializationFindOldAndExpensive() + "\n");
 //
 //            log.info("findMinConstAnimals------------------------------------------------------------------------------------");
 //            log.info(animalsRepository.findMinConstAnimals(animalList) + "\n");
         } catch (IncorrectParameterException ex) {
             log.error("Incorrect parameter value", ex);
-//        } catch (CollectionEmptyException e) {
-//            log.error("Data collection does not meet the required conditions", e);
+        } catch (CollectionEmptyException e) {
+            log.error("Data collection does not meet the required conditions", e);
         } catch (IOException e) {
             log.error("Required file is missing", e);
         }
@@ -132,10 +132,14 @@ public class ScheduledTasks {
         Map<String, LocalDate> dataFindLeapYearNames = new HashMap<>();
         try (FileReader fis = new FileReader(fileName);
              BufferedReader bfr = new BufferedReader(fis)) {
-            List<String> linesFindOlderAnimal = bfr.lines().collect(Collectors.toList());
-            if (!linesFindOlderAnimal.isEmpty()) {
-                for (int i = 1; i < linesFindOlderAnimal.size() - 2; i++) {
-                    String workLine = linesFindOlderAnimal.get(i);
+            List<String> linesFindLeapYearNames = bfr.lines().collect(Collectors.toList());
+            if (linesFindLeapYearNames.get(0).equals("{}")) {
+                log.info("There are no animals born on leap years");
+                return dataFindLeapYearNames;
+            }
+            if (!linesFindLeapYearNames.isEmpty()) {
+                for (int i = 1; i < linesFindLeapYearNames.size() - 2; i++) {
+                    String workLine = linesFindLeapYearNames.get(i);
                     int index = workLine.indexOf(":");
                     String key = workLine.substring(3, index - 2);
                     LocalDate value = LocalDate.parse(workLine.substring(index + 3, workLine.length() - 2));
@@ -154,6 +158,10 @@ public class ScheduledTasks {
         try (FileReader fis = new FileReader(fileName);
              BufferedReader bfr = new BufferedReader(fis)) {
             List<String> linesFindOlderAnimal = bfr.lines().collect(Collectors.toList());
+            if (linesFindOlderAnimal.get(0).equals("{}")) {
+                log.info("No animals older than a given age");
+                return dataFindOlderAnimal;
+            }
             if (!linesFindOlderAnimal.isEmpty()) {
                 AnimalType animalType = AnimalType.valueOf(linesFindOlderAnimal.get(0).toUpperCase());
                 for (int i = 2; i < linesFindOlderAnimal.size() - 1; i++) {
@@ -187,17 +195,17 @@ public class ScheduledTasks {
         Map<String, List<AbstractAnimal>> dataFindDuplicate = new HashMap<>();
         try (FileReader fis = new FileReader(fileName);
              BufferedReader bfr = new BufferedReader(fis)) {
-            List<String> linesFindOlderAnimal = bfr.lines().collect(Collectors.toList());
-            if (linesFindOlderAnimal.get(0).equals("{}")) {
-                log.info("no duplicates found");
+            List<String> linesFindDuplicate = bfr.lines().collect(Collectors.toList());
+            if (linesFindDuplicate.get(0).equals("{}")) {
+                log.info("No duplicates found");
                 return dataFindDuplicate;
             }
-            if (!linesFindOlderAnimal.isEmpty()) {
-                int index = linesFindOlderAnimal.get(0).indexOf(":");
-                AnimalType animalType = AnimalType.valueOf(linesFindOlderAnimal.get(0).substring(2, index - 1));
-                int indexStart = linesFindOlderAnimal.get(0).indexOf("[");
-                int indexEnd = linesFindOlderAnimal.get(0).indexOf("]");
-                String workLine = linesFindOlderAnimal.get(0).substring(indexStart, indexEnd + 1);
+            if (!linesFindDuplicate.isEmpty()) {
+                int index = linesFindDuplicate.get(0).indexOf(":");
+                AnimalType animalType = AnimalType.valueOf(linesFindDuplicate.get(0).substring(2, index - 1));
+                int indexStart = linesFindDuplicate.get(0).indexOf("[");
+                int indexEnd = linesFindDuplicate.get(0).indexOf("]");
+                String workLine = linesFindDuplicate.get(0).substring(indexStart, indexEnd + 1);
                 AbstractAnimal[] animals;
                 switch (animalType) {
                     case DOG:
@@ -215,5 +223,37 @@ public class ScheduledTasks {
             throw new RuntimeException(e);
         }
         return dataFindDuplicate;
+    }
+
+    private List<AbstractAnimal> deserializationFindOldAndExpensive() {
+        String fileName = "src/main/resources/results/findOldAndExpensive.txt";
+        List<AbstractAnimal> dataFindOldAndExpensive = new ArrayList<>();
+        try (FileReader fis = new FileReader(fileName);
+             BufferedReader bfr = new BufferedReader(fis)) {
+            List<String> linesFindOldAndExpensive = bfr.lines().collect(Collectors.toList());
+            if (linesFindOldAndExpensive.get(0).equals("{}")) {
+                log.info("There are no animals that meet the specified parameters");
+                return dataFindOldAndExpensive;
+            }
+            if (!linesFindOldAndExpensive.isEmpty()) {
+                AnimalType animalType = AnimalType.valueOf(linesFindOldAndExpensive.get(0).toUpperCase());
+                String workLine = linesFindOldAndExpensive.get(1);
+                AbstractAnimal[] animals;
+                switch (animalType) {
+                    case DOG:
+                        animals = mapper.readValue(workLine, Dog[].class);
+                        break;
+                    case WOLF:
+                        animals = mapper.readValue(workLine, Wolf[].class);
+                        break;
+                    default:
+                        throw new RuntimeException("Unknown type of animal");
+                }
+                dataFindOldAndExpensive.addAll(Arrays.asList(animals));
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return dataFindOldAndExpensive;
     }
 }
