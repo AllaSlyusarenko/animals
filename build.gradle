@@ -9,6 +9,9 @@ group 'ru.mts'
 jar {
     manifest.attributes('Main-Class': 'ru.mts.hw_3.Main')
 }
+//tasks.register('run', JavaExec) {
+//    classpath = sourceSets.main.runtimeClasspath
+//}
 repositories {
     mavenCentral()
 }
@@ -17,7 +20,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation project(':starter')
     implementation 'org.springframework.boot:spring-boot-starter-web:2.7.11'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.7.3'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compileOnly 'org.projectlombok:lombok:1.18.12'
     annotationProcessor 'org.projectlombok:lombok:1.18.12'

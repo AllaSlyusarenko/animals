@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.io.IOException;
+
 @RestControllerAdvice(annotations = RestController.class)
 public class ErrorHandler {
 
@@ -20,6 +22,12 @@ public class ErrorHandler {
     public ResponseEntity<String> handleValidationException(final RuntimeException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body("Check the entered data: " + e.getMessage());
+    }
+
+    @ExceptionHandler({IOException.class})
+    public ResponseEntity<String> handleIOException(final Exception e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("Required file not found " + e.getMessage());
     }
 
     @ExceptionHandler

@@ -1,0 +1,12 @@
+DOG
+{
+  "{"breed":"breed5","name":"barsik","cost":718.68,"character":"character5","birthDate":"1965-01-04","secretInformation":"dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="}" : 59,
+  "{"breed":"breed10","name":"persik","cost":1388.68,"character":"character10","birthDate":"1994-06-20","secretInformation":"dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="}" : 29,
+  "{"breed":"breed6","name":"persik","cost":939.68,"character":"character6","birthDate":"1988-04-30","secretInformation":"dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="}" : 35,
+  "{"breed":"breed1","name":"tuzik","cost":2844.68,"character":"character1","birthDate":"1980-02-08","secretInformation":"dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="}" : 44,
+  "{"breed":"breed5","name":"barsik","cost":718.68,"character":"character5","birthDate":"1970-01-04","secretInformation":"dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="}" : 54,
+  "{"breed":"breed10","name":"abrikos","cost":1388.68,"character":"character10","birthDate":"1994-06-20","secretInformation":"dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="}" : 29,
+  "{"breed":"breed1","name":"tuzik","cost":2844.68,"character":"character1","birthDate":"1983-02-08","secretInformation":"dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="}" : 41,
+  "{"breed":"breed4","name":"mushka","cost":3061.60,"character":"character4","birthDate":"1998-04-10","secretInformation":"dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="}" : 25,
+  "{"breed":"breed2","name":"bumburuwka","cost":3441.68,"character":"character2","birthDate":"1985-04-06","secretInformation":"dmVyeSBzZWNyZXQgaW5mb3JtYXRpb24="}" : 39
+}

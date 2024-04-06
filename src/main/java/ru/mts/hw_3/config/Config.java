@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class Config {
-    @Bean("animalMapper")
+    @Bean
     @Primary
-    public ObjectMapper getAnimalMapper() {
+    public ObjectMapper animalMapper() {
         return new AnimalMapper();
     }
 }

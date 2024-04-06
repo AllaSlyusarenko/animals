@@ -1,6 +1,0 @@
-{
-  "DOG persikRandom" : "2008-09-02",
-  "DOG pesik" : "1984-07-22",
-  "DOG barsikRandom" : "1980-04-04",
-  "DOG piksel" : "1984-07-22"
-}

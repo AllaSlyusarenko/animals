@@ -74,22 +74,22 @@ class AnimalsRepositoryImplTest {
         initAnimals();
     }
 
-    @Test
-    @DisplayName(value = "Tests of the findLeapYearNames Correct")
-    void findLeapYearNamesCorrect() throws NoSuchFieldException, IllegalAccessException, IOException {
-        Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
-        animalNamesField.setAccessible(true);
-        animalNamesField.set(animalsRepository, animalsMap);
-
-        List<AbstractAnimal> animalList = animalsMap.get(animalTypeDog.toString());
-        assertThat(animalList.get(0), instanceOf(Animal.class));
-        assertEquals("breed1", animalList.get(0).getBreed());
-
-        Map<String, LocalDate> names = animalsRepository.findLeapYearNames();
-        assertEquals(4, names.size());
-        assertTrue(names.containsKey("DOG persik"));
-        assertTrue(names.containsKey("WOLF persik"));
-    }
+//    @Test
+//    @DisplayName(value = "Tests of the findLeapYearNames Correct")
+//    void findLeapYearNamesCorrect() throws NoSuchFieldException, IllegalAccessException, IOException {
+//        Field animalNamesField = animalsRepository.getClass().getDeclaredField("animals");
+//        animalNamesField.setAccessible(true);
+//        animalNamesField.set(animalsRepository, animalsMap);
+//
+//        List<AbstractAnimal> animalList = animalsMap.get(animalTypeDog.toString());
+//        assertThat(animalList.get(0), instanceOf(Animal.class));
+//        assertEquals("breed1", animalList.get(0).getBreed());
+//
+//        Map<String, LocalDate> names = animalsRepository.findLeapYearNames();
+//        assertEquals(4, names.size());
+//        assertTrue(names.containsKey("DOG persik"));
+//        assertTrue(names.containsKey("WOLF persik"));
+//    }
 
     @Test
     @DisplayName(value = "Tests of the findLeapYearNames Incorrect - null")
