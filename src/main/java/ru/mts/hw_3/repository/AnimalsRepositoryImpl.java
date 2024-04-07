@@ -3,6 +3,7 @@ package ru.mts.hw_3.repository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 import ru.mts.entity.AbstractAnimal;
 import ru.mts.entity.AnimalType;
@@ -11,11 +12,11 @@ import ru.mts.hw_3.exception.IncorrectParameterException;
 import ru.mts.service.CreateAnimalService;
 
 import javax.annotation.PostConstruct;
-import java.io.*;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
@@ -29,7 +30,6 @@ import java.util.stream.Collectors;
 public class AnimalsRepositoryImpl implements AnimalsRepository {
     private ConcurrentHashMap<String, List<AbstractAnimal>> animals;
     private final CreateAnimalService createAnimalService;
-    private String firstPartOfPath = "src\\main\\resources\\results\\";
     @Autowired
     private ObjectMapper mapper;
     private AnimalType animalType;
@@ -43,6 +43,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     public void init() throws IOException {
         animals = new ConcurrentHashMap<>(createAnimalService.createAnimals(30));
         animalType = createAnimalService.getAnimalType();
+
     }
 
     /**
@@ -57,26 +58,10 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 .filter(animal -> isLeapYear(animal.getBirthDate()))
                 .collect(Collectors.toMap(k -> k.getClass().getSimpleName().toUpperCase() + " " + k.getName(), v -> v.getBirthDate(), (k1, k2) -> k1));
         String jacksonData = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(animalsMap);
-        String pathString = getResourceFileAsString("results/findLeapYearNames.json");
-        Files.write(Paths.get(pathString), (jacksonData + "\n").getBytes());
+        Path path = new ClassPathResource("results/findLeapYearNames.json", this.getClass().getClassLoader()).getFile().toPath();
+        Files.write(path, (jacksonData + "\n").getBytes());
         return new ConcurrentHashMap<>(animalsMap);
     }
-
-    protected String getResourceFileAsString(String fileName) {
-        InputStream is = getResourceFileAsInputStream(fileName);
-        if (is != null) {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-            return reader.lines().collect(Collectors.joining(System.lineSeparator()));
-        } else {
-            throw new RuntimeException("resource not found");
-        }
-    }
-
-    protected InputStream getResourceFileAsInputStream(String fileName) {
-        ClassLoader classLoader = this.getClass().getClassLoader();
-        return classLoader.getResourceAsStream(fileName);
-    }
-
 
     /**
      * Метод - производит поиск животных, которые старше указанного возраста, иначе выводит старшего
@@ -105,7 +90,8 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
             result.put(jacksonKey, animalsMap.get(key));
         }
         String jacksonData = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(result).replace("\\", "");
-        Files.write(Paths.get(firstPartOfPath, "findOlderAnimal.json"), (animalType.toString() + "\n" + jacksonData + "\n").getBytes());
+        Path path = new ClassPathResource("results/findOldAndExpensive.json", this.getClass().getClassLoader()).getFile().toPath();
+        Files.write(path, (animalType.toString() + "\n" + jacksonData + "\n").getBytes());
         return new ConcurrentHashMap<>(animalsMap);
     }
 
@@ -122,7 +108,8 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 .filter(e -> !elements.add(e))
                 .collect(Collectors.groupingBy(a -> a.getClass().getSimpleName().toUpperCase(), Collectors.toList()));
         String jacksonData = mapper.writeValueAsString(animalsMap);
-        Files.write(Paths.get(firstPartOfPath, "findDuplicate.json"), (jacksonData + "\n").getBytes());
+        Path path = new ClassPathResource("results/findDuplicate.json", this.getClass().getClassLoader()).getFile().toPath();
+        Files.write(path, (jacksonData + "\n").getBytes());
         return animalsMap;
     }
 
@@ -158,7 +145,8 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
         String averageAgeString = Double.toString(Math.round(averageAge * 100.0) / 100.0);
         Double averageAgeRounding = Double.parseDouble(averageAgeString);
         String jacksonData = mapper.writeValueAsString(averageAgeRounding);
-        Files.write(Paths.get(firstPartOfPath, "findAverageAge.json"), (jacksonData + "\n").getBytes());
+        Path path = new ClassPathResource("results/findAverageAge.json", this.getClass().getClassLoader()).getFile().toPath();
+        Files.write(path, (jacksonData + "\n").getBytes());
     }
 
     /**
@@ -179,8 +167,8 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 .filter(t -> t.getCost().compareTo(averageCost) > 0)
                 .sorted(Comparator.comparing(AbstractAnimal::getBirthDate)).collect(Collectors.toCollection(CopyOnWriteArrayList::new));
         String jacksonData = mapper.writeValueAsString(result);
-        Files.write(Paths.get(firstPartOfPath, "findOldAndExpensive.json"),
-                (animalType.toString() + "\n" + jacksonData + "\n").getBytes());
+        Path path = new ClassPathResource("results/findOldAndExpensive.json", this.getClass().getClassLoader()).getFile().toPath();
+        Files.write(path, (animalType.toString() + "\n" + jacksonData + "\n").getBytes());
         return result;
     }
 
@@ -198,8 +186,8 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 .map(AbstractAnimal::getName)
                 .sorted(Comparator.reverseOrder()).collect(Collectors.toCollection(CopyOnWriteArrayList::new));
         String jacksonData = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(result);
-        Files.write(Paths.get(firstPartOfPath, "findMinConstAnimals.json"),
-                (jacksonData + "\n").getBytes());
+        Path path = new ClassPathResource("results/findMinConstAnimals.json", this.getClass().getClassLoader()).getFile().toPath();
+        Files.write(path, (jacksonData + "\n").getBytes());
         return result;
     }
 

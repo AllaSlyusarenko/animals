@@ -3,6 +3,7 @@ package ru.mts.hw_3.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import ru.mts.entity.AbstractAnimal;
 import ru.mts.entity.AnimalType;
@@ -10,6 +11,7 @@ import ru.mts.entity.Dog;
 import ru.mts.entity.Wolf;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -27,10 +29,10 @@ public class DeserializationServiceImpl implements DeserializationService {
     }
 
     @Override
-    public Map<String, LocalDate> deserializationFindLeapYearNames() {
-        String fileName = "src/main/resources/results/findLeapYearNames.json";
+    public Map<String, LocalDate> deserializationFindLeapYearNames() throws IOException {
+        File load = new ClassPathResource("results/findLeapYearNames.json", this.getClass().getClassLoader()).getFile();
         Map<String, LocalDate> dataFindLeapYearNames = new HashMap<>();
-        try (FileReader fis = new FileReader(fileName);
+        try (FileReader fis = new FileReader(load);
              BufferedReader bfr = new BufferedReader(fis)) {
             List<String> linesFindLeapYearNames = bfr.lines().collect(Collectors.toList());
             if (linesFindLeapYearNames.get(0).equals("{}")) {
@@ -53,10 +55,10 @@ public class DeserializationServiceImpl implements DeserializationService {
     }
 
     @Override
-    public Map<AbstractAnimal, Integer> deserializationFindOlderAnimal() {
-        String fileName = "src/main/resources/results/findOlderAnimal.json";
+    public Map<AbstractAnimal, Integer> deserializationFindOlderAnimal() throws IOException {
+        File load = new ClassPathResource("results/findOlderAnimal.json", this.getClass().getClassLoader()).getFile();
         Map<AbstractAnimal, Integer> dataFindOlderAnimal = new HashMap<>();
-        try (FileReader fis = new FileReader(fileName);
+        try (FileReader fis = new FileReader(load);
              BufferedReader bfr = new BufferedReader(fis)) {
             List<String> linesFindOlderAnimal = bfr.lines().collect(Collectors.toList());
             if (linesFindOlderAnimal.get(0).equals("{}")) {
@@ -92,10 +94,10 @@ public class DeserializationServiceImpl implements DeserializationService {
     }
 
     @Override
-    public Map<String, List<AbstractAnimal>> deserializationFindDuplicate() {
-        String fileName = "src/main/resources/results/findDuplicate.json";
+    public Map<String, List<AbstractAnimal>> deserializationFindDuplicate() throws IOException {
+        File load = new ClassPathResource("results/findDuplicate.json", this.getClass().getClassLoader()).getFile();
         Map<String, List<AbstractAnimal>> dataFindDuplicate = new HashMap<>();
-        try (FileReader fis = new FileReader(fileName);
+        try (FileReader fis = new FileReader(load);
              BufferedReader bfr = new BufferedReader(fis)) {
             List<String> linesFindDuplicate = bfr.lines().collect(Collectors.toList());
             if (linesFindDuplicate.get(0).equals("{}")) {
@@ -128,10 +130,10 @@ public class DeserializationServiceImpl implements DeserializationService {
     }
 
     @Override
-    public List<AbstractAnimal> deserializationFindOldAndExpensive() {
-        String fileName = "src/main/resources/results/findOldAndExpensive.json";
+    public List<AbstractAnimal> deserializationFindOldAndExpensive() throws IOException {
+        File load = new ClassPathResource("results/findOldAndExpensive.json", this.getClass().getClassLoader()).getFile();
         List<AbstractAnimal> dataFindOldAndExpensive = new ArrayList<>();
-        try (FileReader fis = new FileReader(fileName);
+        try (FileReader fis = new FileReader(load);
              BufferedReader bfr = new BufferedReader(fis)) {
             List<String> linesFindOldAndExpensive = bfr.lines().collect(Collectors.toList());
             if (linesFindOldAndExpensive.get(1).equals("[]")) {
@@ -161,10 +163,10 @@ public class DeserializationServiceImpl implements DeserializationService {
     }
 
     @Override
-    public List<String> deserializationFindMinConstAnimals() {
-        String fileName = "src/main/resources/results/findMinConstAnimals.json";
+    public List<String> deserializationFindMinConstAnimals() throws IOException {
+        File load = new ClassPathResource("results/findMinConstAnimals.json", this.getClass().getClassLoader()).getFile();
         List<String> dataFindMinConstAnimals = new ArrayList<>();
-        try (FileReader fis = new FileReader(fileName);
+        try (FileReader fis = new FileReader(load);
              BufferedReader bfr = new BufferedReader(fis)) {
             List<String> linesFindMinConstAnimals = bfr.lines().collect(Collectors.toList());
             if (linesFindMinConstAnimals.get(0).equals("[]")) {
@@ -183,10 +185,10 @@ public class DeserializationServiceImpl implements DeserializationService {
     }
 
     @Override
-    public Double deserializationFindAverageAge() {
-        String fileName = "src/main/resources/results/findAverageAge.json";
+    public Double deserializationFindAverageAge() throws IOException {
+        File load = new ClassPathResource("results/findAverageAge.json", this.getClass().getClassLoader()).getFile();
         Double age = null;
-        try (FileReader fis = new FileReader(fileName);
+        try (FileReader fis = new FileReader(load);
              BufferedReader bfr = new BufferedReader(fis)) {
             List<String> linesFindMinConstAnimals = bfr.lines().collect(Collectors.toList());
             if (linesFindMinConstAnimals.isEmpty()) {

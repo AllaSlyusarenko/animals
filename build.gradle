@@ -9,9 +9,7 @@ group 'ru.mts'
 jar {
     manifest.attributes('Main-Class': 'ru.mts.hw_3.Main')
 }
-//tasks.register('run', JavaExec) {
-//    classpath = sourceSets.main.runtimeClasspath
-//}
+
 repositories {
     mavenCentral()
 }

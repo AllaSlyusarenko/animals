@@ -1,7 +1,7 @@
 package ru.mts.service;
 
 import org.springframework.beans.factory.annotation.Value;
-
+import org.springframework.core.io.ClassPathResource;
 import ru.mts.entity.AbstractAnimal;
 import ru.mts.entity.AnimalFactory;
 import ru.mts.entity.AnimalType;
@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.util.*;
@@ -21,7 +20,7 @@ import static ru.mts.service.CreateAnimalService.randomCost;
 public class CreateAnimalServiceImpl implements CreateAnimalService {
     private final AnimalFactory animalFactory = new AnimalFactory();
     private AnimalType animalType;
-    private Path path = Paths.get("src\\main\\resources\\animals\\logData.txt");
+    Path path = new ClassPathResource("animals/logData.txt", this.getClass().getClassLoader()).getFile().toPath();
     @Value("${dog.names.random}")
     private String[] namesDogRandom;
     @Value("${dog.names.nerandom}")
@@ -48,6 +47,9 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
     private String[] charactersWolf;
     @Value("${wolf.dates}")
     private String[] datesWolf;
+
+    public CreateAnimalServiceImpl() throws IOException {
+    }
 
     public void setAnimalType(AnimalType animalType) {
         this.animalType = animalType;
