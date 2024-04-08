@@ -3,7 +3,7 @@
     education-project:
       build: ./
       image: education-project-image
-      container_name: stats-server-container
+      container_name: education-project-container
       ports:
         - "8080:8080"
       depends_on:
