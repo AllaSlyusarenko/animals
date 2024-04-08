@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Wolf extends Predator {
+    public Wolf() {
+    }
+
     public Wolf(String breed, String name, BigDecimal cost, String character, LocalDate birthDate) {
         super(breed, name, cost, character, birthDate);
     }
@@ -18,8 +21,8 @@ public class Wolf extends Predator {
                 ", name='" + name + '\'' +
                 ", cost=" + cost +
                 ", character='" + character + '\'' +
-                ", birthDate=" + getBirthDateString()
-                +
+                ", birthDate=" + birthDate +
+                ", secretInformation='" + secretInformation + '\'' +
                 '}';
     }
 }

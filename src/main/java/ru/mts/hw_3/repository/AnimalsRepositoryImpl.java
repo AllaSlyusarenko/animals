@@ -1,16 +1,22 @@
 package ru.mts.hw_3.repository;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
-import ru.mts.entity.Animal;
+import ru.mts.entity.AbstractAnimal;
+import ru.mts.entity.AnimalType;
 import ru.mts.hw_3.exception.CollectionEmptyException;
 import ru.mts.hw_3.exception.IncorrectParameterException;
 import ru.mts.service.CreateAnimalService;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
@@ -22,8 +28,11 @@ import java.util.stream.Collectors;
 @Slf4j
 @Repository
 public class AnimalsRepositoryImpl implements AnimalsRepository {
-    private ConcurrentHashMap<String, List<Animal>> animals;
+    private ConcurrentHashMap<String, List<AbstractAnimal>> animals;
     private final CreateAnimalService createAnimalService;
+    @Autowired
+    private ObjectMapper mapper;
+    private AnimalType animalType;
 
     @Autowired
     public AnimalsRepositoryImpl(CreateAnimalService createAnimalService) {
@@ -31,21 +40,26 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     }
 
     @PostConstruct
-    public void init() {
+    public void init() throws IOException {
         animals = new ConcurrentHashMap<>(createAnimalService.createAnimals(30));
+        animalType = createAnimalService.getAnimalType();
+
     }
 
     /**
      * Метод - производит поиск имен животных, которые родились в високосный год
      */
     @Override
-    public Map<String, LocalDate> findLeapYearNames() {
+    public Map<String, LocalDate> findLeapYearNames() throws IOException {
         if (isEmptyMap(animals)) {
             throw new IllegalArgumentException("data collection cannot be empty");
         }
         Map<String, LocalDate> animalsMap = prepareListAnimals().stream()
                 .filter(animal -> isLeapYear(animal.getBirthDate()))
                 .collect(Collectors.toMap(k -> k.getClass().getSimpleName().toUpperCase() + " " + k.getName(), v -> v.getBirthDate(), (k1, k2) -> k1));
+        String jacksonData = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(animalsMap);
+        Path path = new ClassPathResource("results/findLeapYearNames.json", this.getClass().getClassLoader()).getFile().toPath();
+        Files.write(path, (jacksonData + "\n").getBytes());
         return new ConcurrentHashMap<>(animalsMap);
     }
 
@@ -53,23 +67,31 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Метод - производит поиск животных, которые старше указанного возраста, иначе выводит старшего
      */
     @Override
-    public Map<Animal, Integer> findOlderAnimal(int N) {
+    public Map<AbstractAnimal, Integer> findOlderAnimal(int N) throws IOException {
         if (isEmptyMap(animals)) {
             throw new IllegalArgumentException("data collection cannot be empty");
         }
         if (N <= 0) {
             throw new IncorrectParameterException("The number of years must be greater than 0");
         }
-        Map<Animal, Integer> animalsMap = prepareListAnimals().stream()
+        Map<AbstractAnimal, Integer> animalsMap = prepareListAnimals().stream()
                 .filter(animal -> animal.getBirthDate().isBefore(LocalDate.now().minusYears(N)))
                 .collect(Collectors.toMap(k -> k, v -> countYears(v.getBirthDate()), (k1, k2) -> k1));
         if (animalsMap.isEmpty()) {
-            Animal oldestAnimal = animals.entrySet().stream()
+            AbstractAnimal oldestAnimal = animals.entrySet().stream()
                     .flatMap(entry -> entry.getValue().stream())
-                    .min(Comparator.comparing(Animal::getBirthDate))
+                    .min(Comparator.comparing(AbstractAnimal::getBirthDate))
                     .orElse(null);
             animalsMap.put(oldestAnimal, countYears(oldestAnimal.getBirthDate()));
         }
+        Map<String, Integer> result = new HashMap<>();
+        for (AbstractAnimal key : animalsMap.keySet()) {
+            String jacksonKey = mapper.writeValueAsString(key);
+            result.put(jacksonKey, animalsMap.get(key));
+        }
+        String jacksonData = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(result).replace("\\", "");
+        Path path = new ClassPathResource("results/findOldAndExpensive.json", this.getClass().getClassLoader()).getFile().toPath();
+        Files.write(path, (animalType.toString() + "\n" + jacksonData + "\n").getBytes());
         return new ConcurrentHashMap<>(animalsMap);
     }
 
@@ -77,23 +99,27 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Метод - производит поиск дубликатов животных
      */
     @Override
-    public Map<String, List<Animal>> findDuplicate() {
+    public Map<String, List<AbstractAnimal>> findDuplicate() throws IOException {
         if (isEmptyMap(animals)) {
             throw new IllegalArgumentException("data collection cannot be empty");
         }
-        Set<Animal> elements = new CopyOnWriteArraySet<>();
-        return prepareListAnimals().stream()
+        Set<AbstractAnimal> elements = new CopyOnWriteArraySet<>();
+        Map<String, List<AbstractAnimal>> animalsMap = prepareListAnimals().stream()
                 .filter(e -> !elements.add(e))
                 .collect(Collectors.groupingBy(a -> a.getClass().getSimpleName().toUpperCase(), Collectors.toList()));
+        String jacksonData = mapper.writeValueAsString(animalsMap);
+        Path path = new ClassPathResource("results/findDuplicate.json", this.getClass().getClassLoader()).getFile().toPath();
+        Files.write(path, (jacksonData + "\n").getBytes());
+        return animalsMap;
     }
 
     /**
      * Метод - производит печать дубликатов животных
      */
     @Override
-    public void printDuplicate() {
-        Map<String, List<Animal>> map = new ConcurrentHashMap<>(findDuplicate());
-        List<Animal> list = map.entrySet().stream()
+    public void printDuplicate() throws IOException {
+        Map<String, List<AbstractAnimal>> map = new ConcurrentHashMap<>(findDuplicate());
+        List<AbstractAnimal> list = map.entrySet().stream()
                 .flatMap(entry -> entry.getValue().stream())
                 .collect(Collectors.toList());
         if (list.isEmpty()) {
@@ -107,7 +133,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Метод - для нахождения среднего возраста животных в списке
      */
     @Override
-    public void findAverageAge(List<Animal> animalList) throws CollectionEmptyException {
+    public void findAverageAge(List<AbstractAnimal> animalList) throws CollectionEmptyException, IOException {
         if (animalList == null || animalList.size() == 0) {
             throw new CollectionEmptyException("data collection cannot be empty");
         }
@@ -116,7 +142,11 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 .filter(x -> x > 0)
                 .average()
                 .orElse(-1.0);
-        log.info(Double.toString(Math.round(averageAge * 100.0) / 100.0));
+        String averageAgeString = Double.toString(Math.round(averageAge * 100.0) / 100.0);
+        Double averageAgeRounding = Double.parseDouble(averageAgeString);
+        String jacksonData = mapper.writeValueAsString(averageAgeRounding);
+        Path path = new ClassPathResource("results/findAverageAge.json", this.getClass().getClassLoader()).getFile().toPath();
+        Files.write(path, (jacksonData + "\n").getBytes());
     }
 
     /**
@@ -124,45 +154,53 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * отсортированный по дате рождения(по возрастанию)
      */
     @Override
-    public List<Animal> findOldAndExpensive(List<Animal> animalList) throws CollectionEmptyException {
+    public List<AbstractAnimal> findOldAndExpensive(List<AbstractAnimal> animalList) throws CollectionEmptyException, IOException {
         if (animalList == null || animalList.size() == 0) {
             throw new CollectionEmptyException("data collection cannot be empty");
         }
         BigDecimal averageCost = animalList.stream()
-                .map(Animal::getCost)
+                .map(AbstractAnimal::getCost)
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
                 .divide(new BigDecimal(animalList.size()), RoundingMode.CEILING);
-        return animalList.stream()
+        List<AbstractAnimal> result = animalList.stream()
                 .filter(x -> countYears(x.getBirthDate()) > 5)
                 .filter(t -> t.getCost().compareTo(averageCost) > 0)
-                .sorted(Comparator.comparing(Animal::getBirthDate)).collect(Collectors.toCollection(CopyOnWriteArrayList::new));
+                .sorted(Comparator.comparing(AbstractAnimal::getBirthDate)).collect(Collectors.toCollection(CopyOnWriteArrayList::new));
+        String jacksonData = mapper.writeValueAsString(result);
+        Path path = new ClassPathResource("results/findOldAndExpensive.json", this.getClass().getClassLoader()).getFile().toPath();
+        Files.write(path, (animalType.toString() + "\n" + jacksonData + "\n").getBytes());
+        return result;
     }
 
     /**
      * Метод - для нахождения 3 животных с самой низкой ценой, вывод - список имен в обратном порядке
      */
     @Override
-    public List<String> findMinConstAnimals(List<Animal> animalList) throws CollectionEmptyException {
+    public List<String> findMinConstAnimals(List<AbstractAnimal> animalList) throws CollectionEmptyException, IOException {
         if (animalList == null || animalList.size() == 0) {
             throw new CollectionEmptyException("data collection cannot be empty");
         }
-        return animalList.stream()
-                .sorted(Comparator.comparing(Animal::getCost))
+        List<String> result = animalList.stream()
+                .sorted(Comparator.comparing(AbstractAnimal::getCost))
                 .limit(3)
-                .map(Animal::getName)
+                .map(AbstractAnimal::getName)
                 .sorted(Comparator.reverseOrder()).collect(Collectors.toCollection(CopyOnWriteArrayList::new));
+        String jacksonData = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(result);
+        Path path = new ClassPathResource("results/findMinConstAnimals.json", this.getClass().getClassLoader()).getFile().toPath();
+        Files.write(path, (jacksonData + "\n").getBytes());
+        return result;
     }
 
     /**
      * Метод - для подготовки списка всех животных из мапы
      */
-    public List<Animal> prepareListAnimals() {
+    public List<AbstractAnimal> prepareListAnimals() {
         return animals.entrySet().stream()
                 .flatMap(entry -> entry.getValue().stream())
                 .collect(Collectors.toCollection(CopyOnWriteArrayList::new));
     }
 
-    private boolean isEmptyMap(Map<String, List<Animal>> animals) {
+    private boolean isEmptyMap(Map<String, List<AbstractAnimal>> animals) {
         return animals == null || animals.size() == 0;
     }
 

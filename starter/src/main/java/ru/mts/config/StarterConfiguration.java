@@ -8,6 +8,8 @@ import ru.mts.ProjectListener;
 import ru.mts.service.CreateAnimalService;
 import ru.mts.service.CreateAnimalServiceImpl;
 
+import java.io.IOException;
+
 @Configuration
 @ComponentScan
 public class StarterConfiguration {
@@ -18,7 +20,7 @@ public class StarterConfiguration {
 
     @Bean
     @Scope(value = "prototype")
-    public CreateAnimalService createAnimalService() {
+    public CreateAnimalService createAnimalService() throws IOException {
         return new CreateAnimalServiceImpl();
     }
 }

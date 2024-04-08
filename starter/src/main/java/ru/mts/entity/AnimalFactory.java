@@ -8,9 +8,9 @@ public class AnimalFactory {
      * Метод - для создания животного по параметрам:
      * тип животного, порода, имя, цена, характер, дата рождения
      */
-    public Animal createAnimal(AnimalType animalType, String breed, String name, BigDecimal cost, String character,
-                               LocalDate birthDate) {
-        Animal animal = null;
+    public AbstractAnimal createAnimal(AnimalType animalType, String breed, String name, BigDecimal cost, String character,
+                                       LocalDate birthDate) {
+        AbstractAnimal animal = null;
         switch (animalType) {
             case DOG:
                 animal = new Dog(breed, name, cost, character, birthDate);

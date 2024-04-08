@@ -1,15 +1,18 @@
 package ru.mts.hw_3.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import ru.mts.entity.Animal;
+import ru.mts.entity.AbstractAnimal;
 import ru.mts.hw_3.exception.CollectionEmptyException;
 import ru.mts.hw_3.exception.IncorrectParameterException;
 import ru.mts.hw_3.repository.AnimalsRepositoryImpl;
+import ru.mts.hw_3.service.DeserializationService;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -20,9 +23,12 @@ public class ScheduledTasks {
     @Value("${average.time}")
     private String averageAgeTime;
     private final AnimalsRepositoryImpl animalsRepository;
+    private final DeserializationService deserializationService;
 
-    public ScheduledTasks(AnimalsRepositoryImpl animalsRepository) {
+    @Autowired
+    public ScheduledTasks(AnimalsRepositoryImpl animalsRepository, DeserializationService deserializationService) {
         this.animalsRepository = animalsRepository;
+        this.deserializationService = deserializationService;
     }
 
     @PostConstruct
@@ -39,23 +45,29 @@ public class ScheduledTasks {
     public void doRepositoryTasks() {
         try {
             log.info("findLeapYearNames-------------------------------------------------------------------------------------");
-            log.info(animalsRepository.findLeapYearNames() + "\n");
+            animalsRepository.findLeapYearNames();
+            log.info(deserializationService.deserializationFindLeapYearNames() + "\n");
 
             log.info("findOlderAnimal---------------------------------------------------------------------------------------");
             int age = 15;
-            log.info(animalsRepository.findOlderAnimal(age) + "\n");
+            animalsRepository.findOlderAnimal(age);
+            log.info(deserializationService.deserializationFindOlderAnimal() + "\n");
 
-            List<Animal> animalList = animalsRepository.prepareListAnimals();
+            List<AbstractAnimal> animalList = animalsRepository.prepareListAnimals();
 
             log.info("findOldAndExpensive------------------------------------------------------------------------------------");
-            log.info(animalsRepository.findOldAndExpensive(animalList) + "\n");
+            animalsRepository.findOldAndExpensive(animalList);
+            log.info(deserializationService.deserializationFindOldAndExpensive() + "\n");
 
             log.info("findMinConstAnimals------------------------------------------------------------------------------------");
-            log.info(animalsRepository.findMinConstAnimals(animalList) + "\n");
+            animalsRepository.findMinConstAnimals(animalList);
+            log.info(deserializationService.deserializationFindMinConstAnimals() + "\n");
         } catch (IncorrectParameterException ex) {
             log.error("Incorrect parameter value", ex);
         } catch (CollectionEmptyException e) {
             log.error("Data collection does not meet the required conditions", e);
+        } catch (IOException e) {
+            log.error("Required file is missing", e);
         }
     }
 
@@ -72,9 +84,10 @@ public class ScheduledTasks {
                 try {
                     log.info("Name of printDuplicateThread = " + Thread.currentThread().getName());
                     log.info("findDuplicate-----------------------------------------------------------------------------------------");
-                    animalsRepository.printDuplicate();
+                    animalsRepository.findDuplicate();
+                    log.info(deserializationService.deserializationFindDuplicate() + "\n");
                     Thread.sleep(Long.parseLong(duplicateTime));
-                } catch (InterruptedException e) {
+                } catch (InterruptedException | IOException e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -94,10 +107,11 @@ public class ScheduledTasks {
                 try {
                     log.info("Name of findAverageAgeThread = " + Thread.currentThread().getName());
                     log.info("findAverageAge-----------------------------------------------------------------------------------------");
-                    List<Animal> animalList = animalsRepository.prepareListAnimals();
+                    List<AbstractAnimal> animalList = animalsRepository.prepareListAnimals();
                     animalsRepository.findAverageAge(animalList);
+                    log.info(deserializationService.deserializationFindAverageAge() + "\n");
                     Thread.sleep(Long.parseLong(averageAgeTime));
-                } catch (InterruptedException | CollectionEmptyException e) {
+                } catch (InterruptedException | CollectionEmptyException | IOException e) {
                     throw new RuntimeException(e);
                 }
             }

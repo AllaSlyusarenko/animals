@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Dog extends Pet {
+    public Dog() {
+    }
+
     public Dog(String breed, String name, BigDecimal cost, String character, LocalDate birthDate) {
         super(breed, name, cost, character, birthDate);
     }
@@ -18,7 +21,8 @@ public class Dog extends Pet {
                 ", name='" + name + '\'' +
                 ", cost=" + cost +
                 ", character='" + character + '\'' +
-                ", birthDate=" + getBirthDateString() +
+                ", birthDate=" + birthDate +
+                ", secretInformation='" + secretInformation + '\'' +
                 '}';
     }
 }

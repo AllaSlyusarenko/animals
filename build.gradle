@@ -9,6 +9,7 @@ group 'ru.mts'
 jar {
     manifest.attributes('Main-Class': 'ru.mts.hw_3.Main')
 }
+
 repositories {
     mavenCentral()
 }

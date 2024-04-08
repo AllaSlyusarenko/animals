@@ -50,4 +50,12 @@ public interface Animal {
      * @see Animal#getBirthDate()
      */
     LocalDate getBirthDate();
+
+    /**
+     * Метод - для получения секретной информации животного
+     *
+     * @return secretInformation - секретная информация
+     * @see Animal#getSecretInformation()
+     */
+    String getSecretInformation();
 }

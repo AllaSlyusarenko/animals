@@ -24,7 +24,9 @@ class AbstractAnimalTest {
     @DisplayName(value = "Тест сравнения двух объектов Dog с одинаковыми значениями")
     void testEqualsCorrect() {
         Dog dog1 = new Dog("breed11", "name11", new BigDecimal("3224.68"), "character11", LocalDate.now().minusYears(50).minusMonths(5).minusDays(20));
+        dog1.setSecretInformation("very secret information");
         Dog dog2 = new Dog("breed11", "name11", new BigDecimal("3224.68"), "character11", LocalDate.now().minusYears(50).minusMonths(5).minusDays(20));
+        dog2.setSecretInformation("very secret information");
         assertTrue(dog1.equals(dog2));
         assertTrue(dog1.hashCode() == dog2.hashCode());
     }
@@ -42,7 +44,9 @@ class AbstractAnimalTest {
     @DisplayName(value = "Тест сравнения объектов Dog и Wolf с одинаковыми значениями")
     void testEqualsDifferentTypes() {
         Dog dog = new Dog("breed11", "name11", new BigDecimal("3224.68"), "character11", LocalDate.now().minusYears(50).minusMonths(5).minusDays(20));
+        dog.setSecretInformation("very secret information");
         Wolf wolf = new Wolf("breed11", "name11", new BigDecimal("3224.68"), "character11", LocalDate.now().minusYears(50).minusMonths(5).minusDays(20));
+        wolf.setSecretInformation("very secret information");
         assertFalse(dog.equals(wolf));
         assertTrue(dog.hashCode() == wolf.hashCode());
     }
