@@ -82,8 +82,8 @@ public class DeserializationServiceImpl implements DeserializationService {
         String content = getResourceFileAsString("results/findMinConstAnimals.json");
         TypeReference<List<String>> typeRef = new TypeReference<>() {
         };
-        List<String> listOldAndExpensive = mapper.readValue(content, typeRef);
-        return listOldAndExpensive;
+        List<String> listMinConstAnimals = mapper.readValue(content, typeRef);
+        return listMinConstAnimals;
     }
 
     @Override
