@@ -7,7 +7,7 @@ public abstract class Predator extends AbstractAnimal {
     public Predator() {
     }
 
-    public Predator(String breed, String name, BigDecimal cost, String character, LocalDate birthDate) {
-        super(breed, name, cost, character, birthDate);
+    public Predator(AnimalType animalType, String breed, String name, BigDecimal cost, String character, LocalDate birthDate) {
+        super(animalType, breed, name, cost, character, birthDate);
     }
 }

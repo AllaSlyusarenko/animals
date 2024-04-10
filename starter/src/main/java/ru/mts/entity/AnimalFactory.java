@@ -13,10 +13,10 @@ public class AnimalFactory {
         AbstractAnimal animal = null;
         switch (animalType) {
             case DOG:
-                animal = new Dog(breed, name, cost, character, birthDate);
+                animal = new Dog(AnimalType.DOG, breed, name, cost, character, birthDate);
                 break;
             case WOLF:
-                animal = new Wolf(breed, name, cost, character, birthDate);
+                animal = new Wolf(AnimalType.WOLF, breed, name, cost, character, birthDate);
                 break;
         }
         return animal;

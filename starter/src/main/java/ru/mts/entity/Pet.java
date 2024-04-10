@@ -7,7 +7,7 @@ public abstract class Pet extends AbstractAnimal {
     public Pet() {
     }
 
-    public Pet(String breed, String name, BigDecimal cost, String character, LocalDate birthDate) {
-        super(breed, name, cost, character, birthDate);
+    public Pet(AnimalType animalType, String breed, String name, BigDecimal cost, String character, LocalDate birthDate) {
+        super(animalType, breed, name, cost, character, birthDate);
     }
 }
