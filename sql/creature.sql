@@ -1,6 +1,6 @@
-CREATE SEQUENCE creature_id_creature_sq as integer START 1 INCREMENT BY 1;
+CREATE SEQUENCE animals.creature_id_creature_sq as integer START 1 INCREMENT BY 1;
 
-create table creature
+create table animals.creature
 (
     id_creature bigint default nextval('animals.creature_id_creature_sq') not null
                 constraint creature_pk primary key,
@@ -11,4 +11,4 @@ create table creature
     updated     timestamp with time zone
 );
 
-alter sequence creature_id_creature_sq owned by creature.id_creature;
+alter sequence animals.creature_id_creature_sq owned by animals.creature.id_creature;
