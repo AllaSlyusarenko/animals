@@ -1,3 +1,5 @@
+CREATE SEQUENCE animal_type_id_type_sq as integer START 1 INCREMENT BY 1;
+
 create table animal_type
 (
     id_type integer default nextval('animals.animal_type_id_type_sq') not null
@@ -8,5 +10,4 @@ create table animal_type
     updated timestamp with time zone
 );
 
-CREATE SEQUENCE animal_type_id_type_sq as integer START 1 INCREMENT BY 1;
 alter sequence animal_type_id_type_sq owned by animal_type.id_type;
