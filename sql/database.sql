@@ -1,1 +1,0 @@
-create database animals with owner postgres;
