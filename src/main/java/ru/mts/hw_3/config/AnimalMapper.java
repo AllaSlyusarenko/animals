@@ -10,5 +10,6 @@ public class AnimalMapper extends ObjectMapper {
         this.registerModule(new JavaTimeModule());
         this.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         this.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        this.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
     }
 }

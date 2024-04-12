@@ -7,8 +7,8 @@ public class Wolf extends Predator {
     public Wolf() {
     }
 
-    public Wolf(String breed, String name, BigDecimal cost, String character, LocalDate birthDate) {
-        super(breed, name, cost, character, birthDate);
+    public Wolf(AnimalType animalType, String breed, String name, BigDecimal cost, String character, LocalDate birthDate) {
+        super(animalType, breed, name, cost, character, birthDate);
     }
 
     /**

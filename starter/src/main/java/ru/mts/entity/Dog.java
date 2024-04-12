@@ -7,8 +7,9 @@ public class Dog extends Pet {
     public Dog() {
     }
 
-    public Dog(String breed, String name, BigDecimal cost, String character, LocalDate birthDate) {
-        super(breed, name, cost, character, birthDate);
+
+    public Dog(AnimalType animalType, String breed, String name, BigDecimal cost, String character, LocalDate birthDate) {
+        super(animalType, breed, name, cost, character, birthDate);
     }
 
     /**
