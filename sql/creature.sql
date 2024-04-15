@@ -2,7 +2,7 @@ CREATE SEQUENCE animals.creature_id_creature_sq as integer START 1 INCREMENT BY 
 
 create table animals.creature
 (
-    id_creature bigint default nextval('animals.creature_id_creature_sq') not null
+    id_creature integer default nextval('animals.creature_id_creature_sq') not null
                 constraint creature_pk primary key,
     name        text not null,
     type_id     integer not null,
@@ -11,4 +11,7 @@ create table animals.creature
     updated     timestamp with time zone
 );
 
-alter sequence animals.creature_id_creature_sq owned by animals.creature.id_creature;
+ALTER SEQUENCE animals.creature_id_creature_sq OWNED BY animals.creature.id_creature;
+
+ALTER TABLE animals.creature ADD CONSTRAINT type_id_animal_type_id_type_fk
+FOREIGN KEY(type_id) REFERENCES animals.animal_type (id_type) ON DELETE CASCADE;
