@@ -8,10 +8,10 @@ create table animals.creature
     type_id     integer not null,
     age         smallint not null,
     created     timestamp with time zone default CURRENT_TIMESTAMP not null,
-    updated     timestamp with time zone
+    updated     timestamp with time zone default CURRENT_TIMESTAMP not null
 );
 
 ALTER SEQUENCE animals.creature_id_creature_sq OWNED BY animals.creature.id_creature;
 
 ALTER TABLE animals.creature ADD CONSTRAINT type_id_animal_type_id_type_fk
-FOREIGN KEY(type_id) REFERENCES animals.animal_type (id_type) ON DELETE CASCADE;
+FOREIGN KEY(type_id) REFERENCES animals.animal_type (id_type);

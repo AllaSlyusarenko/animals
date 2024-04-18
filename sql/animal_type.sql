@@ -7,7 +7,7 @@ create table animals.animal_type
     type    char(50) not null,
     is_wild boolean not null,
     created timestamp with time zone default CURRENT_TIMESTAMP not null,
-    updated timestamp with time zone
+    updated timestamp with time zone default CURRENT_TIMESTAMP not null
 );
 
 alter sequence animals.animal_type_id_type_sq owned by animals.animal_type.id_type;

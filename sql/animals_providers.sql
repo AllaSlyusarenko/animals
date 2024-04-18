@@ -6,7 +6,7 @@ create table animals.animals_providers
 );
 
 ALTER TABLE animals.animals_providers ADD CONSTRAINT id_animal_type_animal_type_id_type_fk
-FOREIGN KEY(id_animal_type) REFERENCES animals.animal_type (id_type) ON DELETE CASCADE;
+FOREIGN KEY(id_animal_type) REFERENCES animals.animal_type (id_type);
 
 ALTER TABLE animals.animals_providers ADD CONSTRAINT id_provider_provider_id_provider_fk
-FOREIGN KEY(id_provider) REFERENCES animals.provider (id_provider) ON DELETE CASCADE;
+FOREIGN KEY(id_provider) REFERENCES animals.provider (id_provider);

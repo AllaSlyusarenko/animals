@@ -7,7 +7,7 @@ create table animals.provider
     name        text not null,
     phone       char(50) not null,
     created     timestamp with time zone default CURRENT_TIMESTAMP not null,
-    updated     timestamp with time zone
+    updated     timestamp with time zone default CURRENT_TIMESTAMP not null
 );
 
 ALTER SEQUENCE animals.provider_id_provider_sq OWNED BY animals.provider.id_provider;

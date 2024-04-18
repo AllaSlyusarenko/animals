@@ -6,7 +6,7 @@ create table animals.habitat
                 constraint habitat_pk primary key,
     area        char(50) not null,
     created     timestamp with time zone default CURRENT_TIMESTAMP not null,
-    updated     timestamp with time zone
+    updated     timestamp with time zone default CURRENT_TIMESTAMP not null
 );
 
 ALTER SEQUENCE animals.habitat_id_area_sq OWNED BY animals.habitat.id_area;
