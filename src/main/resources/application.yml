@@ -6,7 +6,8 @@ spring:
 application:
   scheduled:
     time: 60000
-
+  scheduledDB:
+    time: 15000
 duplicate:
     time: 10000
 average:
