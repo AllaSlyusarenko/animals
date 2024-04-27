@@ -1,29 +1,29 @@
-  version: '3.1'
-  services:
-    education-project:
-      build: ./
-      image: education-project-image
-      container_name: education-project-container
-      ports:
-        - "8080:8080"
-      depends_on:
-        - animals-db
-      environment:
-        - SPRING_DATASOURCE_URL=jdbc:postgresql://animals-db:5432/animals
-        - POSTGRES_DB=animals
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=iamroot
-      # - TZ=Europe/Moscow
+version: '3.8'
+services:
+  education-project:
+    build: ./
+    image: education-project-image
+    container_name: education-project-container
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/animals
+#      - POSTGRES_DB=animals
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=iamroot
+    # - TZ=Europe/Moscow
 
-    animals-db:
-      image: postgres:14-alpine
-      volumes:
-        - /var/lib/postgresql/data/
-      container_name: animals-db-container
-      ports:
-        - "5432:5432"
-      environment:
-        - POSTGRES_DB=animals
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=iamroot
-  #     - TZ=Europe/Moscow
+  db:
+    image: postgres:14-alpine
+    volumes:
+      - /var/lib/postgresql/data/
+    container_name: animals-db-container
+    ports:
+      - "6541:5432"
+    environment:
+      - POSTGRES_DB=animals
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=iamroot
+    # - TZ=Europe/Moscow
