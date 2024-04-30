@@ -2,15 +2,20 @@ spring:
   application.name: education-project
   main:
     allow-bean-definition-overriding: true
+datasource:
+  dburl: jdbc:postgresql://localhost:5432/animals
+  dbusername: postgres
+  dbpassword: iamroot
 
 application:
   scheduled:
     time: 60000
-
+  scheduledDB:
+    time: 15000
 duplicate:
-    time: 10000
+  time: 10000
 average:
-    time: 20000
+  time: 20000
 
 
 dog:
