@@ -1,14 +1,26 @@
 package ru.mts.hw_3.entity;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Creature {
+@Entity
+@Table(name = "creature")
+public class Creature implements Serializable { //существо, животное
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCreature;
+    @JoinColumn(name = "name")
     private String name;
+    @JoinColumn(name = "type_id")
+    @ManyToOne(targetEntity = AnimalType.class)
     private int typeId;
+    @JoinColumn(name = "age")
     private short age;
+    @JoinColumn(name = "created")
     private LocalDate created;
+    @JoinColumn(name = "updated")
     private LocalDate updated;
 
     public Creature(int idCreature, String name, int typeId, short age, LocalDate created, LocalDate updated) {
@@ -18,6 +30,10 @@ public class Creature {
         this.age = age;
         this.created = created;
         this.updated = updated;
+    }
+
+    public Creature() {
+
     }
 
     public int getIdCreature() {

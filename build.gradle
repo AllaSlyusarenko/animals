@@ -28,7 +28,6 @@ dependencies {
     testImplementation 'org.testcontainers:junit-jupiter:1.18.3'
     testImplementation 'org.testcontainers:testcontainers:1.18.3'
     implementation 'org.hibernate:hibernate-core:6.1.7.Final'
-
 }
 
 test {

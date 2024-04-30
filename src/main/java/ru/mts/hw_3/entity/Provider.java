@@ -1,13 +1,23 @@
 package ru.mts.hw_3.entity;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Provider {
+@Entity
+@Table(name = "provider")
+public class Provider implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idProvider;
+    @JoinColumn(name = "name")
     private String name;
+    @JoinColumn(name = "phone")
     private String phone;
+    @JoinColumn(name = "created")
     private LocalDate created;
+    @JoinColumn(name = "updated")
     private LocalDate updated;
 
     public Provider(int idProvider, String name, String phone, LocalDate created, LocalDate updated) {
@@ -16,6 +26,10 @@ public class Provider {
         this.phone = phone;
         this.created = created;
         this.updated = updated;
+    }
+
+    public Provider() {
+
     }
 
     public int getIdProvider() {

@@ -1,12 +1,21 @@
 package ru.mts.hw_3.entity;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Habitat {
+@Entity
+@Table(name = "habitat")
+public class Habitat implements Serializable { //место обитания
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idArea;
+    @JoinColumn(name = "area")
     private String area;
+    @JoinColumn(name = "created")
     private LocalDate created;
+    @JoinColumn(name = "updated")
     private LocalDate updated;
 
     public Habitat(int idArea, String area, LocalDate created, LocalDate updated) {
@@ -14,6 +23,10 @@ public class Habitat {
         this.area = area;
         this.created = created;
         this.updated = updated;
+    }
+
+    public Habitat() {
+
     }
 
     public int getIdArea() {
