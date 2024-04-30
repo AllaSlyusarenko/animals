@@ -1,10 +1,19 @@
 package ru.mts.hw_3.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class AnimalType {
+@Entity
+public class AnimalType implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idType;
+
     private String type;
     private Boolean isWild;
     private LocalDate created;
@@ -16,6 +25,10 @@ public class AnimalType {
         this.isWild = isWild;
         this.created = created;
         this.updated = updated;
+    }
+
+    public AnimalType() {
+
     }
 
     public int getIdType() {
