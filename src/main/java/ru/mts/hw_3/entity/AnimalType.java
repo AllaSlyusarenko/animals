@@ -3,13 +3,14 @@ package ru.mts.hw_3.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "animal_type")
 public class AnimalType implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int idType;
     @JoinColumn(name = "type")
     private String type;
@@ -19,6 +20,7 @@ public class AnimalType implements Serializable {
     private LocalDate created;
     @JoinColumn(name = "updated")
     private LocalDate updated;
+
 
     public AnimalType(int idType, String type, Boolean isWild, LocalDate created, LocalDate updated) {
         this.idType = idType;

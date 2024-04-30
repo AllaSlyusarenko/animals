@@ -9,7 +9,7 @@ import java.util.Objects;
 @Table(name = "creature")
 public class Creature implements Serializable { //существо, животное
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int idCreature;
     @JoinColumn(name = "name")
     private String name;
@@ -18,10 +18,14 @@ public class Creature implements Serializable { //существо, животн
     private int typeId;
     @JoinColumn(name = "age")
     private short age;
+    @JoinColumn(name = "breed_id")
+    @ManyToOne(targetEntity = Breed.class)
+    private int breedId;
     @JoinColumn(name = "created")
     private LocalDate created;
     @JoinColumn(name = "updated")
     private LocalDate updated;
+
 
     public Creature(int idCreature, String name, int typeId, short age, LocalDate created, LocalDate updated) {
         this.idCreature = idCreature;
