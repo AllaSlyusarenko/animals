@@ -8,12 +8,13 @@
 
         <!-- JDBC Database connection settings -->
         <property name="connection.driver_class">org.postgresql.Driver</property>
-        <property name="connection.url">jdbc:postgresql://localhost:5432/animals?useSSL=false</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/animals</property>
         <property name="connection.username">postgres</property>
         <property name="connection.password">iamroot</property>
+        <!--        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</property>-->
 
         <!-- JDBC connection pool settings ... using built-in test pool -->
-        <property name="connection.pool_size">5</property>
+        <property name="connection.pool_size">1</property>
 
         <!-- Echo the SQL to stdout -->
         <property name="show_sql">true</property>
@@ -32,10 +33,12 @@
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
 
         <mapping class="ru.mts.hw_3.entity.AnimalType"/>
-<!--        <mapping class="ru.mts.hw_3.entity.Breed"/>-->
+        <mapping class="ru.mts.hw_3.entity.Breed"/>
         <mapping class="ru.mts.hw_3.entity.Creature"/>
         <mapping class="ru.mts.hw_3.entity.Habitat"/>
         <mapping class="ru.mts.hw_3.entity.Provider"/>
+        <mapping class="ru.mts.hw_3.entity.AnimalsHabitat"/>
+        <mapping class="ru.mts.hw_3.entity.AnimalsProvider"/>
 
     </session-factory>
 </hibernate-configuration>

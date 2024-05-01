@@ -1,12 +1,12 @@
 package ru.mts.hw_3.entity;
-
-import jakarta.persistence.*;
+import javax.persistence.*;
+//import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "animal_type")
+@Table(name = "animal_type", schema = "animals")
 public class AnimalType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,6 +1,7 @@
 package ru.mts.hw_3.entity;
 
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
@@ -9,7 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Getter
 @Setter
 @Entity
-@Table(name = "animals_providers")
+@Table(name = "animals_providers", schema = "animals")
 public class AnimalsProvider {
     @EmbeddedId
     private AnimalsProviderId id;

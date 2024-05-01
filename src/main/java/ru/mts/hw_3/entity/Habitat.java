@@ -1,13 +1,14 @@
 package ru.mts.hw_3.entity;
 
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "habitat")
+@Table(name = "habitat", schema = "animals")
 public class Habitat implements Serializable { //место обитания
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
