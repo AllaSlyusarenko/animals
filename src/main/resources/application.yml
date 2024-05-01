@@ -2,10 +2,11 @@ spring:
   application.name: education-project
   main:
     allow-bean-definition-overriding: true
-datasource:
-  dburl: jdbc:postgresql://localhost:5432/animals
-  dbusername: postgres
-  dbpassword: iamroot
+  datasource:
+    driver-class-name: 'org.postgresql.Driver'
+    url: jdbc:postgresql://localhost:5432/animals
+    username: postgres
+    password: iamroot
 
 application:
   scheduled:

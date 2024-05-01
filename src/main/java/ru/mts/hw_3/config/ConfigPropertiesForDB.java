@@ -4,33 +4,33 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "datasource")
+@ConfigurationProperties(prefix = "spring.datasource")
 public class ConfigPropertiesForDB {
-    private String dbUrl;
-    private String dbUserName;
-    private String dbPassword;
+    private String url;
+    private String userName;
+    private String password;
 
-    public String getDbUrl() {
-        return dbUrl;
+    public String getUrl() {
+        return url;
     }
 
-    public void setDbUrl(String dbUrl) {
-        this.dbUrl = dbUrl;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String getDbUserName() {
-        return dbUserName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setDbUserName(String dbUserName) {
-        this.dbUserName = dbUserName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getDbPassword() {
-        return dbPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setDbPassword(String dbPassword) {
-        this.dbPassword = dbPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

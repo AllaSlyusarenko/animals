@@ -1,6 +1,6 @@
 package ru.mts.hw_3.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -10,7 +10,7 @@ import java.util.Set;
 @Table(name = "provider")
 public class Provider implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int idProvider;
     @JoinColumn(name = "name")
     private String name;
@@ -21,11 +21,13 @@ public class Provider implements Serializable {
     @JoinColumn(name = "updated")
     private LocalDate updated;
 
-    @ManyToMany
-    @JoinTable(name = "animals_providers",
-            joinColumns = @JoinColumn(name = "id_provider"),
-            inverseJoinColumns = @JoinColumn(name = "id_animal_type"))
-    private Set<AnimalType> animalTypes;
+//    @ManyToMany
+//    @JoinTable(
+//            schema = "animals",
+//            name = "animals_providers",
+//            joinColumns = @JoinColumn(name = "id_provider"),
+//            inverseJoinColumns = @JoinColumn(name = "id_animal_type"))
+//    private Set<AnimalType> animalTypes;
 
     public Provider(int idProvider, String name, String phone, LocalDate created, LocalDate updated) {
         this.idProvider = idProvider;

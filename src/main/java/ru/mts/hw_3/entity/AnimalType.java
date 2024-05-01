@@ -1,16 +1,15 @@
 package ru.mts.hw_3.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "animal_type")
 public class AnimalType implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int idType;
     @JoinColumn(name = "type")
     private String type;

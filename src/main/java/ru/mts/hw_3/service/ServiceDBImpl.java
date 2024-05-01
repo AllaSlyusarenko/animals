@@ -20,8 +20,8 @@ public class ServiceDBImpl implements ServiceDB {
 
     @Autowired
     public ServiceDBImpl(ConfigPropertiesForDB configPropertiesForDB) throws SQLException {
-        connection = DriverManager.getConnection(configPropertiesForDB.getDbUrl(), configPropertiesForDB.getDbUserName(),
-                configPropertiesForDB.getDbPassword());
+        connection = DriverManager.getConnection(configPropertiesForDB.getUrl(), configPropertiesForDB.getUserName(),
+                configPropertiesForDB.getPassword());
     }
 
     /**

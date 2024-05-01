@@ -1,6 +1,7 @@
 package ru.mts.hw_3.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -9,7 +10,7 @@ import java.util.Objects;
 @Table(name = "creature")
 public class Creature implements Serializable { //существо, животное
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int idCreature;
     @JoinColumn(name = "name")
     private String name;
@@ -18,9 +19,9 @@ public class Creature implements Serializable { //существо, животн
     private int typeId;
     @JoinColumn(name = "age")
     private short age;
-    @JoinColumn(name = "breed_id")
-    @ManyToOne(targetEntity = Breed.class)
-    private int breedId;
+//    @JoinColumn(name = "breed_id")
+//    @ManyToOne(targetEntity = Breed.class)
+//    private int breedId;
     @JoinColumn(name = "created")
     private LocalDate created;
     @JoinColumn(name = "updated")
