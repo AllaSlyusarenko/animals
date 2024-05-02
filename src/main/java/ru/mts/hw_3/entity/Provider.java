@@ -1,11 +1,9 @@
 package ru.mts.hw_3.entity;
 
-//import jakarta.persistence.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "provider", schema = "animals")
@@ -21,14 +19,6 @@ public class Provider implements Serializable {
     private LocalDate created;
     @JoinColumn(name = "updated")
     private LocalDate updated;
-
-//    @ManyToMany
-//    @JoinTable(
-//            schema = "animals",
-//            name = "animals_providers",
-//            joinColumns = @JoinColumn(name = "id_provider"),
-//            inverseJoinColumns = @JoinColumn(name = "id_animal_type"))
-//    private Set<AnimalType> animalTypes;
 
     public Provider(int idProvider, String name, String phone, LocalDate created, LocalDate updated) {
         this.idProvider = idProvider;

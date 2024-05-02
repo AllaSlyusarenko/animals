@@ -11,14 +11,13 @@
         <property name="connection.url">jdbc:postgresql://localhost:5432/animals</property>
         <property name="connection.username">postgres</property>
         <property name="connection.password">iamroot</property>
-        <!--        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</property>-->
 
         <!-- JDBC connection pool settings ... using built-in test pool -->
         <property name="connection.pool_size">1</property>
 
         <!-- Echo the SQL to stdout -->
-        <property name="show_sql">true</property>
-        <property name="hibernate.format_sql">true</property>
+<!--        <property name="show_sql">true</property>-->
+<!--        <property name="hibernate.format_sql">true</property>-->
         <property name="hibernate.default_schema">animals</property>
 
         <!-- Set the current session context -->
@@ -26,13 +25,6 @@
 
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">create-drop</property> <!--можно update-->
-
-        <!-- dbcp connection pool configuration -->
-        <property name="hibernate.dbcp.initialSize">5</property>
-        <property name="hibernate.dbcp.maxTotal">20</property>
-        <property name="hibernate.dbcp.maxIdle">10</property>
-        <property name="hibernate.dbcp.minIdle">5</property>
-        <property name="hibernate.dbcp.maxWaitMillis">-1</property>
 
         <mapping class="ru.mts.hw_3.entity.AnimalType"/>
         <mapping class="ru.mts.hw_3.entity.Breed"/>

@@ -1,5 +1,7 @@
 package ru.mts.hw_3.entity;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.List;
 public class Breed {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int idBreed;
+    private Integer idBreed;
     @JoinColumn(name = "name")
     private String name;
     @JoinColumn(name = "created")
@@ -17,7 +19,7 @@ public class Breed {
     @JoinColumn(name = "updated")
     private LocalDate updated;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_breed")
     private List<Creature> creatures;
 

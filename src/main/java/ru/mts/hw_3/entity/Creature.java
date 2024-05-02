@@ -1,7 +1,5 @@
 package ru.mts.hw_3.entity;
 
-//import jakarta.persistence.*;
-
 import javax.persistence.*;
 
 import java.io.Serializable;
@@ -12,35 +10,44 @@ import java.util.Objects;
 @Table(name = "creature", schema = "animals")
 public class Creature implements Serializable { //существо, животное
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "creature_generator")
+    @SequenceGenerator(name="creature_generator", sequenceName = "creature_seq", allocationSize = 1, initialValue = 1)
     private int idCreature;
     @JoinColumn(name = "name")
     private String name;
     @JoinColumn(name = "type_id")
-    @ManyToOne(targetEntity = AnimalType.class)
-    private int typeId;
+    @ManyToOne
+    private AnimalType typeId;
     @JoinColumn(name = "age")
     private short age;
-//    @JoinColumn(name = "breed_id")
-//    @ManyToOne(targetEntity = Breed.class)
-//    private int breedId;
     @JoinColumn(name = "created")
     private LocalDate created;
     @JoinColumn(name = "updated")
     private LocalDate updated;
+    @JoinColumn(name = "id_breed")
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Breed idBreed;
 
-
-    public Creature(int idCreature, String name, int typeId, short age, LocalDate created, LocalDate updated) {
+    public Creature(int idCreature, String name, AnimalType typeId, short age, LocalDate created, LocalDate updated, Breed idBreed) {
         this.idCreature = idCreature;
         this.name = name;
         this.typeId = typeId;
         this.age = age;
         this.created = created;
         this.updated = updated;
+        this.idBreed = idBreed;
     }
 
     public Creature() {
 
+    }
+
+    public Breed getIdBreed() {
+        return idBreed;
+    }
+
+    public void setIdBreed(Breed idBreed) {
+        this.idBreed = idBreed;
     }
 
     public int getIdCreature() {
@@ -59,11 +66,11 @@ public class Creature implements Serializable { //существо, животн
         this.name = name;
     }
 
-    public int getTypeId() {
+    public AnimalType getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(int typeId) {
+    public void setTypeId(AnimalType typeId) {
         this.typeId = typeId;
     }
 
@@ -97,16 +104,14 @@ public class Creature implements Serializable { //существо, животн
         if (!(o instanceof Creature)) return false;
 
         Creature creature = (Creature) o;
-        return idCreature == creature.idCreature && typeId == creature.typeId && age == creature.age
-                && Objects.equals(name, creature.name) && Objects.equals(created, creature.created)
-                && Objects.equals(updated, creature.updated);
+        return idCreature == creature.idCreature && typeId == creature.typeId && age == creature.age && idBreed == creature.idBreed && Objects.equals(name, creature.name) && Objects.equals(created, creature.created) && Objects.equals(updated, creature.updated);
     }
 
     @Override
     public int hashCode() {
         int result = idCreature;
         result = 31 * result + Objects.hashCode(name);
-        result = 31 * result + typeId;
+//        result = 31 * result + typeId;
         result = 31 * result + age;
         result = 31 * result + Objects.hashCode(created);
         result = 31 * result + Objects.hashCode(updated);

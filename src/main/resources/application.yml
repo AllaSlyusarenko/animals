@@ -8,6 +8,12 @@ spring:
     username: postgres
     password: iamroot
 
+#  sql:
+#    init:
+#      schema-locations: 'classpath:db/schema.sql'
+#      data-locations: 'classpath:db/data.sql'
+#      mode: never
+
 application:
   scheduled:
     time: 60000
@@ -18,6 +24,12 @@ duplicate:
 average:
   time: 20000
 
+creature:
+  names: Warik,Seriy, Piksel
+  age: 5,10,15
+animaltype: Dog, Wolf, Cat
+isWild: true, false
+breed: puwistii, korotkowertii, srednii
 
 dog:
   names:

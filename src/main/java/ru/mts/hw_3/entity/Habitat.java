@@ -1,11 +1,9 @@
 package ru.mts.hw_3.entity;
 
-//import jakarta.persistence.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "habitat", schema = "animals")
@@ -19,14 +17,6 @@ public class Habitat implements Serializable { //место обитания
     private LocalDate created;
     @JoinColumn(name = "updated")
     private LocalDate updated;
-
-//    @ManyToMany
-//    @JoinTable(
-//            schema = "animals",
-//            name = "animals_habitats",
-//            joinColumns = @JoinColumn(name = "id_area"),
-//            inverseJoinColumns = @JoinColumn(name = "id_animal_type"))
-//    private Set<AnimalType> animalTypes;
 
     public Habitat(int idArea, String area, LocalDate created, LocalDate updated) {
         this.idArea = idArea;

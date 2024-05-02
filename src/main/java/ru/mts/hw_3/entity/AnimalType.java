@@ -1,6 +1,8 @@
 package ru.mts.hw_3.entity;
+
+import lombok.Builder;
+
 import javax.persistence.*;
-//import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -9,11 +11,12 @@ import java.util.Objects;
 @Table(name = "animal_type", schema = "animals")
 public class AnimalType implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "animal_type_generator")
+    @SequenceGenerator(name="animal_type_generator", sequenceName = "animal_type_seq", allocationSize = 1, initialValue = 1)
     private int idType;
     @JoinColumn(name = "type")
     private String type;
-    @JoinColumn(name = "is_wild")
+    @JoinColumn(name = "iswild")
     private Boolean isWild;
     @JoinColumn(name = "created")
     private LocalDate created;

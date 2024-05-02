@@ -1,7 +1,5 @@
 package ru.mts.hw_3.entity;
 
-//import jakarta.persistence.Column;
-//import jakarta.persistence.Embeddable;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
