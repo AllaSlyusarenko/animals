@@ -10,12 +10,9 @@ import java.util.List;
 
 public abstract class AbstractHibernateDao<T extends Serializable> {
 
-    protected final SessionFactory sessionFactory;
     private Class<T> clazz;
-
-    protected AbstractHibernateDao(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    @Autowired
+    protected SessionFactory sessionFactory;
 
     public final void setClazz(final Class<T> clazzToSet) {
         clazz = Preconditions.checkNotNull(clazzToSet, null);

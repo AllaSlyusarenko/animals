@@ -25,5 +25,4 @@ public class AnimalsHabitat {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_area", nullable = false)
     private Habitat idArea;
-
 }

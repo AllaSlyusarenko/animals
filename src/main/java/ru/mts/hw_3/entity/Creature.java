@@ -104,17 +104,18 @@ public class Creature implements Serializable { //существо, животн
         if (!(o instanceof Creature)) return false;
 
         Creature creature = (Creature) o;
-        return idCreature == creature.idCreature && typeId == creature.typeId && age == creature.age && idBreed == creature.idBreed && Objects.equals(name, creature.name) && Objects.equals(created, creature.created) && Objects.equals(updated, creature.updated);
+        return idCreature == creature.idCreature && age == creature.age && Objects.equals(name, creature.name) && Objects.equals(typeId, creature.typeId) && Objects.equals(created, creature.created) && Objects.equals(updated, creature.updated) && Objects.equals(idBreed, creature.idBreed);
     }
 
     @Override
     public int hashCode() {
         int result = idCreature;
         result = 31 * result + Objects.hashCode(name);
-//        result = 31 * result + typeId;
+        result = 31 * result + Objects.hashCode(typeId);
         result = 31 * result + age;
         result = 31 * result + Objects.hashCode(created);
         result = 31 * result + Objects.hashCode(updated);
+        result = 31 * result + Objects.hashCode(idBreed);
         return result;
     }
 

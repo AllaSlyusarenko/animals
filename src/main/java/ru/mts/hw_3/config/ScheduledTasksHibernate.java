@@ -8,7 +8,6 @@ import ru.mts.hw_3.entity.Creature;
 import ru.mts.hw_3.repository.CreatureRepository;
 import ru.mts.hw_3.service.CreatureService;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 

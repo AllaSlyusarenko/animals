@@ -1,7 +1,7 @@
 package ru.mts.hw_3.entity;
 
-//import jakarta.persistence.*;
 import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
