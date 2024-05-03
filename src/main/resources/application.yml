@@ -24,7 +24,7 @@ duplicate:
 average:
   time: 20000
 
-creature:
+animal:
   names: Warik,Seriy, Piksel
   age: 5,10,15
 animaltype: Dog, Wolf, Cat

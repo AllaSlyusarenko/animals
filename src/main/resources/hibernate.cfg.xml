@@ -28,7 +28,7 @@
 
         <mapping class="ru.mts.hw_3.entity.AnimalType"/>
         <mapping class="ru.mts.hw_3.entity.Breed"/>
-        <mapping class="ru.mts.hw_3.entity.Creature"/>
+        <mapping class="ru.mts.hw_3.entity.Animal"/>
         <mapping class="ru.mts.hw_3.entity.Habitat"/>
         <mapping class="ru.mts.hw_3.entity.Provider"/>
         <mapping class="ru.mts.hw_3.entity.AnimalsHabitat"/>

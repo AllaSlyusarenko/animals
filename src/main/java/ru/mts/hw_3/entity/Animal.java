@@ -7,12 +7,12 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "creature", schema = "animals")
-public class Creature implements Serializable { //существо, животное
+@Table(name = "animal", schema = "animals")
+public class Animal implements Serializable { //существо, животное
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "creature_generator")
-    @SequenceGenerator(name="creature_generator", sequenceName = "creature_seq", allocationSize = 1, initialValue = 1)
-    private int idCreature;
+    @SequenceGenerator(name = "creature_generator", sequenceName = "creature_seq", allocationSize = 1, initialValue = 1)
+    private int idAnimal;
     @JoinColumn(name = "name")
     private String name;
     @JoinColumn(name = "type_id")
@@ -28,8 +28,8 @@ public class Creature implements Serializable { //существо, животн
     @ManyToOne(cascade = CascadeType.ALL)
     private Breed idBreed;
 
-    public Creature(int idCreature, String name, AnimalType typeId, short age, LocalDate created, LocalDate updated, Breed idBreed) {
-        this.idCreature = idCreature;
+    public Animal(int idAnimal, String name, AnimalType typeId, short age, LocalDate created, LocalDate updated, Breed idBreed) {
+        this.idAnimal = idAnimal;
         this.name = name;
         this.typeId = typeId;
         this.age = age;
@@ -38,7 +38,7 @@ public class Creature implements Serializable { //существо, животн
         this.idBreed = idBreed;
     }
 
-    public Creature() {
+    public Animal() {
 
     }
 
@@ -50,12 +50,12 @@ public class Creature implements Serializable { //существо, животн
         this.idBreed = idBreed;
     }
 
-    public int getIdCreature() {
-        return idCreature;
+    public int getIdAnimal() {
+        return idAnimal;
     }
 
-    public void setIdCreature(int idCreature) {
-        this.idCreature = idCreature;
+    public void setIdAnimal(int idAnimal) {
+        this.idAnimal = idAnimal;
     }
 
     public String getName() {
@@ -101,15 +101,15 @@ public class Creature implements Serializable { //существо, животн
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Creature)) return false;
+        if (!(o instanceof Animal)) return false;
 
-        Creature creature = (Creature) o;
-        return idCreature == creature.idCreature && age == creature.age && Objects.equals(name, creature.name) && Objects.equals(typeId, creature.typeId) && Objects.equals(created, creature.created) && Objects.equals(updated, creature.updated) && Objects.equals(idBreed, creature.idBreed);
+        Animal creature = (Animal) o;
+        return idAnimal == creature.idAnimal && age == creature.age && Objects.equals(name, creature.name) && Objects.equals(typeId, creature.typeId) && Objects.equals(created, creature.created) && Objects.equals(updated, creature.updated) && Objects.equals(idBreed, creature.idBreed);
     }
 
     @Override
     public int hashCode() {
-        int result = idCreature;
+        int result = idAnimal;
         result = 31 * result + Objects.hashCode(name);
         result = 31 * result + Objects.hashCode(typeId);
         result = 31 * result + age;
@@ -121,8 +121,8 @@ public class Creature implements Serializable { //существо, животн
 
     @Override
     public String toString() {
-        return "Creature{" +
-                "idCreature=" + idCreature +
+        return "Animal {" +
+                "idAnimal=" + idAnimal +
                 ", name='" + name + '\'' +
                 ", typeId=" + typeId +
                 ", age=" + age +

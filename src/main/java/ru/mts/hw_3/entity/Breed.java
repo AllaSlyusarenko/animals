@@ -20,14 +20,14 @@ public class Breed {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_breed")
-    private List<Creature> creatures;
+    private List<Animal> animals;
 
-    public Breed(int idBreed, String name, LocalDate created, LocalDate updated, List<Creature> creatures) {
+    public Breed(int idBreed, String name, LocalDate created, LocalDate updated, List<Animal> animals) {
         this.idBreed = idBreed;
         this.name = name;
         this.created = created;
         this.updated = updated;
-        this.creatures = creatures;
+        this.animals = animals;
     }
 
     public Breed() {
@@ -65,12 +65,12 @@ public class Breed {
         this.updated = updated;
     }
 
-    public List<Creature> getCreatures() {
-        return creatures;
+    public List<Animal> getAnimals() {
+        return animals;
     }
 
-    public void setCreatures(List<Creature> creatures) {
-        this.creatures = creatures;
+    public void setAnimals(List<Animal> animals) {
+        this.animals = animals;
     }
 
     @Override
@@ -79,7 +79,7 @@ public class Breed {
         if (!(o instanceof Breed)) return false;
 
         Breed breed = (Breed) o;
-        return Objects.equals(idBreed, breed.idBreed) && Objects.equals(name, breed.name) && Objects.equals(created, breed.created) && Objects.equals(updated, breed.updated) && Objects.equals(creatures, breed.creatures);
+        return Objects.equals(idBreed, breed.idBreed) && Objects.equals(name, breed.name) && Objects.equals(created, breed.created) && Objects.equals(updated, breed.updated) && Objects.equals(animals, breed.animals);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class Breed {
         result = 31 * result + Objects.hashCode(name);
         result = 31 * result + Objects.hashCode(created);
         result = 31 * result + Objects.hashCode(updated);
-        result = 31 * result + Objects.hashCode(creatures);
+        result = 31 * result + Objects.hashCode(animals);
         return result;
     }
 
@@ -99,7 +99,7 @@ public class Breed {
                 ", name='" + name + '\'' +
                 ", created=" + created +
                 ", updated=" + updated +
-                ", creatures=" + creatures +
+                ", animals=" + animals +
                 '}';
     }
 }

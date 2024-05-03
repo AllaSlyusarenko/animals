@@ -25,13 +25,13 @@ public class ServiceDBImpl implements ServiceDB {
      * Метод - возвращает всех животных из бд animals
      */
     @Override
-    public List<Creature> getAllCreatures() throws SQLException {
+    public List<Animal> getAllCreatures() throws SQLException {
         String sqlAllCreatures = "SELECT * FROM animals.creature";
         PreparedStatement statement = connection.prepareStatement(sqlAllCreatures);
         ResultSet resultSet = statement.executeQuery();
-        List<Creature> creatures = new ArrayList<>();
+        List<Animal> creatures = new ArrayList<>();
         while (resultSet.next()) {
-            creatures.add(new Creature(
+            creatures.add(new Animal(
                     resultSet.getInt("id_creature"),
                     resultSet.getString("name"),
                     resultSet.getObject("type_id", AnimalType.class),

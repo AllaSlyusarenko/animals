@@ -5,20 +5,20 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.mts.hw_3.entity.AnimalType;
 import ru.mts.hw_3.entity.Breed;
-import ru.mts.hw_3.entity.Creature;
+import ru.mts.hw_3.entity.Animal;
 import ru.mts.hw_3.repository.AnimalTypeRepository;
-import ru.mts.hw_3.repository.CreatureRepository;
+import ru.mts.hw_3.repository.AnimalRepository;
 
 import java.time.LocalDate;
 import java.util.*;
 
 @Service
-public class CreatureServiceImpl implements CreatureService {
+public class AnimalServiceImpl implements AnimalService {
     Random random = new Random();
-    @Value("${creature.names}")
-    private String[] namesCreatures;
-    @Value("${creature.age}")
-    private String[] ageCreatures;
+    @Value("${animal.names}")
+    private String[] namesAnimals;
+    @Value("${animal.age}")
+    private String[] ageAnimals;
     @Value("${animaltype}")
     private String[] animalTypes;
     @Value("${breed}")
@@ -27,33 +27,33 @@ public class CreatureServiceImpl implements CreatureService {
     private String[] isWild;
 
     @Autowired
-    private CreatureRepository creatureRepository;
+    private AnimalRepository animalRepository;
     @Autowired
     private AnimalTypeRepository animalTypeRepository;
 
 
     @Override
-    public Map<String, List<Creature>> createCreatures(int N) {
+    public Map<String, List<Animal>> createAnimals(int N) {
         if (N <= 0) {
             System.out.print("The number of animals must be greater than 0");
             throw new IllegalArgumentException("The number of animals must be greater than 0");
         }
-        Map<String, List<Creature>> creaturesMap = new HashMap<>();
+        Map<String, List<Animal>> animalsMap = new HashMap<>();
         AnimalType animalType = createAnimalType();
-        List<Creature> creatures = new ArrayList<>();
+        List<Animal> animals = new ArrayList<>();
         for (int i = 0; i < N; i++) {
-            Creature creature = new Creature();
-            creature.setName(namesCreatures[random.nextInt(namesCreatures.length)]);
-            creature.setAge(Short.parseShort(ageCreatures[random.nextInt(ageCreatures.length)]));
-            creature.setCreated(LocalDate.now());
-            creature.setUpdated(LocalDate.now());
-            creature.setTypeId(animalType);
-            creature.setIdBreed(createBreed());
-            Creature creatureInBD = creatureRepository.create(creature);
-            creatures.add(creature);
+            Animal animal = new Animal();
+            animal.setName(namesAnimals[random.nextInt(namesAnimals.length)]);
+            animal.setAge(Short.parseShort(ageAnimals[random.nextInt(ageAnimals.length)]));
+            animal.setCreated(LocalDate.now());
+            animal.setUpdated(LocalDate.now());
+            animal.setTypeId(animalType);
+            animal.setIdBreed(createBreed());
+            Animal animalInBD = animalRepository.create(animal);
+            animals.add(animal);
         }
-        creaturesMap.put(animalType.getType(), creatures);
-        return creaturesMap;
+        animalsMap.put(animalType.getType(), animals);
+        return animalsMap;
     }
 
     private Breed createBreed() {
@@ -70,7 +70,7 @@ public class CreatureServiceImpl implements CreatureService {
         animalType.setCreated(LocalDate.now());
         animalType.setUpdated(LocalDate.now());
         animalType.setWild(Boolean.valueOf(isWild[random.nextInt(isWild.length)]));
-        animalTypeRepository.create(animalType);
-        return animalType;
+        AnimalType animalTypeOut = animalTypeRepository.create(animalType);
+        return animalTypeOut;
     }
 }
