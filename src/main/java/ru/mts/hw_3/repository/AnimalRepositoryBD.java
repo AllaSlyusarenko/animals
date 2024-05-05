@@ -4,9 +4,9 @@ import org.springframework.stereotype.Repository;
 import ru.mts.hw_3.entity.Animal;
 
 @Repository
-public class AnimalRepository extends AbstractHibernateDao<Animal> {
+public class AnimalRepositoryBD extends AbstractHibernateDao<Animal> {
 
-    public AnimalRepository() {
+    public AnimalRepositoryBD() {
         setClazz(Animal.class);
     }
 }

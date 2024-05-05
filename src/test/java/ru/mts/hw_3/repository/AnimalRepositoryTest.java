@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName(value = "Database tests")
 class AnimalRepositoryTest {
     @Autowired
-    AnimalRepository animalRepository;
+    AnimalRepositoryBD animalRepository;
     @Autowired
     AnimalTypeRepository animalTypeRepository;
     @Autowired
@@ -60,7 +60,7 @@ class AnimalRepositoryTest {
         AnimalType animalType = new AnimalType();
         AnimalType animalTypeOut = animalTypeRepository.create(animalType);
         Breed breed = new Breed();
-        Animal animalIn = new Animal(0, "Puwistik", animalTypeOut,  5, LocalDate.now(), LocalDate.now(), breed);
+        Animal animalIn = new Animal(0, "Puwistik", animalTypeOut,  5, LocalDate.now(), LocalDate.now());
         Animal animalOut = animalRepository.create(animalIn);
         assertNotNull(animalOut);
         assertEquals("Puwistik", animalOut.getName());

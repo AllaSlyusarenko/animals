@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.mts.hw_3.entity.Animal;
 import ru.mts.hw_3.entity.AnimalType;
-import ru.mts.hw_3.entity.Breed;
-import ru.mts.hw_3.repository.AnimalRepository;
+import ru.mts.hw_3.exception.CollectionEmptyException;
+import ru.mts.hw_3.repository.AnimalRepositoryBD;
 import ru.mts.hw_3.repository.AnimalTypeRepository;
+import ru.mts.hw_3.repository.AnimalsRepository;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -17,9 +19,14 @@ public class AnimalServiceImpl implements AnimalService {
     @Autowired
     private AnimalProperties animalProperties;
     @Autowired
-    private AnimalRepository animalRepository;
+    private AnimalRepositoryBD animalRepositoryBD;
     @Autowired
     private AnimalTypeRepository animalTypeRepository;
+    @Autowired
+    private AnimalsRepository animalsRepository;
+    @Autowired
+    DeserializationService deserializationService;
+
 
     @Override
     public Map<String, List<Animal>> createAnimals(int N) {
@@ -37,22 +44,47 @@ public class AnimalServiceImpl implements AnimalService {
             animal.setCreated(LocalDate.now());
             animal.setUpdated(LocalDate.now());
             animal.setAnimalType(animalType);
-            animal.setBreed(createBreed());
             animal.setCost(animalProperties.getCost()[random.nextInt(animalProperties.getCost().length)]);
             animal.setBirthDate(LocalDate.parse(animalProperties.getDates()[random.nextInt(animalProperties.getDates().length)]));
-            Animal animalInBD = animalRepository.create(animal);
+            Animal animalInBD = animalRepositoryBD.create(animal);
             animals.add(animal);
         }
         animalsMap.put(animalType.getType(), animals);
         return animalsMap;
     }
 
-    private Breed createBreed() {
-        Breed breed = new Breed();
-        breed.setName(animalProperties.getBreed()[random.nextInt(animalProperties.getBreed().length)]);
-        breed.setCreated(LocalDate.now());
-        breed.setUpdated(LocalDate.now());
-        return breed;
+    public Map<String, LocalDate> findLeapYearNames() throws IOException {
+        animalsRepository.findLeapYearNames();
+        return deserializationService.deserializationFindLeapYearNames();
+    }
+
+    public Map<Animal, Integer> findOlderAnimal(int N) throws IOException {
+        animalsRepository.findOlderAnimal(N);
+        return deserializationService.deserializationFindOlderAnimal();
+    }
+
+    public Map<String, List<Animal>> findDuplicate() throws IOException {
+        animalsRepository.findDuplicate();
+        return deserializationService.deserializationFindDuplicate();
+    }
+
+    public List<Animal> prepareListAnimals() {
+        return animalsRepository.prepareListAnimals();
+    }
+
+    public Double findAverageAge(List<Animal> animalList) throws CollectionEmptyException, IOException {
+        animalsRepository.findAverageAge(animalList);
+        return deserializationService.deserializationFindAverageAge();
+    }
+
+    public List<Animal> findOldAndExpensive(List<Animal> animalList) throws CollectionEmptyException, IOException {
+        animalsRepository.findOldAndExpensive(animalList);
+        return deserializationService.deserializationFindOldAndExpensive();
+    }
+
+    public List<String> findMinConstAnimals(List<Animal> animalList) throws CollectionEmptyException, IOException {
+        animalsRepository.findMinConstAnimals(animalList);
+        return deserializationService.deserializationFindMinConstAnimals();
     }
 
     private AnimalType createAnimalType() {
@@ -60,7 +92,7 @@ public class AnimalServiceImpl implements AnimalService {
         animalType.setType(animalProperties.getAnimalType()[random.nextInt(animalProperties.getAnimalType().length)]);
         animalType.setCreated(LocalDate.now());
         animalType.setUpdated(LocalDate.now());
-        animalType.setWild(Boolean.valueOf(animalProperties.getIsWild()[random.nextInt(animalProperties.getIsWild().length)]));
+        animalType.setIsWild(Boolean.valueOf(animalProperties.getIsWild()[random.nextInt(animalProperties.getIsWild().length)]));
         AnimalType animalTypeOut = animalTypeRepository.create(animalType);
         return animalTypeOut;
     }

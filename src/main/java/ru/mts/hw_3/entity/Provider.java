@@ -1,10 +1,14 @@
 package ru.mts.hw_3.entity;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
 
+@Data
+@EqualsAndHashCode(exclude = "idProvider")
 @Entity
 @Table(name = "provider", schema = "animals")
 public class Provider implements Serializable {
@@ -29,67 +33,6 @@ public class Provider implements Serializable {
     }
 
     public Provider() {
-
-    }
-
-    public int getIdProvider() {
-        return idProvider;
-    }
-
-    public void setIdProvider(int idProvider) {
-        this.idProvider = idProvider;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public LocalDate getCreated() {
-        return created;
-    }
-
-    public void setCreated(LocalDate created) {
-        this.created = created;
-    }
-
-    public LocalDate getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(LocalDate updated) {
-        this.updated = updated;
-    }
-
-    @Override
-    public final boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Provider)) return false;
-
-        Provider provider = (Provider) o;
-        return idProvider == provider.idProvider && Objects.equals(name, provider.name) && Objects.equals(phone, provider.phone)
-                && Objects.equals(created, provider.created) && Objects.equals(updated, provider.updated);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = idProvider;
-        result = 31 * result + Objects.hashCode(name);
-        result = 31 * result + Objects.hashCode(phone);
-        result = 31 * result + Objects.hashCode(created);
-        result = 31 * result + Objects.hashCode(updated);
-        return result;
     }
 
     @Override

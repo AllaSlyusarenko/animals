@@ -53,4 +53,6 @@ public interface AnimalsRepository {
      * Метод - для нахождения 3 животных с самой низкой ценой, вывод - список имен в обратном порядке
      */
     List<String> findMinConstAnimals(List<Animal> animalList) throws CollectionEmptyException, IOException;
+
+    List<Animal> prepareListAnimals();
 }
