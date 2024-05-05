@@ -44,7 +44,6 @@ public class ScheduledTasks {
 
             log.info("findMinConstAnimals------------------------------------------------------------------------------------");
             log.info(animalService.findMinConstAnimals(animalList).toString() + "\n");
-
         } catch (CollectionEmptyException e) {
             log.error("Data collection does not meet the required conditions", e);
         } catch (IOException e) {
