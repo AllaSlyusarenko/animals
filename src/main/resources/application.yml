@@ -8,11 +8,6 @@ spring:
     username: postgres
     password: iamroot
 
-#  sql:
-#    init:
-#      schema-locations: 'classpath:db/schema.sql'
-#      data-locations: 'classpath:db/data.sql'
-#      mode: never
 
 application:
   scheduled:
@@ -27,9 +22,11 @@ average:
 animal:
   names: Warik,Seriy, Piksel
   age: 5,10,15
-animaltype: Dog, Wolf, Cat
-isWild: true, false
-breed: puwistii, korotkowertii, srednii
+  animaltype: Dog, Wolf, Cat
+  isWild: true, false
+  breed: puwistii, korotkowertii, srednii
+  cost: 500, 1000, 1500
+  dates: 1983-03-15, 1984-07-22
 
 dog:
   names:

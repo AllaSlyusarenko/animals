@@ -11,13 +11,13 @@ public class Provider implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idProvider;
-    @JoinColumn(name = "name")
+    @Column(name = "name")
     private String name;
-    @JoinColumn(name = "phone")
+    @Column(name = "phone")
     private String phone;
-    @JoinColumn(name = "created")
+    @Column(name = "created")
     private LocalDate created;
-    @JoinColumn(name = "updated")
+    @Column(name = "updated")
     private LocalDate updated;
 
     public Provider(int idProvider, String name, String phone, LocalDate created, LocalDate updated) {

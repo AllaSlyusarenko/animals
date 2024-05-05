@@ -5,6 +5,7 @@ create table animals.animal
     id_animal integer default nextval('animals.animal_id_animal_sq') not null
                 constraint creature_pk primary key,
     name        text not null,
+    cost        bigint not null,
     type_id     integer not null,
     age         smallint not null,
     created     timestamp with time zone default CURRENT_TIMESTAMP not null,

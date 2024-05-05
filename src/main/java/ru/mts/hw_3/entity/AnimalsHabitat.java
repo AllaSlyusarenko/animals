@@ -16,7 +16,6 @@ public class AnimalsHabitat {
 
     @MapsId("idAnimalType")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_animal_type", nullable = false)
     private AnimalType idAnimalType;
 

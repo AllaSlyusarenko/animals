@@ -10,15 +10,15 @@ import java.util.Objects;
 public class AnimalType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "animal_type_generator")
-    @SequenceGenerator(name="animal_type_generator", sequenceName = "animal_type_seq", allocationSize = 1, initialValue = 1)
+    @SequenceGenerator(name = "animal_type_generator", sequenceName = "animal_type_seq", allocationSize = 1, initialValue = 1)
     private int idType;
-    @JoinColumn(name = "type")
+    @Column(name = "type")
     private String type;
-    @JoinColumn(name = "iswild")
+    @Column(name = "iswild")
     private Boolean isWild;
-    @JoinColumn(name = "created")
+    @Column(name = "created")
     private LocalDate created;
-    @JoinColumn(name = "updated")
+    @Column(name = "updated")
     private LocalDate updated;
 
 
@@ -96,12 +96,6 @@ public class AnimalType implements Serializable {
 
     @Override
     public String toString() {
-        return "AnimalType{" +
-                "idType=" + idType +
-                ", type='" + type + '\'' +
-                ", isWild=" + isWild +
-                ", created=" + created +
-                ", updated=" + updated +
-                '}';
+        return type;
     }
 }

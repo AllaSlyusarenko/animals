@@ -49,9 +49,9 @@ class AnimalRepositoryTest {
         Animal animalOut = animalRepository.create(animalEmptyIn);
         assertNotNull(animalOut);
         assertNull(animalOut.getName());
-        assertEquals(0, animalOut.getAge());
+        assertEquals(null, animalOut.getAge());
         assertNotEquals(0, animalOut.getIdAnimal());
-        assertNull(animalOut.getTypeId());
+        assertNull(animalOut.getAnimalType());
     }
 
     @Test
@@ -60,7 +60,7 @@ class AnimalRepositoryTest {
         AnimalType animalType = new AnimalType();
         AnimalType animalTypeOut = animalTypeRepository.create(animalType);
         Breed breed = new Breed();
-        Animal animalIn = new Animal(0, "Puwistik", animalTypeOut, (short) 5, LocalDate.now(), LocalDate.now(), breed);
+        Animal animalIn = new Animal(0, "Puwistik", animalTypeOut,  5, LocalDate.now(), LocalDate.now(), breed);
         Animal animalOut = animalRepository.create(animalIn);
         assertNotNull(animalOut);
         assertEquals("Puwistik", animalOut.getName());

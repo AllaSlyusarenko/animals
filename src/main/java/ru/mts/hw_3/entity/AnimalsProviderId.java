@@ -1,6 +1,7 @@
 package ru.mts.hw_3.entity;
 
 import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.Hibernate;

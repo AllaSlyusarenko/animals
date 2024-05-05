@@ -1,6 +1,6 @@
 package ru.mts.hw_3.repository;
 
-import ru.mts.entity.AbstractAnimal;
+import ru.mts.hw_3.entity.Animal;
 import ru.mts.hw_3.exception.CollectionEmptyException;
 
 import java.io.IOException;
@@ -24,12 +24,12 @@ public interface AnimalsRepository {
     /**
      * Метод - ищет животных по возрасту, который больше, чем заданное значение
      */
-    Map<AbstractAnimal, Integer> findOlderAnimal(int N) throws IOException;
+    Map<Animal, Integer> findOlderAnimal(int N) throws IOException;
 
     /**
      * Метод - ищет животных по наличию дубликатов
      */
-    Map<String, List<AbstractAnimal>> findDuplicate() throws IOException;
+    Map<String, List<Animal>> findDuplicate() throws IOException;
 
     /**
      * Метод - для печати дубликатов
@@ -38,17 +38,19 @@ public interface AnimalsRepository {
 
     /**
      * Метод - для нахождения среднего возраста животных в списке
+     *
+     * @return
      */
-    void findAverageAge(List<AbstractAnimal> animalList) throws CollectionEmptyException, IOException;
+    Double findAverageAge(List<Animal> animalList) throws CollectionEmptyException, IOException;
 
     /**
      * Метод - для нахождения животных в списке старше 5 лет и стоимость больше средней стоимости,
      * отсортированный по дате рождения(по возрастанию)
      */
-    List<AbstractAnimal> findOldAndExpensive(List<AbstractAnimal> animalList) throws CollectionEmptyException, IOException;
+    List<Animal> findOldAndExpensive(List<Animal> animalList) throws CollectionEmptyException, IOException;
 
     /**
      * Метод - для нахождения 3 животных с самой низкой ценой, вывод - список имен в обратном порядке
      */
-    List<String> findMinConstAnimals(List<AbstractAnimal> animalList) throws CollectionEmptyException, IOException;
+    List<String> findMinConstAnimals(List<Animal> animalList) throws CollectionEmptyException, IOException;
 }

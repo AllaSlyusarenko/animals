@@ -11,11 +11,11 @@ public class Habitat implements Serializable { //место обитания
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idArea;
-    @JoinColumn(name = "area")
+    @Column(name = "area")
     private String area;
-    @JoinColumn(name = "created")
+    @Column(name = "created")
     private LocalDate created;
-    @JoinColumn(name = "updated")
+    @Column(name = "updated")
     private LocalDate updated;
 
     public Habitat(int idArea, String area, LocalDate created, LocalDate updated) {

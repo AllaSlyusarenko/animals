@@ -11,11 +11,11 @@ public class Breed {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idBreed;
-    @JoinColumn(name = "name")
+    @Column(name = "name")
     private String name;
-    @JoinColumn(name = "created")
+    @Column(name = "created")
     private LocalDate created;
-    @JoinColumn(name = "updated")
+    @Column(name = "updated")
     private LocalDate updated;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -94,12 +94,6 @@ public class Breed {
 
     @Override
     public String toString() {
-        return "Breed{" +
-                "idBreed=" + idBreed +
-                ", name='" + name + '\'' +
-                ", created=" + created +
-                ", updated=" + updated +
-                ", animals=" + animals +
-                '}';
+        return name;
     }
 }

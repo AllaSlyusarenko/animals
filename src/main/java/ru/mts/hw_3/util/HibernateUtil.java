@@ -15,7 +15,7 @@ public class HibernateUtil {
     private static SessionFactory sessionFactory;
 
     @Bean
-    public SessionFactory getSessionFactory() {
+    public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
                 // Create registry
