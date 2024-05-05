@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Интерфейс, используемый в качестве хранилища создаваемых животных
@@ -16,6 +17,11 @@ import java.util.Map;
  */
 
 public interface AnimalsRepository {
+    /**
+     * Метод - формирует мапу животных из бд
+     */
+    ConcurrentHashMap<String, List<Animal>> getAnimalsMap();
+
     /**
      * Метод - ищет животных по дате рождения в високосный год
      */

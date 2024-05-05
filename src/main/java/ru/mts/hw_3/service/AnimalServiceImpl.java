@@ -2,6 +2,7 @@ package ru.mts.hw_3.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.mts.hw_3.config.AnimalProperties;
 import ru.mts.hw_3.entity.Animal;
 import ru.mts.hw_3.entity.AnimalType;
 import ru.mts.hw_3.exception.CollectionEmptyException;
@@ -53,35 +54,42 @@ public class AnimalServiceImpl implements AnimalService {
         return animalsMap;
     }
 
+    @Override
     public Map<String, LocalDate> findLeapYearNames() throws IOException {
         animalsRepository.findLeapYearNames();
         return deserializationService.deserializationFindLeapYearNames();
     }
 
+    @Override
     public Map<Animal, Integer> findOlderAnimal(int N) throws IOException {
         animalsRepository.findOlderAnimal(N);
         return deserializationService.deserializationFindOlderAnimal();
     }
 
+    @Override
     public Map<String, List<Animal>> findDuplicate() throws IOException {
         animalsRepository.findDuplicate();
         return deserializationService.deserializationFindDuplicate();
     }
 
+    @Override
     public List<Animal> prepareListAnimals() {
         return animalsRepository.prepareListAnimals();
     }
 
+    @Override
     public Double findAverageAge(List<Animal> animalList) throws CollectionEmptyException, IOException {
         animalsRepository.findAverageAge(animalList);
         return deserializationService.deserializationFindAverageAge();
     }
 
+    @Override
     public List<Animal> findOldAndExpensive(List<Animal> animalList) throws CollectionEmptyException, IOException {
         animalsRepository.findOldAndExpensive(animalList);
         return deserializationService.deserializationFindOldAndExpensive();
     }
 
+    @Override
     public List<String> findMinConstAnimals(List<Animal> animalList) throws CollectionEmptyException, IOException {
         animalsRepository.findMinConstAnimals(animalList);
         return deserializationService.deserializationFindMinConstAnimals();

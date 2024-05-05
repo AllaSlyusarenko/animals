@@ -34,6 +34,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     /**
      * Метод - формирует мапу животных из бд
      */
+    @Override
     public ConcurrentHashMap<String, List<Animal>> getAnimalsMap() {
         ConcurrentHashMap<String, List<Animal>> animalsMap = new ConcurrentHashMap<>();
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -208,6 +209,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     /**
      * Метод - для подготовки списка всех животных из мапы
      */
+    @Override
     public List<Animal> prepareListAnimals() {
         ConcurrentHashMap<String, List<Animal>> animals = getAnimalsMap();
         return animals.entrySet().stream()
