@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.mts.entity.AbstractAnimal;
+import ru.mts.hw_3.entity.Animal;
 import ru.mts.hw_3.repository.AnimalsRepository;
 
 import java.io.IOException;
@@ -33,17 +33,17 @@ public class AnimalRepositoryMethodsController {
 
     @ResponseBody
     @GetMapping("/old/{age}")
-    public ResponseEntity<Map<AbstractAnimal, Integer>> getOlderAnimal(@PathVariable(name = "age") Integer age) throws IOException {
+    public ResponseEntity<Map<Animal, Integer>> getOlderAnimal(@PathVariable(name = "age") Integer age) throws IOException {
         log.info("findOlderAnimal---------------------------------------------------------------------------------------");
-        Map<AbstractAnimal, Integer> olderAnimals = animalsRepository.findOlderAnimal(age);
+        Map<Animal, Integer> olderAnimals = animalsRepository.findOlderAnimal(age);
         return ResponseEntity.ok(olderAnimals);
     }
 
     @ResponseBody
     @GetMapping("/dupl")
-    public ResponseEntity<Map<String, List<AbstractAnimal>>> getDuplicate() throws IOException {
+    public ResponseEntity<Map<String, List<Animal>>> getDuplicate() throws IOException {
         log.info("findDuplicate-----------------------------------------------------------------------------------------");
-        Map<String, List<AbstractAnimal>> animalsDuplicate = animalsRepository.findDuplicate();
+        Map<String, List<Animal>> animalsDuplicate = animalsRepository.findDuplicate();
         return ResponseEntity.ok(animalsDuplicate);
     }
 }

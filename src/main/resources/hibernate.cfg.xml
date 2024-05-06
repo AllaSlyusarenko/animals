@@ -1,0 +1,38 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+
+        <!-- JDBC Database connection settings -->
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/animals</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">iamroot</property>
+
+        <!-- JDBC connection pool settings ... using built-in test pool -->
+        <property name="connection.pool_size">5</property>
+
+        <!-- Echo the SQL to stdout -->
+        <!--        <property name="show_sql">true</property>-->
+        <!--        <property name="hibernate.format_sql">true</property>-->
+        <property name="hibernate.default_schema">animals</property>
+
+        <!-- Set the current session context -->
+        <property name="current_session_context_class">thread</property>
+
+        <!-- Drop and re-create the database schema on startup -->
+        <property name="hbm2ddl.auto">create-drop</property> <!--можно update-->
+
+        <mapping class="ru.mts.hw_3.entity.AnimalType"/>
+        <mapping class="ru.mts.hw_3.entity.Breed"/>
+        <mapping class="ru.mts.hw_3.entity.Animal"/>
+        <mapping class="ru.mts.hw_3.entity.Habitat"/>
+        <mapping class="ru.mts.hw_3.entity.Provider"/>
+        <mapping class="ru.mts.hw_3.entity.AnimalsHabitat"/>
+        <mapping class="ru.mts.hw_3.entity.AnimalsProvider"/>
+
+    </session-factory>
+</hibernate-configuration>

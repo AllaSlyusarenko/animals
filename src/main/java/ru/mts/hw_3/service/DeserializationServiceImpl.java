@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.mts.entity.AbstractAnimal;
+import ru.mts.hw_3.entity.Animal;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,34 +46,34 @@ public class DeserializationServiceImpl implements DeserializationService {
     }
 
     @Override
-    public Map<AbstractAnimal, Integer> deserializationFindOlderAnimal() throws IOException {
+    public Map<Animal, Integer> deserializationFindOlderAnimal() throws IOException {
         String content = getResourceFileAsString("results/findOlderAnimal.json");
-        Map<AbstractAnimal, Integer> dataFindOlderAnimal = new HashMap<>();
+        Map<Animal, Integer> dataFindOlderAnimal = new HashMap<>();
         TypeReference<HashMap<String, Integer>> typeRef = new TypeReference<>() {
         };
         Map<String, Integer> mapFindOlder = mapper.readValue(content, typeRef);
         for (String key : mapFindOlder.keySet()) {
-            AbstractAnimal abstractAnimal = mapper.readValue(key, AbstractAnimal.class);
+            Animal abstractAnimal = mapper.readValue(key, Animal.class);
             dataFindOlderAnimal.put(abstractAnimal, mapFindOlder.get(key));
         }
         return dataFindOlderAnimal;
     }
 
     @Override
-    public Map<String, List<AbstractAnimal>> deserializationFindDuplicate() throws IOException {
+    public Map<String, List<Animal>> deserializationFindDuplicate() throws IOException {
         String content = getResourceFileAsString("results/findDuplicate.json");
-        TypeReference<HashMap<String, List<AbstractAnimal>>> typeRef = new TypeReference<>() {
+        TypeReference<HashMap<String, List<Animal>>> typeRef = new TypeReference<>() {
         };
-        HashMap<String, List<AbstractAnimal>> mapFindDuplicate = mapper.readValue(content, typeRef);
+        HashMap<String, List<Animal>> mapFindDuplicate = mapper.readValue(content, typeRef);
         return mapFindDuplicate;
     }
 
     @Override
-    public List<AbstractAnimal> deserializationFindOldAndExpensive() throws IOException {
+    public List<Animal> deserializationFindOldAndExpensive() throws IOException {
         String content = getResourceFileAsString("results/findOldAndExpensive.json");
-        TypeReference<List<AbstractAnimal>> typeRef = new TypeReference<>() {
+        TypeReference<List<Animal>> typeRef = new TypeReference<>() {
         };
-        List<AbstractAnimal> listOldAndExpensive = mapper.readValue(content, typeRef);
+        List<Animal> listOldAndExpensive = mapper.readValue(content, typeRef);
         return listOldAndExpensive;
     }
 

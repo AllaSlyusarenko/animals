@@ -4,7 +4,7 @@ VALUES
     ('Wolf', true),
     ('Cat', false);
 
-INSERT INTO animals.creature(name, type_id, age)
+INSERT INTO animals.animal(name, type_id, age)
 VALUES
     ('Warik', 1, 3),
     ('Seriy', 2, 2),
