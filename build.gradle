@@ -19,9 +19,12 @@ dependencies {
     implementation project(':starter')
     implementation 'org.springframework.boot:spring-boot-starter-web:2.7.11'
     implementation 'org.postgresql:postgresql:42.3.10'
+    implementation 'org.hibernate:hibernate-core:6.1.7.Final'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.11'
 
     implementation 'javax.validation:validation-api:2.0.1.Final'
+//    // https://mvnrepository.com/artifact/org.flywaydb/flyway-core
+//    implementation 'org.flywaydb:flyway-core:9.21.2'
 
     compileOnly 'org.projectlombok:lombok:1.18.28'
     annotationProcessor 'org.projectlombok:lombok:1.18.28'
