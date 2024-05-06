@@ -9,12 +9,13 @@ import java.util.List;
 import java.util.Map;
 
 public interface AnimalService {
-    Map<String, List<Animal>> createAnimals(int N);
-    Map<String, LocalDate> findLeapYearNames() throws IOException;
-    Map<Animal, Integer> findOlderAnimal(int N) throws IOException;
-    Map<String, List<Animal>> findDuplicate() throws IOException;
-    List<Animal> prepareListAnimals();
-    Double findAverageAge(List<Animal> animalList) throws CollectionEmptyException, IOException;
-    List<Animal> findOldAndExpensive(List<Animal> animalList) throws CollectionEmptyException, IOException;
-    List<String> findMinConstAnimals(List<Animal> animalList) throws CollectionEmptyException, IOException;
+    List<Animal> getAllAnimals();
+//    Map<String, List<Animal>> createAnimals(int N);
+//    Map<String, LocalDate> findLeapYearNames() throws IOException;
+//    Map<Animal, Integer> findOlderAnimal(int N) throws IOException;
+//    Map<String, List<Animal>> findDuplicate() throws IOException;
+//    List<Animal> prepareListAnimals();
+//    Double findAverageAge(List<Animal> animalList) throws CollectionEmptyException, IOException;
+//    List<Animal> findOldAndExpensive(List<Animal> animalList) throws CollectionEmptyException, IOException;
+//    List<String> findMinConstAnimals(List<Animal> animalList) throws CollectionEmptyException, IOException;
 }

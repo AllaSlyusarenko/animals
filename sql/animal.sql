@@ -8,6 +8,8 @@ create table animals.animal
     cost        bigint not null,
     type_id     integer not null,
     age         smallint not null,
+    birthdate   date,
+    id_breed    integer,
     created     timestamp with time zone default CURRENT_TIMESTAMP not null,
     updated     timestamp with time zone default CURRENT_TIMESTAMP not null
 );
@@ -16,3 +18,6 @@ ALTER SEQUENCE animals.animal_id_animal_sq OWNED BY animals.animal.id_animal;
 
 ALTER TABLE animals.animal ADD CONSTRAINT type_id_animal_type_id_type_fk
 FOREIGN KEY(type_id) REFERENCES animals.animal_type (id_type);
+
+ALTER TABLE animals.animal ADD CONSTRAINT id_breed_breed_fk
+FOREIGN KEY(id_breed) REFERENCES animals.breed (id_breed);

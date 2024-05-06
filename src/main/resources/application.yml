@@ -2,19 +2,21 @@ spring:
   application.name: education-project
   main:
     allow-bean-definition-overriding: true
-#  flyway:
-#    locations: classpath:migrations
-#    url: jdbc:postgresql://localhost:5432/animals
-#    user: postgres
-#    password: iamroot
+  flyway:
+    locations: classpath:migrations
+    url: jdbc:postgresql://localhost:5432/animals
+    user: postgres
+    password: iamroot
+    default-schema: animals
+    enabled: true
   datasource:
     driver-class-name: 'org.postgresql.Driver'
     url: jdbc:postgresql://localhost:5432/animals
     username: postgres
     password: iamroot
-#  jpa:
-#    hibernate:
-#      ddl-auto: create-drop
+  jpa:
+    hibernate:
+      ddl-auto: validate
 
 
 application:

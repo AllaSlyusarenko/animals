@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 
 @Data
 @EqualsAndHashCode(exclude = "idAnimal")
@@ -14,9 +15,9 @@ import java.time.LocalDate;
 @Table(name = "animal", schema = "animals")
 public class Animal implements Serializable { //существо, животное
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "creature_generator")
-    @SequenceGenerator(name = "creature_generator", sequenceName = "creature_seq", allocationSize = 1, initialValue = 1)
-    private int idAnimal;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "animal_generator")
+    @SequenceGenerator(name = "animal_generator", sequenceName = "animal_id_animal_sq", allocationSize = 1, initialValue = 1)
+    private Integer idAnimal;
     @Column(name = "name")
     private String name;
     @JoinColumn(name = "type_id")
@@ -25,14 +26,14 @@ public class Animal implements Serializable { //существо, животно
     @Column(name = "age")
     private Integer age;
     @Column(name = "created")
-    private LocalDate created;
+    private OffsetDateTime created;
     @Column(name = "updated")
-    private LocalDate updated;
+    private OffsetDateTime updated;
 
     private BigDecimal cost;
     private LocalDate birthDate;
 
-    public Animal(int idAnimal, String name, AnimalType typeId, Integer age, LocalDate created, LocalDate updated) {
+    public Animal(int idAnimal, String name, AnimalType typeId, Integer age, OffsetDateTime created, OffsetDateTime updated) {
         this.idAnimal = idAnimal;
         this.name = name;
         this.animalType = typeId;
@@ -42,18 +43,5 @@ public class Animal implements Serializable { //существо, животно
     }
 
     public Animal() {
-    }
-
-    @Override
-    public String toString() {
-        return "Animal{" +
-                "idAnimal=" + idAnimal +
-                ", name='" + name + '\'' +
-                ", cost=" + cost +
-                ", typeId=" + animalType +
-                ", age=" + age +
-                ", created=" + created +
-                ", updated=" + updated +
-                '}';
     }
 }
