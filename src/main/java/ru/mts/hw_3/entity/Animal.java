@@ -29,18 +29,13 @@ public class Animal implements Serializable { //существо, животно
     private OffsetDateTime created;
     @Column(name = "updated")
     private OffsetDateTime updated;
-
+    @JoinColumn(name = "id_breed")
+    @ManyToOne
+    private Breed breed;
+    @Column(name = "cost")
     private BigDecimal cost;
+    @Column(name = "birth_date")
     private LocalDate birthDate;
-
-    public Animal(int idAnimal, String name, AnimalType typeId, Integer age, OffsetDateTime created, OffsetDateTime updated) {
-        this.idAnimal = idAnimal;
-        this.name = name;
-        this.animalType = typeId;
-        this.age = age;
-        this.created = created;
-        this.updated = updated;
-    }
 
     public Animal() {
     }

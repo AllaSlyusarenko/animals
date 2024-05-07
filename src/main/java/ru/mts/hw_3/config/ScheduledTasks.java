@@ -13,12 +13,9 @@ public class ScheduledTasks {
     @Autowired
     private AnimalService animalService;
 
-
     @Scheduled(fixedDelayString = "${application.scheduled.time}")
     public void doRepositoryTasks() {
-
         log.info("findAllAnimals-------------------------------------------------------------------------------------");
         log.info(animalService.getAllAnimals().toString() + "\n");
-
     }
 }

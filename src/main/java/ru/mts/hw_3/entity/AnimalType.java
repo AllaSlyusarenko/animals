@@ -26,14 +26,6 @@ public class AnimalType implements Serializable {
     private OffsetDateTime updated;
 
 
-    public AnimalType(int idType, String type, Boolean isWild, OffsetDateTime created, OffsetDateTime updated) {
-        this.idType = idType;
-        this.type = type;
-        this.isWild = isWild;
-        this.created = created;
-        this.updated = updated;
-    }
-
     public AnimalType() {
     }
 

@@ -23,14 +23,6 @@ public class Habitat implements Serializable { //место обитания
     @Column(name = "updated")
     private OffsetDateTime updated;
 
-    public Habitat(int idArea, String area, OffsetDateTime created, OffsetDateTime updated) {
-        this.idArea = idArea;
-        this.area = area;
-        this.created = created;
-        this.updated = updated;
-    }
-
     public Habitat() {
-
     }
 }

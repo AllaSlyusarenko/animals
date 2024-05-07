@@ -27,14 +27,6 @@ public class Breed {
     @JoinColumn(name = "id_breed")
     private List<Animal> animals;
 
-    public Breed(int idBreed, String name, OffsetDateTime created, OffsetDateTime updated, List<Animal> animals) {
-        this.idBreed = idBreed;
-        this.name = name;
-        this.created = created;
-        this.updated = updated;
-        this.animals = animals;
-    }
-
     public Breed() {
     }
 

@@ -25,25 +25,6 @@ public class Provider implements Serializable {
     @Column(name = "updated")
     private OffsetDateTime updated;
 
-    public Provider(int idProvider, String name, String phone, OffsetDateTime created, OffsetDateTime updated) {
-        this.idProvider = idProvider;
-        this.name = name;
-        this.phone = phone;
-        this.created = created;
-        this.updated = updated;
-    }
-
     public Provider() {
-    }
-
-    @Override
-    public String toString() {
-        return "Provider{" +
-                "idProvider=" + idProvider +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", created=" + created +
-                ", updated=" + updated +
-                '}';
     }
 }
