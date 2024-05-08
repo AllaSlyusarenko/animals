@@ -1,9 +1,9 @@
-create schema if not exists test;
+create schema test;
 
 
-CREATE SEQUENCE if not exists test.animal_type_id_type_sq as integer START 1 INCREMENT BY 1;
+CREATE SEQUENCE test.animal_type_id_type_sq as integer START 1 INCREMENT BY 1;
 
-create table if not exists test.animal_type
+create table test.animal_type
 (
     id_type integer default nextval('test.animal_type_id_type_sq') not null
             constraint animal_type_pk primary key,
@@ -13,12 +13,9 @@ create table if not exists test.animal_type
     updated timestamp with time zone default CURRENT_TIMESTAMP not null
 );
 
-alter sequence test.animal_type_id_type_sq owned by test.animal_type.id_type;
+CREATE SEQUENCE test.breed_id_breed_sq as integer START 1 INCREMENT BY 1;
 
-
-CREATE SEQUENCE if not exists test.breed_id_breed_sq as integer START 1 INCREMENT BY 1;
-
-create table if not exists test.breed
+create table test.breed
 (
     id_breed integer default nextval('test.breed_id_breed_sq') not null
                              constraint breed_pk primary key,
@@ -27,12 +24,10 @@ create table if not exists test.breed
     updated timestamp with time zone default CURRENT_TIMESTAMP not null
 );
 
-ALTER SEQUENCE test.breed_id_breed_sq OWNED BY test.breed.id_breed;
 
+CREATE SEQUENCE test.animal_id_animal_sq as integer START 1 INCREMENT BY 1;
 
-CREATE SEQUENCE if not exists test.animal_id_animal_sq as integer START 1 INCREMENT BY 1;
-
-create table if not exists test.animal
+create table test.animal
 (
     id_animal integer default nextval('test.animal_id_animal_sq') not null
                 constraint creature_pk primary key,
@@ -45,8 +40,6 @@ create table if not exists test.animal
     created     timestamp with time zone default CURRENT_TIMESTAMP not null,
     updated     timestamp with time zone default CURRENT_TIMESTAMP not null
 );
-
-ALTER SEQUENCE test.animal_id_animal_sq OWNED BY test.animal.id_animal;
 
 ALTER TABLE test.animal ADD CONSTRAINT type_id_animal_type_id_type_fk
 FOREIGN KEY(type_id) REFERENCES test.animal_type (id_type);

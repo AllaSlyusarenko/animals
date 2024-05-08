@@ -1,30 +1,23 @@
-package ru.mts.hw_3.repository.vtoroe;
+package ru.mts.hw_3.repository;
 
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.testcontainers.junit.jupiter.Testcontainers;
+import ru.mts.hw_3.Main;
 import ru.mts.hw_3.config.ConfigPropertiesForDB;
 import ru.mts.hw_3.entity.Animal;
-import ru.mts.hw_3.repository.AnimalRepository;
-import ru.mts.hw_3.service.AnimalService;
+import ru.mts.hw_3.repository.config.TestDatabaseConfig;
 import ru.mts.hw_3.service.ServiceFoDB;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-
-@SpringBootTest(classes = {TestDatabaseConfig.class, ConfigPropertiesForDB.class})
+@SpringBootTest(classes = {TestDatabaseConfig.class, ConfigPropertiesForDB.class, Main.class})
 @ActiveProfiles("test")
-public class AnimalTest {
-
+class AnimalRepositoryTest {
     @Autowired
     private ApplicationContext applicationContext;
     @Autowired
@@ -51,4 +44,5 @@ public class AnimalTest {
         System.out.println("");
         assertEquals(10, animals.size());
     }
+
 }

@@ -1,4 +1,4 @@
-package ru.mts.hw_3.repository.vtoroe;
+package ru.mts.hw_3.repository.config;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -33,5 +33,6 @@ public class TestDatabaseConfig {
         databaseProperties.setPort(postgresContainer.getMappedPort(5432));
         databaseProperties.setUsername(postgresContainer.getUsername());
         databaseProperties.setPassword(postgresContainer.getPassword());
+        databaseProperties.setUrl(postgresContainer.getJdbcUrl());
         return new ServiceFoDB(databaseProperties); }
 }
