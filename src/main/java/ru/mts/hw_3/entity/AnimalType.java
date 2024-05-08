@@ -25,10 +25,8 @@ public class AnimalType implements Serializable {
     @Column(name = "updated")
     private OffsetDateTime updated;
 
-
     public AnimalType() {
     }
-
 
     @Override
     public String toString() {

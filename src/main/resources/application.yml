@@ -4,9 +4,6 @@ spring:
     allow-bean-definition-overriding: true
   flyway:
     locations: classpath:migrations
-    url: jdbc:postgresql://localhost:5432/animals
-    user: postgres
-    password: iamroot
     default-schema: animals
     enabled: true
   datasource:
