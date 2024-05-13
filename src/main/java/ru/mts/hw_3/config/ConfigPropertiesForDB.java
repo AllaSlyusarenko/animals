@@ -11,4 +11,6 @@ public class ConfigPropertiesForDB {
     private String url;
     private String userName;
     private String password;
+    private String host;
+    private int port;
 }

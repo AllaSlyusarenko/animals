@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.OffsetDateTime;
 
 @Data
 @EqualsAndHashCode(exclude = "idArea")
@@ -13,33 +13,16 @@ import java.time.LocalDate;
 @Table(name = "habitat", schema = "animals")
 public class Habitat implements Serializable { //место обитания
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int idArea;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "habitat_generator")
+    @SequenceGenerator(name = "habitat_generator", sequenceName = "habitat_id_area_sq", allocationSize = 1, initialValue = 1)
+    private Integer idArea;
     @Column(name = "area")
     private String area;
     @Column(name = "created")
-    private LocalDate created;
+    private OffsetDateTime created;
     @Column(name = "updated")
-    private LocalDate updated;
-
-    public Habitat(int idArea, String area, LocalDate created, LocalDate updated) {
-        this.idArea = idArea;
-        this.area = area;
-        this.created = created;
-        this.updated = updated;
-    }
+    private OffsetDateTime updated;
 
     public Habitat() {
-
-    }
-
-    @Override
-    public String toString() {
-        return "Habitat{" +
-                "idArea=" + idArea +
-                ", area='" + area + '\'' +
-                ", created=" + created +
-                ", updated=" + updated +
-                '}';
     }
 }

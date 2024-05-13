@@ -2,11 +2,20 @@ spring:
   application.name: education-project
   main:
     allow-bean-definition-overriding: true
+  flyway:
+    locations: classpath:migrations
+    default-schema: animals
+    enabled: true
   datasource:
     driver-class-name: 'org.postgresql.Driver'
     url: jdbc:postgresql://localhost:5432/animals
     username: postgres
     password: iamroot
+  jpa:
+    properties:
+      hibernate:
+        ddl-auto: validate
+        default_schema: animals
 
 
 application:
@@ -51,11 +60,11 @@ logging:
     root: INFO
   #    org.springframework.web: DEBUG
   #    org.hibernate: ERROR
-  file:
-    name: ./logs/app.log
-    logrotate:
-      max-history: 10
-      max-size: 10MB
-  pattern:
-    console: "%d{dd-MM-yyyy HH:mm:ss.SSS} %-5level - %msg%n"
-    file: "%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+#  file:
+#    name: ./logs/app.log
+#    logrotate:
+#      max-history: 10
+#      max-size: 10MB
+#  pattern:
+#    console: "%d{dd-MM-yyyy HH:mm:ss.SSS} %-5level - %msg%n"
+#    file: "%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

@@ -4,9 +4,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Objects;
 
 @Data
 @EqualsAndHashCode(exclude = "idBreed")
@@ -14,26 +13,19 @@ import java.util.Objects;
 @Table(name = "breed", schema = "animals")
 public class Breed {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "breed_generator")
+    @SequenceGenerator(name = "breed_generator", sequenceName = "breed_id_breed_sq", allocationSize = 1, initialValue = 1)
     private Integer idBreed;
     @Column(name = "name")
     private String name;
     @Column(name = "created")
-    private LocalDate created;
+    private OffsetDateTime created;
     @Column(name = "updated")
-    private LocalDate updated;
+    private OffsetDateTime updated;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_breed")
     private List<Animal> animals;
-
-    public Breed(int idBreed, String name, LocalDate created, LocalDate updated, List<Animal> animals) {
-        this.idBreed = idBreed;
-        this.name = name;
-        this.created = created;
-        this.updated = updated;
-        this.animals = animals;
-    }
 
     public Breed() {
     }
