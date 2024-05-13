@@ -14,6 +14,7 @@
             <th>Порода</th>
             <th>Цена</th>
             <th>Дата рождения</th>
+            <th>Удалить</th>
         </thead>
         <tbody>
         <tr th:each="animal : ${animalList}">
@@ -26,6 +27,7 @@
             <th th:text="${animal.breed}"></th>
             <th th:text="${animal.cost}"></th>
             <th th:text="${#temporals.format(animal.birthDate, 'yyyy-MM-dd')}"></th>
+            <th th:text="..."></th>
         </tr>
 
         </tbody>
