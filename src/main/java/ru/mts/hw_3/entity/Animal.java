@@ -39,4 +39,19 @@ public class Animal implements Serializable { //существо, животно
 
     public Animal() {
     }
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "idAnimal=" + idAnimal +
+                ", name='" + name + '\'' +
+                ", animalType=" + animalType.getType() +
+                ", age=" + age +
+                ", created=" + created +
+                ", updated=" + updated +
+                ", breed=" + breed.getName() +
+                ", cost=" + cost +
+                ", birthDate=" + birthDate +
+                '}';
+    }
 }

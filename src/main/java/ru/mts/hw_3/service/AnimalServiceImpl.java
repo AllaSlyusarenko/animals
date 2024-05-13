@@ -21,4 +21,9 @@ public class AnimalServiceImpl implements AnimalService {
     public List<Animal> getAllAnimals() {
         return animalsRepository.findAll();
     }
+
+    @Override
+    public Animal saveAnimal(Animal animal) {
+        return animalsRepository.save(animal);
+    }
 }
