@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "spring.datasource")
 public class ConfigPropertiesForDB {
     private String url;
-    private String username;
+    private String userName;
     private String password;
     private String host;
     private int port;
