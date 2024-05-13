@@ -2,6 +2,7 @@ package ru.mts.hw_3.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,8 +27,10 @@ public class Animal implements Serializable { //существо, животно
     @Column(name = "age")
     private Integer age;
     @Column(name = "created")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private OffsetDateTime created;
     @Column(name = "updated")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private OffsetDateTime updated;
     @JoinColumn(name = "id_breed")
     @ManyToOne
@@ -35,6 +38,7 @@ public class Animal implements Serializable { //существо, животно
     @Column(name = "cost")
     private BigDecimal cost;
     @Column(name = "birth_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
     public Animal() {
