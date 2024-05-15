@@ -30,4 +30,5 @@ public class AnimalRepositoryMethodsController {
         List<Animal> animals = animalRepository.findAll();
         return ResponseEntity.ok(animals);
     }
+
 }
