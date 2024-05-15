@@ -23,7 +23,7 @@ public class Animal implements Serializable { //существо, животно
     private String name;
     @JoinColumn(name = "type_id")
     @ManyToOne
-    private AnimalType animalType;
+    private AnimalType animalType; //type_id
     @Column(name = "age")
     private Integer age;
     @Column(name = "created")

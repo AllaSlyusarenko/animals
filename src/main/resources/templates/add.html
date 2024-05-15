@@ -9,41 +9,41 @@
       th:object="${animal}"
       method="post">
     <br>
+    <br>
     <label for="name">Имя</label>
     <input type="text" id="name" th:field="*{name}">
     <label for="age">Возраст</label>
     <input type="text" id="age" th:field="*{age}">
+    <br>
     <br>
     <label for="cost">Стоимость</label>
     <input type="text" id="cost" th:field="*{cost}">
     <label for="birthDate">Дата рождения</label>
     <input type="text" id="birthDate" th:field="*{birthDate}">
     <br>
-    <div>
-        <label for="animalType">Тип животного</label>
-            <select id="animalType" name="animalType">
-<!--                <option value="0">выбрать тип животного</option>-->
-                <option th:each="type : ${animalTypes}"
-                        th:value="${type.type}"
-                        th:attr="type=${type.type}, animalType=*{animalType.type}, showselected=(${type.type} == *{animalType.getType()})"
-                        th:selected="(${type.type} == *{animalType.getType()})"
-                        th:readonly="(${type.type} == *{animalType.getType()})"
-                        th:text="${type.type}"></option>
-            </select>
-
-<!--        <select name="category">-->
-<!--            <option th:each="choice : ${allCategories}"-->
-<!--                    th:value="${choice.id}"-->
-<!--                    th:attr="choiceid=${choice.id}, categoryid=*{category.id}, showselected=(${choice.id} == *{category.id})"-->
-<!--                    th:selected="(${choice.id} == *{category.id})"-->
-<!--                    th:readonly="(${choice.id} == *{category.id})"-->
-<!--                    th:text="${choice.description}"></option>-->
-<!--        </select>-->
-<!--        <select class="form-control" id="addTeam">-->
-<!--            <option value="0">выбрать породу</option>-->
-<!--            <option th:each="team : ${teams}" th:value="${team.name}" th:text="${team.name}"></option>-->
-<!--        </select>-->
+    <br>
+    <div class="form-group">
+        <label>Тип животного</label>
+        <select th:field="*{animalType.idType}">
+            <option th:value="''" th:text="Select"></option>
+            <option th:each="type : ${animalTypes}"
+                    th:value="${type.idType}"
+                    th:text="${type.type}">
+            </option>
+        </select>
     </div>
+    <br>
+    <div class="form-group">
+        <label>Порода животного</label>
+        <select th:field="*{breed.idBreed}">
+            <option th:value="''" th:text="Select"></option>
+            <option th:each="breed : ${breeds}"
+                    th:value="${breed.idBreed}"
+                    th:text="${breed.name}">
+            </option>
+        </select>
+    </div>
+    <br>
     <input type="submit" name="action" value="save">
     <input type="submit" name="action" value="cancel">
 </form>

@@ -1,20 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <table>
     <thead>
     <title> Животные </title>
     </thead>
     <tbody>
-    <table border="9">
+    <table border="10">
         <thead>
-            <th>ID</th>
-            <th>Имя</th>
-            <th>Тип животного</th>
-            <th>Возраст</th>
-            <th>Дата создания</th>
-            <th>Дата изменения</th>
-            <th>Порода</th>
-            <th>Цена</th>
-            <th>Дата рождения</th>
-            <th>Удалить</th>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Тип животного</th>
+        <th>Возраст</th>
+        <th>Дата создания</th>
+        <th>Дата изменения</th>
+        <th>Порода</th>
+        <th>Цена</th>
+        <th>Дата рождения</th>
+        <th>Удалить</th>
         </thead>
         <tbody>
         <tr th:each="animal : ${animalList}">
@@ -27,10 +29,21 @@
             <th th:text="${animal.breed}"></th>
             <th th:text="${animal.cost}"></th>
             <th th:text="${#temporals.format(animal.birthDate, 'yyyy-MM-dd')}"></th>
-            <th th:text="..."></th>
+            <th><a th:href="@{/delete/{id}(id=${animal.idAnimal})}">Удалить</a></th>
         </tr>
-
         </tbody>
     </table>
     </tbody>
 </table>
+
+<table>
+    <tbody>
+    <br>
+    <br>
+        <form th:action="@{/add}" th:method="get">
+            <input type="submit" name="action" value="Добавить новое животное">
+        </form>
+    </tbody>
+</table>
+
+</html>

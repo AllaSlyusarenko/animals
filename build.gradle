@@ -30,7 +30,6 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-web:2.6.15'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.6.15'
-// https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-java8time
     implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE'
 
     compileOnly 'org.projectlombok:lombok:1.18.28'
@@ -42,6 +41,8 @@ dependencies {
     testImplementation 'org.testcontainers:postgresql:1.18.3'
     testImplementation 'org.testcontainers:junit-jupiter:1.18.3'
     testImplementation 'org.testcontainers:testcontainers:1.18.3'
+    testImplementation 'com.h2database:h2:2.2.224'
+
 }
 
 test {

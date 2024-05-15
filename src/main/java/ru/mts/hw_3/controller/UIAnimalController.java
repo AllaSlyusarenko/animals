@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.mts.hw_3.entity.Animal;
 import ru.mts.hw_3.entity.AnimalType;
-import ru.mts.hw_3.repository.AnimalRepository;
+import ru.mts.hw_3.entity.Breed;
 import ru.mts.hw_3.repository.AnimalTypeRepository;
+import ru.mts.hw_3.repository.BreedRepository;
 import ru.mts.hw_3.service.AnimalService;
 
 import java.util.List;
@@ -18,11 +19,13 @@ import java.util.List;
 public class UIAnimalController {
     private final AnimalService animalService;
     private final AnimalTypeRepository animalTypeRepository;
+    private final BreedRepository breedRepository;
 
     @Autowired
-    public UIAnimalController(AnimalService animalService, AnimalTypeRepository animalTypeRepository) {
+    public UIAnimalController(AnimalService animalService, AnimalTypeRepository animalTypeRepository, BreedRepository breedRepository) {
         this.animalService = animalService;
         this.animalTypeRepository = animalTypeRepository;
+        this.breedRepository = breedRepository;
     }
 
     @GetMapping("/index")
@@ -42,8 +45,8 @@ public class UIAnimalController {
         model.addAttribute("animal", new Animal());
         List<AnimalType> animalTypes = (List<AnimalType>) animalTypeRepository.findAll();
         model.addAttribute("animalTypes", animalTypes);
-        System.out.println(animalTypes);
-
+        List<Breed> breeds = (List<Breed>) breedRepository.findAll();
+        model.addAttribute("breeds", breeds);
         return "add";
     }
 

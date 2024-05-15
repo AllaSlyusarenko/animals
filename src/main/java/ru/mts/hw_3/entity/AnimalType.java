@@ -15,7 +15,7 @@ public class AnimalType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "animal_type_generator")
     @SequenceGenerator(name = "animal_type_generator", sequenceName = "animal_type_id_type_sq", allocationSize = 1, initialValue = 1)
-    private Integer idType;
+    private Integer idType; //id_type
     @Column(name = "type")
     private String type;
     @Column(name = "is_wild")
