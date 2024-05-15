@@ -41,10 +41,10 @@ create table if not exists animals.animal
                 constraint creature_pk primary key,
     name        text not null,
     cost        numeric not null,
-    type_id     integer not null,
+    type_id     integer,
     age         integer not null,
     birth_date  date not null,
-    id_breed    integer not null,
+    id_breed    integer,
     created     timestamp with time zone default CURRENT_TIMESTAMP not null,
     updated     timestamp with time zone default CURRENT_TIMESTAMP not null
 );
