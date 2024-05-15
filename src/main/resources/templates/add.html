@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<thead>
+<title>Добавление нового животного</title>
+</thead>
+<tbody>
+<form action="#"
+      th:action="@{/add}"
+      th:object="${animal}"
+      method="post">
+    <br>
+    <label for="name">Имя</label>
+    <input type="text" id="name" th:field="*{name}">
+    <label for="age">Возраст</label>
+    <input type="text" id="age" th:field="*{age}">
+    <br>
+    <label for="cost">Стоимость</label>
+    <input type="text" id="cost" th:field="*{cost}">
+    <label for="birthDate">Дата рождения</label>
+    <input type="text" id="birthDate" th:field="*{birthDate}">
+    <br>
+    <div>
+        <label for="animalType">Тип животного</label>
+            <select id="animalType" name="animalType">
+<!--                <option value="0">выбрать тип животного</option>-->
+                <option th:each="type : ${animalTypes}"
+                        th:value="${type.type}"
+                        th:attr="type=${type.type}, animalType=*{animalType.type}, showselected=(${type.type} == *{animalType.getType()})"
+                        th:selected="(${type.type} == *{animalType.getType()})"
+                        th:readonly="(${type.type} == *{animalType.getType()})"
+                        th:text="${type.type}"></option>
+            </select>
+
+<!--        <select name="category">-->
+<!--            <option th:each="choice : ${allCategories}"-->
+<!--                    th:value="${choice.id}"-->
+<!--                    th:attr="choiceid=${choice.id}, categoryid=*{category.id}, showselected=(${choice.id} == *{category.id})"-->
+<!--                    th:selected="(${choice.id} == *{category.id})"-->
+<!--                    th:readonly="(${choice.id} == *{category.id})"-->
+<!--                    th:text="${choice.description}"></option>-->
+<!--        </select>-->
+<!--        <select class="form-control" id="addTeam">-->
+<!--            <option value="0">выбрать породу</option>-->
+<!--            <option th:each="team : ${teams}" th:value="${team.name}" th:text="${team.name}"></option>-->
+<!--        </select>-->
+    </div>
+    <input type="submit" name="action" value="save">
+    <input type="submit" name="action" value="cancel">
+</form>
+</tbody>
+</html>

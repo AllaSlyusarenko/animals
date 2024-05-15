@@ -28,10 +28,10 @@ public class Animal implements Serializable { //существо, животно
     private Integer age;
     @Column(name = "created")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private OffsetDateTime created;
+    private OffsetDateTime created = OffsetDateTime.now();
     @Column(name = "updated")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private OffsetDateTime updated;
+    private OffsetDateTime updated = OffsetDateTime.now();
     @JoinColumn(name = "id_breed")
     @ManyToOne
     private Breed breed;

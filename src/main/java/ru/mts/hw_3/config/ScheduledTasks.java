@@ -15,7 +15,7 @@ public class ScheduledTasks {
 
     @Scheduled(fixedDelayString = "${application.scheduled.time}")
     public void doRepositoryTasks() {
-        log.info("findAllAnimals-------------------------------------------------------------------------------------");
-        log.info(animalService.getAllAnimals().toString() + "\n");
+//        log.info("findAllAnimals-------------------------------------------------------------------------------------");
+//        log.info(animalService.getAllAnimals().toString() + "\n");
     }
 }

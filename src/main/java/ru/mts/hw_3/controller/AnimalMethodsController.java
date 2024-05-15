@@ -22,15 +22,18 @@ public class AnimalMethodsController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Animal>> getAllAnimals() {
-        log.info("findAllAnimals-------------------------------------------------------------------------------------");
         List<Animal> animals = animalService.getAllAnimals();
         return ResponseEntity.ok(animals);
     }
 
     @PostMapping("/add")
     public ResponseEntity<Animal> createAnimal(@RequestBody Animal animal) {
-        log.info("saveAnimal-----------------------------------------------------------------------------------------");
         Animal animalOut = animalService.saveAnimal(animal);
         return ResponseEntity.ok(animalOut);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteAnimal(@PathVariable Integer id) {
+        animalService.deleteAnimal(id);
     }
 }
