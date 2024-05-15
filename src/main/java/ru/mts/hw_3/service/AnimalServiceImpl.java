@@ -28,11 +28,6 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
-    public Animal getAnimalById(Integer id) {
-        return animalsRepository.getReferenceById(id);
-    }
-
-    @Override
     public void deleteAnimal(Integer id) {
         animalsRepository.deleteById(id);
     }
