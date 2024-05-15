@@ -16,7 +16,10 @@ spring:
       hibernate:
         ddl-auto: validate
         default_schema: animals
-
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
 
 application:
   scheduled:

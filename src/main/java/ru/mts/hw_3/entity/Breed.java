@@ -22,10 +22,9 @@ public class Breed {
     private OffsetDateTime created;
     @Column(name = "updated")
     private OffsetDateTime updated;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_breed")
-    private List<Animal> animals;
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "id_breed")
+//    private List<Animal> animals;
 
     public Breed() {
     }

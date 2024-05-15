@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<thead>
+<title>Добавление нового животного</title>
+</thead>
+<tbody>
+<form action="#"
+      th:action="@{/add}"
+      th:object="${animal}"
+      method="post">
+    <br>
+    <br>
+    <label for="name">Имя</label>
+    <input type="text" id="name" th:field="*{name}">
+    <label for="age">Возраст</label>
+    <input type="text" id="age" th:field="*{age}">
+    <br>
+    <br>
+    <label for="cost">Стоимость</label>
+    <input type="text" id="cost" th:field="*{cost}">
+    <label for="birthDate">Дата рождения</label>
+    <input type="text" id="birthDate" th:field="*{birthDate}">
+    <br>
+    <br>
+    <div class="form-group">
+        <label>Тип животного</label>
+        <select th:field="*{animalType.idType}">
+            <option th:value="''" th:text="Select"></option>
+            <option th:each="type : ${animalTypes}"
+                    th:value="${type.idType}"
+                    th:text="${type.type}">
+            </option>
+        </select>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Порода животного</label>
+        <select th:field="*{breed.idBreed}">
+            <option th:value="''" th:text="Select"></option>
+            <option th:each="breed : ${breeds}"
+                    th:value="${breed.idBreed}"
+                    th:text="${breed.name}">
+            </option>
+        </select>
+    </div>
+    <br>
+    <input type="submit" name="action" value="save">
+    <input type="submit" name="action" value="cancel">
+</form>
+</tbody>
+</html>
