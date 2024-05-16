@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.mts.hw_3.entity.Animal;
 import ru.mts.hw_3.entity.AnimalType;
 import ru.mts.hw_3.entity.Breed;
-import ru.mts.hw_3.repository.AnimalTypeRepository;
-import ru.mts.hw_3.repository.BreedRepository;
 import ru.mts.hw_3.service.AnimalService;
+import ru.mts.hw_3.service.AnimalTypeService;
+import ru.mts.hw_3.service.BreedService;
 
 import java.util.List;
 
 @Controller
 public class UIAnimalController {
     private final AnimalService animalService;
-    private final AnimalTypeRepository animalTypeRepository;
-    private final BreedRepository breedRepository;
+    private final BreedService breedService;
+    private final AnimalTypeService animalTypeService;
 
     @Autowired
-    public UIAnimalController(AnimalService animalService, AnimalTypeRepository animalTypeRepository, BreedRepository breedRepository) {
+    public UIAnimalController(AnimalService animalService, BreedService breedService, AnimalTypeService animalTypeService) {
         this.animalService = animalService;
-        this.animalTypeRepository = animalTypeRepository;
-        this.breedRepository = breedRepository;
+        this.breedService = breedService;
+        this.animalTypeService = animalTypeService;
     }
 
     @GetMapping("/index")
@@ -43,9 +43,9 @@ public class UIAnimalController {
     @GetMapping(value = "/add")
     public String addAnimal(Model model) {
         model.addAttribute("animal", new Animal());
-        List<AnimalType> animalTypes = (List<AnimalType>) animalTypeRepository.findAll();
+        List<AnimalType> animalTypes = animalTypeService.getAllAnimalTypes();
         model.addAttribute("animalTypes", animalTypes);
-        List<Breed> breeds = (List<Breed>) breedRepository.findAll();
+        List<Breed> breeds = breedService.getBreeds();
         model.addAttribute("breeds", breeds);
         return "add";
     }
