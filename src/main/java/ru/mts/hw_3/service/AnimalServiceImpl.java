@@ -31,9 +31,4 @@ public class AnimalServiceImpl implements AnimalService {
     public void deleteAnimal(Integer id) {
         animalsRepository.deleteById(id);
     }
-
-    @Override
-    public Animal addAnimal(Animal animal) {
-        return animalsRepository.save(animal);
-    }
 }

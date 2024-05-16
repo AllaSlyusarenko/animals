@@ -18,9 +18,9 @@ public class Breed {
     @Column(name = "name")
     private String name;
     @Column(name = "created")
-    private OffsetDateTime created;
+    private OffsetDateTime created = OffsetDateTime.now();
     @Column(name = "updated")
-    private OffsetDateTime updated;
+    private OffsetDateTime updated = OffsetDateTime.now();
 
     public Breed() {
     }
