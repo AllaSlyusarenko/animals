@@ -21,9 +21,9 @@ public class AnimalType implements Serializable {
     @Column(name = "is_wild")
     private Boolean isWild;
     @Column(name = "created")
-    private OffsetDateTime created = OffsetDateTime.now();
+    private OffsetDateTime created;
     @Column(name = "updated")
-    private OffsetDateTime updated = OffsetDateTime.now();
+    private OffsetDateTime updated;
 
     public AnimalType() {
     }
@@ -31,5 +31,16 @@ public class AnimalType implements Serializable {
     @Override
     public String toString() {
         return type;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        created = OffsetDateTime.now();
+        updated = OffsetDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updated = OffsetDateTime.now();
     }
 }

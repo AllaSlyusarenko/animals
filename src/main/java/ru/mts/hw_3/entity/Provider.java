@@ -27,4 +27,15 @@ public class Provider implements Serializable {
 
     public Provider() {
     }
+
+    @PrePersist
+    protected void onCreate() {
+        created = OffsetDateTime.now();
+        updated = OffsetDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updated = OffsetDateTime.now();
+    }
 }

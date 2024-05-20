@@ -18,9 +18,9 @@ public class Breed {
     @Column(name = "name")
     private String name;
     @Column(name = "created")
-    private OffsetDateTime created = OffsetDateTime.now();
+    private OffsetDateTime created;
     @Column(name = "updated")
-    private OffsetDateTime updated = OffsetDateTime.now();
+    private OffsetDateTime updated;
 
     public Breed() {
     }
@@ -28,5 +28,16 @@ public class Breed {
     @Override
     public String toString() {
         return name;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        created = OffsetDateTime.now();
+        updated = OffsetDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updated = OffsetDateTime.now();
     }
 }
