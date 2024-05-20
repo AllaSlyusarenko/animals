@@ -41,8 +41,6 @@ dependencies {
     testImplementation 'org.testcontainers:postgresql:1.18.3'
     testImplementation 'org.testcontainers:junit-jupiter:1.18.3'
     testImplementation 'org.testcontainers:testcontainers:1.18.3'
-    testImplementation 'com.h2database:h2:2.2.224'
-
 }
 
 test {
