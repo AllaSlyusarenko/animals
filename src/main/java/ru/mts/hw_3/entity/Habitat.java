@@ -25,4 +25,15 @@ public class Habitat implements Serializable { //место обитания
 
     public Habitat() {
     }
+
+    @PrePersist
+    protected void onCreate() {
+        created = OffsetDateTime.now();
+        updated = OffsetDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updated = OffsetDateTime.now();
+    }
 }

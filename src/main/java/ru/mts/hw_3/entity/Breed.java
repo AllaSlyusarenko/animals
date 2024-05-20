@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
-import java.util.List;
 
 @Data
 @EqualsAndHashCode(exclude = "idBreed")
@@ -23,15 +22,22 @@ public class Breed {
     @Column(name = "updated")
     private OffsetDateTime updated;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_breed")
-    private List<Animal> animals;
-
     public Breed() {
     }
 
     @Override
     public String toString() {
         return name;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        created = OffsetDateTime.now();
+        updated = OffsetDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updated = OffsetDateTime.now();
     }
 }
