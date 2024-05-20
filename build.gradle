@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.4'
     id 'io.spring.dependency-management' version '1.1.4'
+//    id 'io.freefair.aspectj.post-compile-weaving' version '8.6'
 }
 
 group 'ru.mts'
@@ -13,6 +14,11 @@ jar {
 repositories {
     mavenCentral()
 }
+//
+//compileTestJava.ajc.options.aspectpath.from = sourceSets.main.output
+//[compileJava, compileTestJava].each {
+//    it.ajc.options.compilerArgs += ['-xmlConfigured', "${projectDir}/src/main/resources/aop.xml"]
+//}
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
@@ -31,6 +37,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web:2.6.15'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.6.15'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-aop:2.7.11'
+    implementation 'org.apache.commons:commons-lang3:3.13.0'
 
     compileOnly 'org.projectlombok:lombok:1.18.28'
     annotationProcessor 'org.projectlombok:lombok:1.18.28'

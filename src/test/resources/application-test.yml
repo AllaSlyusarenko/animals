@@ -1,4 +1,12 @@
 spring:
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        show_sql: true
+    hibernate:
+      ddl-auto: none
   datasource:
     host: localhost
     port: 5432
