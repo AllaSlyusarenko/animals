@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface BreedService {
     List<Breed> getBreeds();
+
+    Breed saveBreed(Breed breed);
 }

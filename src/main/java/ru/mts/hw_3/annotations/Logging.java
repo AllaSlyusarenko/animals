@@ -16,4 +16,8 @@ public @interface Logging {
     boolean exiting() default false;
 
     String level() default "INFO";
+
+    boolean logArgs() default false;
+
+    boolean logResult() default false;
 }

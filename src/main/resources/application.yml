@@ -12,8 +12,10 @@ spring:
     username: postgres
     password: iamroot
   jpa:
+    show-sql: true
     properties:
       hibernate:
+        show_sql: true
         ddl-auto: validate
         default_schema: animals
   mvc:

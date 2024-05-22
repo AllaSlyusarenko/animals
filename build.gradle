@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.4'
     id 'io.spring.dependency-management' version '1.1.4'
-//    id 'io.freefair.aspectj.post-compile-weaving' version '8.6'
 }
 
 group 'ru.mts'
@@ -14,11 +13,6 @@ jar {
 repositories {
     mavenCentral()
 }
-//
-//compileTestJava.ajc.options.aspectpath.from = sourceSets.main.output
-//[compileJava, compileTestJava].each {
-//    it.ajc.options.compilerArgs += ['-xmlConfigured', "${projectDir}/src/main/resources/aop.xml"]
-//}
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'

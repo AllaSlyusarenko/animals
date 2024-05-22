@@ -19,18 +19,19 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
-    @Logging(value = "get All Animals")
+    @Logging(value = "get All Animals", entering = true, exiting = true)
     public List<Animal> getAllAnimals() {
         return animalsRepository.findAll();
     }
 
     @Override
-    @Logging(value = "save Animal")
+    @Logging(value = "save Animal", entering = true, exiting = true, logArgs = true, logResult = true)
     public Animal saveAnimal(Animal animal) {
         return animalsRepository.save(animal);
     }
 
     @Override
+    @Logging(entering = true, logArgs = true)
     public void deleteAnimal(Integer id) {
         animalsRepository.deleteById(id);
     }

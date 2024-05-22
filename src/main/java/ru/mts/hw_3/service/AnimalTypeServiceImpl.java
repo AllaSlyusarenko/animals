@@ -2,6 +2,7 @@ package ru.mts.hw_3.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.mts.hw_3.annotations.Logging;
 import ru.mts.hw_3.entity.AnimalType;
 import ru.mts.hw_3.repository.AnimalTypeRepository;
 
@@ -18,7 +19,14 @@ public class AnimalTypeServiceImpl implements AnimalTypeService {
     }
 
     @Override
+    @Logging(entering = true, exiting = true)
     public List<AnimalType> getAllAnimalTypes() {
         return animalTypeRepository.findAll();
+    }
+
+    @Override
+    @Logging(value = "save AnimalType", entering = true, exiting = true, level = "warn", logArgs = true, logResult = true)
+    public AnimalType saveAnimalType(AnimalType animalType) {
+        return animalTypeRepository.save(animalType);
     }
 }
