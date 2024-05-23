@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.mts.hw_3.dto.AnimalDto;
 import ru.mts.hw_3.entity.Animal;
+import ru.mts.hw_3.mapper.AnimalMapper;
 import ru.mts.hw_3.service.AnimalService;
 
 import java.util.List;
@@ -22,15 +24,15 @@ public class AnimalMethodsController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Animal>> getAllAnimals() {
+    public ResponseEntity<List<AnimalDto>> getAllAnimals() {
         List<Animal> animals = animalService.getAllAnimals();
-        return new ResponseEntity<>(animals, HttpStatus.OK);
+        return new ResponseEntity<>(AnimalMapper.animalsToAnimalDtos(animals), HttpStatus.OK);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Animal> createAnimal(@RequestBody Animal animal) {
+    public ResponseEntity<AnimalDto> createAnimal(@RequestBody Animal animal) {
         Animal animalOut = animalService.saveAnimal(animal);
-        return new ResponseEntity<>(animalOut, HttpStatus.CREATED);
+        return new ResponseEntity<>(AnimalMapper.animalToAnimalDto(animalOut), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{id}")
