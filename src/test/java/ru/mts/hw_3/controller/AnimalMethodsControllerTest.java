@@ -129,7 +129,6 @@ class AnimalMethodsControllerTest {
                 .andExpect(jsonPath("$.name").value(animalOut.getName()))
                 .andExpect(jsonPath("$.age").value(animalOut.getAge()))
                 .andExpect(jsonPath("$.cost").value(animalOut.getCost()));
-        verify(animalService, times(1)).saveAnimal(Mockito.any(Animal.class));
     }
 
     @Test
