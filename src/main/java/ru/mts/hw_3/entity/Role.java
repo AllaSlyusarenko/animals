@@ -13,8 +13,13 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_generator")
     @SequenceGenerator(name = "role_generator", sequenceName = "role_id_role_sq", allocationSize = 1, initialValue = 1)
-    private Integer id;
+    private Integer idRole;
 
     @Enumerated(EnumType.STRING)
     private ERole roleName;
+
+    public Role(Integer idRole, ERole roleName) {
+        this.idRole = idRole;
+        this.roleName = roleName;
+    }
 }

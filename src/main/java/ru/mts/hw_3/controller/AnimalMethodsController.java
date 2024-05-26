@@ -7,21 +7,27 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.mts.hw_3.dto.AnimalDto;
+import ru.mts.hw_3.dto.Signup;
 import ru.mts.hw_3.entity.Animal;
+import ru.mts.hw_3.entity.Person;
 import ru.mts.hw_3.mapper.AnimalMapper;
 import ru.mts.hw_3.service.AnimalService;
+import ru.mts.hw_3.service.UserService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
 @RequestMapping("/animals")
 public class AnimalMethodsController {
     private final AnimalService animalService;
+    private final UserService userService;
 
     @Autowired
-    public AnimalMethodsController(AnimalService animalService) {
+    public AnimalMethodsController(AnimalService animalService, UserService userService) {
         this.animalService = animalService;
+        this.userService = userService;
     }
 
     @GetMapping("/one")
@@ -29,6 +35,34 @@ public class AnimalMethodsController {
     public ResponseEntity<String> getOne() {
         return new ResponseEntity<>("Done!", HttpStatus.OK);
     }
+
+//    Если необходимо сделать авторизацию для MVC паттерна, не забудьте использовать
+//    методы .formLogin и .logout, в которых нужно указать ссылки на свои html страницы
+//    авторизации и выхода из системы.
+
+    @PostMapping("/signup")
+    public ResponseEntity<String> signup(@RequestBody Signup signup){
+        //register user
+        Person person = userService.signup(signup);
+        return ResponseEntity.ok(String.valueOf(person.getIdPerson()));
+    }
+//    @PostMapping("/signin")
+//    public ResponseEntity<JwtResponse> signin(@RequestBody Signin signin){
+//        Authentication authenticated = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signin.getUsername(), signin.getPassword()));
+//        //enter
+//        SecurityContextHolder.getContext().setAuthentication(authenticated);
+//        String jwtToken = jwtUtilty.generateJwtToken(authenticated);
+//
+//        Person userDetails = (Person) authenticated.getPrincipal();
+//        List<String> roles = userDetails.getAuthorities().stream()
+//                .map(item -> item.getAuthority())
+//                .collect(Collectors.toList());
+//
+//        return ResponseEntity.ok(new JwtResponse(jwtToken,
+//                userDetails.getId(),
+//                userDetails.getUsername(),
+//                roles));
+//    }
 
     @GetMapping("/all")
     public ResponseEntity<List<AnimalDto>> getAllAnimals() {

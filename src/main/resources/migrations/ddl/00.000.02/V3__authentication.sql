@@ -7,15 +7,23 @@ create table if not exists animals.role
     role_name   varchar(50) not null
 );
 
+ALTER SEQUENCE animals.role_id_role_sq OWNED BY animals.role.id_role;
+
+---
+
 CREATE SEQUENCE if not exists animals.person_id_person_sq as integer START 1 INCREMENT BY 1;
 
 create table if not exists animals.person
 (
     id_person   integer default nextval('animals.person_id_person_sq') not null
                 constraint person_pk primary key,
-    name        varchar(50) not null,
-    password    varchar(50) not null
+    username    varchar(50) not null,
+    password    text not null
 );
+
+ALTER SEQUENCE animals.person_id_person_sq OWNED BY animals.person.id_person;
+
+---
 
 create table if not exists animals.person_roles
 (

@@ -62,7 +62,7 @@ wolf:
 
 logging:
   level:
-    root: INFO
+    root: debug
   #    org.springframework.web: DEBUG
   #    org.hibernate: ERROR
 #  file:
