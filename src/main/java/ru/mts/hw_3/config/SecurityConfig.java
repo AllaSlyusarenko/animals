@@ -15,17 +15,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import ru.mts.hw_3.service.UserService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
     @Autowired
     @Lazy
-    private UserDetailsService userDetailsService;
+    private UserService userDetailsService;
 
     @Bean
     public AuthenticationProvider authenticationProvider(@Autowired PasswordEncoder passwordEncoder) {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
         return daoAuthenticationProvider;
     }

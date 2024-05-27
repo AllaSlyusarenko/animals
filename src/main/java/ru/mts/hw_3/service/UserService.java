@@ -19,8 +19,7 @@ public class UserService implements UserDetailsService {
     private PersonRepository personRepository;
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public UserService(PersonRepository personRepository, PasswordEncoder passwordEncoder) {
+    public UserService(@Autowired PersonRepository personRepository, PasswordEncoder passwordEncoder) {
         this.personRepository = personRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -34,7 +33,7 @@ public class UserService implements UserDetailsService {
         Person person = new Person();
         person.setUsername(signup.getUsername());
         person.setPassword(passwordEncoder.encode(signup.getPassword()));
-        person.setRoles(Set.of(new Role(2, ERole.USER)));
+        person.setRoles(Set.of(new Role(ERole.USER)));
         return personRepository.save(person);
     }
 }

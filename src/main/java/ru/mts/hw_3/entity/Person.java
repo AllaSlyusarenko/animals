@@ -1,7 +1,6 @@
 package ru.mts.hw_3.entity;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,7 +13,6 @@ import java.util.Set;
 @Entity
 @Table(name = "person", schema = "animals")
 @Data
-@NoArgsConstructor
 public class Person implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "person_generator")
@@ -24,11 +22,14 @@ public class Person implements UserDetails {
     private String username;
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "person_roles",
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    public Person() {
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

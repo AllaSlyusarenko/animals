@@ -1,8 +1,8 @@
-INSERT INTO animals.role(role_name)
-VALUES
-    ('ADMIN'),
-    ('USER'),
-    ('MODERATOR');
+-- INSERT INTO animals.role(role_name)
+-- VALUES
+--     ('ADMIN'),
+--     ('USER'),
+--     ('MODERATOR');
 --
 -- INSERT INTO animals.person(username, password)
 -- VALUES
