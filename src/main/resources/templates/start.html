@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Стартовая страница</title>
+</head>
+<table>
+    <tbody>
+<form th:action="@{/signup}" th:method="get">
+    <input type="submit" name="action" value="Зарегистрироваться">
+</form>
+
+<form th:action="@{/signin}" th:method="get">
+    <input type="submit" name="action" value="Войти в аккаунт">
+</form>
+    </tbody>
+</table>
+
+</html>

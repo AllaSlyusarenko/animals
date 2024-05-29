@@ -44,6 +44,7 @@ public class SecurityConfig {
         return daoAuthenticationProvider;
     }
 
+    // для HTTP Basic
 //    @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
@@ -67,12 +68,31 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, @Autowired PasswordEncoder passwordEncoder) throws Exception {
         http.csrf(csrf -> csrf.disable()).sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authorizeHttpRequests(auth ->
+        {
+            try {
                 auth.requestMatchers(new AntPathRequestMatcher("/animals/signup")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/signin")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/signup")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/start")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/animals/signin")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/animals/all")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/animals/one")).authenticated()
+                        .requestMatchers(new AntPathRequestMatcher("/index")).authenticated()
                         .requestMatchers(new AntPathRequestMatcher("/animals/delete/*")).authenticated()
-                        .anyRequest().authenticated());
+                        .anyRequest().authenticated()
+                        .and()
+                        .logout()
+                        .logoutSuccessUrl("/start")
+                        .deleteCookies("JSESSIONID")
+                        .invalidateHttpSession(true)
+                        .and()
+                        .formLogin()
+                        .loginPage("/start")
+                        .permitAll();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         http.authenticationProvider(authenticationProvider(passwordEncoder));
 

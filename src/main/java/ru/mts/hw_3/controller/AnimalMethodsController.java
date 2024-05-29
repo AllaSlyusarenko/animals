@@ -47,10 +47,6 @@ public class AnimalMethodsController {
         return new ResponseEntity<>("Done!", HttpStatus.OK);
     }
 
-//    Если необходимо сделать авторизацию для MVC паттерна, не забудьте использовать
-//    методы .formLogin и .logout, в которых нужно указать ссылки на свои html страницы
-//    авторизации и выхода из системы.
-
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody Signup signup){
         //register user
