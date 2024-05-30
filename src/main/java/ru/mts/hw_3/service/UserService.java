@@ -12,12 +12,14 @@ import ru.mts.hw_3.entity.Person;
 import ru.mts.hw_3.entity.Role;
 import ru.mts.hw_3.repository.PersonRepository;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
 public class UserService implements UserDetailsService {
     private PersonRepository personRepository;
     private PasswordEncoder passwordEncoder;
+    private Role user = new Role(ERole.USER);
 
     public UserService(@Autowired PersonRepository personRepository, PasswordEncoder passwordEncoder) {
         this.personRepository = personRepository;
@@ -29,11 +31,17 @@ public class UserService implements UserDetailsService {
         return personRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
     }
 
+    public boolean checkSignup(Signup signup) {
+        return personRepository.findByUsername(signup.getUsername()).isPresent();
+    }
+
     public Person signup(Signup signup) {
         Person person = new Person();
         person.setUsername(signup.getUsername());
         person.setPassword(passwordEncoder.encode(signup.getPassword()));
-        person.setRoles(Set.of(new Role(ERole.USER)));
+        Set<Role> roles = new HashSet<>();
+        roles.add(user);
+        person.setRoles(roles);
         return personRepository.save(person);
     }
 }
