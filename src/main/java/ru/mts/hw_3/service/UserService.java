@@ -11,19 +11,18 @@ import ru.mts.hw_3.entity.ERole;
 import ru.mts.hw_3.entity.Person;
 import ru.mts.hw_3.entity.Role;
 import ru.mts.hw_3.repository.PersonRepository;
-
-import java.util.HashSet;
-import java.util.Set;
+import ru.mts.hw_3.repository.RoleRepository;
 
 @Service
 public class UserService implements UserDetailsService {
+    private final RoleRepository roleRepository;
     private PersonRepository personRepository;
     private PasswordEncoder passwordEncoder;
-    private Role user = new Role(ERole.USER);
 
-    public UserService(@Autowired PersonRepository personRepository, PasswordEncoder passwordEncoder) {
+    public UserService(@Autowired PersonRepository personRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
         this.personRepository = personRepository;
         this.passwordEncoder = passwordEncoder;
+        this.roleRepository = roleRepository;
     }
 
     @Override
@@ -39,9 +38,8 @@ public class UserService implements UserDetailsService {
         Person person = new Person();
         person.setUsername(signup.getUsername());
         person.setPassword(passwordEncoder.encode(signup.getPassword()));
-        Set<Role> roles = new HashSet<>();
-        roles.add(user);
-        person.setRoles(roles);
+        Role role = roleRepository.findByRoleName(ERole.USER).isPresent() ? roleRepository.findByRoleName(ERole.USER).get() : roleRepository.save(new Role(ERole.USER));
+        person.getRoles().add(role);
         return personRepository.save(person);
     }
 }
