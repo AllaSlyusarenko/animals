@@ -1,7 +1,13 @@
-# Animal
+# Учебный проект Финтех.Академия от МТС - Animals
+## При написании проекта реализовала:
+### Spring Boot приложение для учета и отбора животных по параметрам
+### Стартер для создания коллекции животных, используя паттерн фабрика(Factory), с рандомными значениями из списка
+### Покрыла тестами Controller, DAO слой(TestContainers)
+### Написала свой BeanPostProcessor для инициализации поля AnimalType с необходимой логикой
+### Использовала @Scheduled задачи
+### Stream API
+### Разработала ExceptionHandler c помощью ControllerAdvice
 
-### animal schema
-![schema](src/docs/schema.jpg)
 
-### animal diagram
-![animal_diagram](src/docs/animal_diagram.png)
+
+## Технологический стек: Java, ООП, Коллекции, Stream API
