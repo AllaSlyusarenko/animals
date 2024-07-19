@@ -40,9 +40,19 @@
     <tbody>
     <br>
     <br>
-        <form th:action="@{/add}" th:method="get">
-            <input type="submit" name="action" value="Добавить новое животное">
-        </form>
+    <form th:action="@{/add}" th:method="get">
+        <input type="submit" name="action" value="Добавить новое животное">
+    </form>
+    </tbody>
+</table>
+
+<table>
+    <tbody>
+    <br>
+    <br>
+    <form th:action="@{/logout}" th:method="get">
+        <input type="submit" name="action" value="Выйти из аккаунта">
+    </form>
     </tbody>
 </table>
 
