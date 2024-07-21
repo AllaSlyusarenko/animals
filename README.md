@@ -15,4 +15,4 @@
 ####  - Покрыла тестами Controller, DAO слой(TestContainers)
 
 
-#### Технологический стек: Java, ООП, Spring Boot, AOP, Flyway, Thymeleaf, Spring Security, Коллекции, Stream API, PostgreSQL, JUnit, TestContainers
+## Технологический стек: Java, ООП, Spring Boot, AOP, Flyway, Thymeleaf, Spring Security, Коллекции, Stream API, PostgreSQL, JUnit, TestContainers
