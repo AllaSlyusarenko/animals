@@ -7,11 +7,12 @@
 ####  - Осуществила миграцию с помощью Flyway
 ####  - Отображение UI с помощью Thymeleaf - список всех, добавление нового животного с выпадающими списками, удаление
 ####  - Логирование через AOP
+####  - Регистрацию по username и password
+####  - Аутентификацию, используя HTTP Basic
+####  - Выполнение задач, используя несколько потоков
 ####  - Использовала @Scheduled задачи, потокобезопасные коллекции
 ####  - Разработала ExceptionHandler c помощью ControllerAdvice
 ####  - Покрыла тестами Controller, DAO слой(TestContainers)
 
 
-
-
-#### Технологический стек: Java, ООП, Коллекции, Stream API
+#### Технологический стек: Java, ООП, Spring Boot, AOP, Flyway, Thymeleaf, Spring Security, Коллекции, Stream API, PostgreSQL, JUnit, TestContainers
